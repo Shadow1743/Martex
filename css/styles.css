@@ -1,5 +1,5 @@
 /* ============================================================
-   MARTEX — Sistema de Estilos Principal
+   MARTEX — Sistema de Estilos Principal (Responsive Optimizado)
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
@@ -59,6 +59,7 @@ html {
   scroll-behavior: smooth;
   font-family: var(--font-sans);
   overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -69,16 +70,6 @@ body {
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
-}
-
-.announcement-bar {
-  background-color: #0A111E;
-  color: #F8FAFC;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .header-glass {
@@ -130,6 +121,7 @@ body {
   transform: scale(1.06);
 }
 
+/* ─── MODALES Y DIÁLOGOS RESPONSIVOS ─── */
 .quick-view-modal {
   position: fixed;
   inset: 0;
@@ -137,13 +129,19 @@ body {
   display: none;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  padding: 0.75rem;
   background: rgba(10, 17, 30, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.25s ease;
+}
+
+@media (min-width: 640px) {
+  .quick-view-modal {
+    padding: 1.5rem;
+  }
 }
 
 .quick-view-modal.active {
@@ -158,8 +156,9 @@ body {
   border-radius: 1.5rem;
   width: 100%;
   max-width: 960px;
-  max-height: 90vh;
+  max-height: 92vh;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   transform: scale(0.95);
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -193,7 +192,7 @@ body {
   top: 0;
   right: 0;
   width: 450px;
-  max-width: 90vw;
+  max-width: 100vw;
   height: 100vh;
   background: var(--bg-card);
   border-left: 1px solid var(--border-light);
@@ -203,6 +202,12 @@ body {
   display: flex;
   flex-direction: column;
   box-shadow: -20px 0 50px rgba(0, 0, 0, 0.35);
+}
+
+@media (max-width: 480px) {
+  .cart-drawer {
+    width: 100vw;
+  }
 }
 
 .cart-drawer.active {
@@ -216,13 +221,19 @@ body {
   display: none;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  padding: 0.75rem;
   background: rgba(10, 17, 30, 0.85);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.25s ease;
+}
+
+@media (min-width: 640px) {
+  .auth-modal {
+    padding: 1.5rem;
+  }
 }
 
 .auth-modal.active {
@@ -237,8 +248,9 @@ body {
   border-radius: 1.5rem;
   width: 100%;
   max-width: 440px;
-  max-height: 90vh;
+  max-height: 92vh;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   transform: scale(0.95);
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -251,7 +263,7 @@ body {
 .mobile-nav-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(10, 17, 30, 0.7);
+  background: rgba(10, 17, 30, 0.75);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   z-index: 250;
@@ -294,6 +306,11 @@ body {
   font-weight: 600;
   font-size: 0.813rem;
   padding: 0.5rem 0.875rem;
+  min-height: 42px;
+  min-width: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 0.625rem;
   cursor: pointer;
   transition: var(--transition);
@@ -306,14 +323,26 @@ body {
   box-shadow: 0 4px 12px rgba(0, 168, 150, 0.3);
 }
 
+/* ─── TOASTS ADAPTATIVOS MÓVILES ─── */
 .toast-container {
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  left: 1.25rem;
   z-index: 600;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  pointer-events: none;
+}
+
+@media (min-width: 640px) {
+  .toast-container {
+    left: auto;
+    bottom: 2rem;
+    right: 2rem;
+    max-width: 400px;
+  }
 }
 
 .toast {
@@ -328,7 +357,9 @@ body {
   gap: 0.75rem;
   font-size: 0.875rem;
   font-weight: 500;
+  pointer-events: auto;
 }
 
+/* Scrollbar utilities */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

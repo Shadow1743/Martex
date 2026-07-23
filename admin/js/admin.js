@@ -1,5 +1,5 @@
 /* ============================================================
-   MARTEX ADMIN — Executive Dashboard & Measurement Engine
+   MARTEX ADMIN — Executive Dashboard & Measurement Engine (El Salvador)
    ============================================================ */
 
 // Seed initial demo orders if empty
@@ -11,14 +11,13 @@ if (orders.length === 0) {
       date: new Date(Date.now() - 3600000 * 5).toISOString(),
       clientName: 'Dra. María Elena Ramos',
       dui: '04829103-5',
-      phone: '7845-1290',
-      address: 'Colonia Escalon, Calle El Mirador #402, San Salvador',
+      phone: '6049 7383',
+      address: 'Usulután, El Salvador',
       paymentMethod: 'Transferencia Bancaria',
       items: [
-        { name: 'Set Quirúrgico V-Neck Technical', size: 'M', qty: 2, price: 49.99 },
-        { name: 'Gorro Quirúrgico Técnico Adjust-Fit', size: 'ÚNICA', qty: 2, price: 12.00 }
+        { name: 'Conjunto Quirúrgico Azul Médico', size: 'M', qty: 2, price: 49.99 }
       ],
-      total: 123.98,
+      total: 99.98,
       status: 'En Confección'
     },
     {
@@ -27,28 +26,13 @@ if (orders.length === 0) {
       clientName: 'Licda. Sofía Benítez (Spa & Estética)',
       dui: '01948201-9',
       phone: '7102-9944',
-      address: 'Avenida Jerusalem, Edificio Plaza Rosa #12, Antiguo Cuscatlán',
+      address: 'Usulután, El Salvador',
       paymentMethod: 'Efectivo contra Entrega',
       items: [
-        { name: 'Set Estética Slate Grey Minimalist', size: 'S', qty: 4, price: 45.00 }
+        { name: 'Uniforme Gris para Estética y Spa', size: 'S', qty: 2, price: 45.00 }
       ],
-      total: 180.00,
+      total: 90.00,
       status: 'Pendiente'
-    },
-    {
-      id: 'MX-510293',
-      date: new Date(Date.now() - 3600000 * 48).toISOString(),
-      clientName: 'Dr. Roberto Mendoza',
-      dui: '02910482-1',
-      phone: '7555-8811',
-      address: 'Hospital de Diagnóstico, Calle Villalta #20, San Salvador',
-      paymentMethod: 'Transferencia Bancaria',
-      items: [
-        { name: 'Filipina Royal Navy Pro', size: 'L', qty: 3, price: 29.00 },
-        { name: 'Bata / Abrigo Médico Laboratorio', size: 'L', qty: 1, price: 34.00 }
-      ],
-      total: 121.00,
-      status: 'Entregado'
     }
   ];
   localStorage.setItem('martex_orders', JSON.stringify(orders));
@@ -62,12 +46,12 @@ if (medidas.length === 0) {
       id: 'MED-101',
       date: new Date().toISOString(),
       clientName: 'Dr. Alejandro Rivas',
-      phone: '7233-4411',
+      phone: '6049 7383',
       garmentType: 'ambos',
       garmentLabel: 'Filipina + Pantalón (Set Completo)',
       filipina: { hombro: '44 cm', busto: '98 cm', cintura: '86 cm', cadera: '96 cm', largoCintura: '45 cm', mangaLargo: '24 cm', grosorBrazo: '34 cm', largoTotal: '72 cm' },
       pantalon: { cintura: '86 cm', cadera: '98 cm', largoRodilla: '54 cm', largoTotal: '102 cm', grosorMuslo: '58 cm', tiro: '28 cm', grosorRodilla: '40 cm' },
-      notes: 'Cliente prefiere filipina ligeramente ajustada en hombros y pantalón jogger con resorte.'
+      notes: 'Cliente prefiere filipina ligeramente holgada en hombros y pantalón jogger con resorte.'
     }
   ];
   localStorage.setItem('martex_medidas', JSON.stringify(medidas));
@@ -146,12 +130,20 @@ function switchTab(tabId) {
 
 function toggleMobileSidebar() {
   const sidebar = document.getElementById('sidebar');
-  if (sidebar) sidebar.classList.toggle('active');
+  const overlay = document.getElementById('sidebar-overlay');
+  if (sidebar) {
+    sidebar.classList.toggle('active');
+    if (overlay) {
+      overlay.classList.toggle('hidden', !sidebar.classList.contains('active'));
+    }
+  }
 }
 
 function closeMobileSidebar() {
   const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('sidebar-overlay');
   if (sidebar) sidebar.classList.remove('active');
+  if (overlay) overlay.classList.add('hidden');
 }
 
 // ─── DYNAMIC ANATOMICAL MEASUREMENT FORM CONTROLLER ───
@@ -281,10 +273,10 @@ function renderMedidas(searchQuery = '') {
       </td>
       <td class="py-4 px-4 text-right space-x-2">
         <button onclick="viewMedidaDetail('${m.id}')" class="p-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-[#00A896] hover:text-white text-slate-600 dark:text-slate-300 transition-colors" title="Ver Ficha Completa">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+          <svg class="w-4 h-4 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
         </button>
         <button onclick="deleteMedida(${index})" class="p-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-rose-500 hover:text-white text-slate-600 dark:text-slate-300 transition-colors" title="Eliminar Ficha">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+          <svg class="w-4 h-4 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
         </button>
       </td>
     </tr>
@@ -371,7 +363,6 @@ function renderOrders(filterStatus = 'todos', searchQuery = '') {
   const tbody = document.getElementById('pedidos-table-body');
   if (!tbody) return;
 
-  // Refresh from localStorage
   orders = JSON.parse(localStorage.getItem('martex_orders') || '[]');
 
   let list = orders;
@@ -411,7 +402,7 @@ function renderOrders(filterStatus = 'todos', searchQuery = '') {
       </td>
       <td class="py-4 px-4 text-right">
         <button onclick="deleteOrder('${o.id}')" class="p-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-rose-500 hover:text-white text-slate-600 dark:text-slate-300 transition-colors" title="Eliminar Pedido">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+          <svg class="w-4 h-4 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
         </button>
       </td>
     </tr>
@@ -448,12 +439,13 @@ function updateKPIs() {
   const pendingOrdersCount = orders.filter(o => o.status === 'Pendiente' || o.status === 'En Confección').length;
   const totalMedidasCount = medidas.length;
 
-  const kpiSales = document.getElementById('stat-total-ventas');
+  const kpiSales = document.getElementById('stat-total-[#00A896]');
+  const kpiSalesReal = document.getElementById('stat-total-ventas');
   const kpiOrders = document.getElementById('stat-total-pedidos');
   const kpiPending = document.getElementById('stat-pedidos-pendientes');
   const kpiMedidas = document.getElementById('stat-total-medidas');
 
-  if (kpiSales) kpiSales.textContent = `$${totalSales.toFixed(2)}`;
+  if (kpiSalesReal) kpiSalesReal.textContent = `$${totalSales.toFixed(2)}`;
   if (kpiOrders) kpiOrders.textContent = totalOrdersCount;
   if (kpiPending) kpiPending.textContent = pendingOrdersCount;
   if (kpiMedidas) kpiMedidas.textContent = totalMedidasCount;
@@ -472,7 +464,7 @@ function showAdminToast(msg, type = 'info') {
   const toast = document.createElement('div');
   toast.className = `toast ${type === 'error' ? 'border-left-rose-500' : ''}`;
   toast.innerHTML = `
-    <svg class="w-4 h-4 text-[#00A896]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    <svg class="w-4 h-4 text-[#00A896] stroke-[2.5]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>
     <span class="text-xs font-semibold">${msg}</span>
   `;
 
