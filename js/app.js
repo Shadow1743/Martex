@@ -1,8 +1,31 @@
 /* ============================================================
-   MARTEX — Catálogo con Fotografías Reales de El Salvador
+   MARTEX — Motor Principal de la Tienda (El Salvador)
    ============================================================ */
 
-// ─── PRODUCTOS CON FOTOS REALES DE MARTEX ───
+// ─── ACCESO SECRETO AL PANEL ADMIN (5 CLICS EN LOGO MARTEX) ───
+let logoClickCount = 0;
+let logoClickTimer = null;
+
+function handleLogoClick(e) {
+  logoClickCount++;
+  clearTimeout(logoClickTimer);
+  
+  if (logoClickCount >= 5) {
+    e.preventDefault();
+    logoClickCount = 0;
+    showToast('Redirigiendo al Panel de Administración...', 'info');
+    setTimeout(() => {
+      window.location.href = 'admin/admin.html';
+    }, 600);
+    return false;
+  }
+  
+  logoClickTimer = setTimeout(() => {
+    logoClickCount = 0;
+  }, 1500);
+}
+
+// ─── CATÁLOGO DE PRODUCTOS MARTEX ───
 const PRODUCTS = [
   {
     id: 'm-01',
@@ -118,7 +141,6 @@ document.addEventListener('DOMContentLoaded', () => {
   
   renderProducts();
   updateCartUI();
-  initAnnouncementBar();
   initSearch();
 });
 
@@ -183,27 +205,6 @@ function updateThemeToggleIcons(theme) {
         </svg>`;
     }
   });
-}
-
-function initAnnouncementBar() {
-  const messages = [
-    "8 Años Confeccionando Uniformes Médicos y de Belleza en El Salvador",
-    "Telas Antifluido Nivel 4 — Resistentes a Lavados Industriales",
-    "Envíos Rápidos a todo El Salvador",
-    "Confección a la Medida Disponible en Nuestra Tienda"
-  ];
-  let index = 0;
-  const msgEl = document.getElementById('announcement-msg');
-  if (!msgEl) return;
-  
-  setInterval(() => {
-    index = (index + 1) % messages.length;
-    msgEl.style.opacity = 0;
-    setTimeout(() => {
-      msgEl.textContent = messages[index];
-      msgEl.style.opacity = 1;
-    }, 300);
-  }, 4000);
 }
 
 function initSearch() {

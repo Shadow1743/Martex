@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sobre Nosotros | Martex</title>
-  <meta name="description" content="Conoce los 8 años de trayectoria de Martex confeccionando uniformes médicos y de estética en El Salvador.">
+  <title>Sobre Nosotros | Martex Usulután</title>
+  <meta name="description" content="Conoce la historia de Martex — 8 Años confeccionando uniformes médicos y de belleza con orgullo en Usulután, El Salvador.">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,22 +30,16 @@
 </head>
 <body class="bg-[#F8FAFC] dark:bg-[#0A111E] text-slate-900 dark:text-slate-100 transition-colors duration-300 overflow-x-hidden">
 
-  <!-- TOP ANNOUNCEMENT BAR -->
-  <div class="announcement-bar py-2 px-4 text-center sticky top-0 z-50 flex items-center justify-center gap-2">
-    <svg class="w-3.5 h-3.5 text-[#00A896]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-    <span id="announcement-msg">Martex — 8 Años de Tradición & Calidad Textil en El Salvador</span>
-  </div>
-
   <!-- HEADER -->
   <header class="header-glass">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-2.5 group">
+      <a href="index.html" onclick="handleLogoClick(event)" class="flex items-center gap-2.5 group cursor-pointer">
         <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-[#1B2A4A] to-[#0A111E] border border-[#00A896]/40 flex items-center justify-center">
           <svg class="w-6 h-6 text-[#00A896]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.38 3.46 16 2a4 4 0 0 0-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23Z"/></svg>
         </div>
         <div class="flex flex-col">
           <span class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white leading-none">MAR<span class="text-[#00A896]">TEX</span></span>
-          <span class="text-[9px] font-bold text-slate-500 tracking-widest uppercase">Sobre Nosotros</span>
+          <span class="text-[9px] font-bold text-slate-500 tracking-widest uppercase">Usulután, El Salvador</span>
         </div>
       </a>
 
@@ -92,54 +86,28 @@
     </div>
   </aside>
 
-  <main class="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-16">
+  <main class="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-12">
     <div class="text-center max-w-3xl mx-auto space-y-4">
       <span class="text-xs font-extrabold text-[#00A896] uppercase tracking-widest">Nuestra Historia</span>
-      <h1 class="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">8 Años de Confección & Pasión Textil</h1>
-      <p class="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
-        Fundada en 2018 en San Salvador, Martex nació con la convicción de que los profesionales de la salud y la estética merecen prendas cómodas, anatómicas y con materiales que garanticen su protección diaria.
+      <h1 class="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">8 Años Vistiendo a los Profesionales de El Salvador</h1>
+      <p class="text-sm text-slate-600 dark:text-slate-300">
+        Nacimos en Usulután con el firme compromiso de ofrecer prendas duraderas, antifluido y ergonómicas.
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="p-8 rounded-3xl bg-white dark:bg-[#162447] border border-slate-200 dark:border-slate-800 space-y-4 shadow-sm">
-        <div class="w-12 h-12 rounded-xl bg-[#00A896]/10 text-[#00A896] flex items-center justify-center font-bold text-xl">1</div>
-        <h3 class="text-xl font-bold text-slate-900 dark:text-white">Telas Antifluido Nivel 4</h3>
-        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-          Tecnología textil avanzada que repele fluidos corporales, químicos de peluquería y manchas biológicas sin restar respirabilidad.
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <div class="space-y-4 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+        <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">Confección Con Pasión y Calidad Certificada</h2>
+        <p>
+          En <strong>MARTEX</strong> entendemos las exigencias del trabajo médico y de estética. Nuestras batas, filipinas y conjuntos están confeccionados con telas de grado clínico Nivel 4 que resisten lavados continuos sin perder su color ni suavidad.
+        </p>
+        <p>
+          Atendemos pedidos a la medida tanto para profesionales independientes como para clínicas, hospitales y centros estéticos de todo El Salvador.
         </p>
       </div>
 
-      <div class="p-8 rounded-3xl bg-white dark:bg-[#162447] border border-slate-200 dark:border-slate-800 space-y-4 shadow-sm">
-        <div class="w-12 h-12 rounded-xl bg-[#00A896]/10 text-[#00A896] flex items-center justify-center font-bold text-xl">2</div>
-        <h3 class="text-xl font-bold text-slate-900 dark:text-white">Toma de Medidas Corporales</h3>
-        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-          Contamos con fichas de medida personalizadas para confeccionar juegos de filipina y pantalón ajustados al cuerpo de cada profesional.
-        </p>
-      </div>
-
-      <div class="p-8 rounded-3xl bg-white dark:bg-[#162447] border border-slate-200 dark:border-slate-800 space-y-4 shadow-sm">
-        <div class="w-12 h-12 rounded-xl bg-[#00A896]/10 text-[#00A896] flex items-center justify-center font-bold text-xl">3</div>
-        <h3 class="text-xl font-bold text-slate-900 dark:text-white">Garantía Directa de Taller</h3>
-        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-          Confección 100% nacional realizada por artesanos textiles altamente calificados con estándares internacionales de durabilidad.
-        </p>
-      </div>
-    </div>
-
-    <div class="p-8 sm:p-12 rounded-3xl bg-[#0A111E] text-white border border-slate-800 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-      <div class="space-y-4">
-        <span class="text-xs font-bold text-[#00A896] uppercase tracking-wider">Showroom & Taller</span>
-        <h2 class="text-2xl sm:text-3xl font-extrabold">Ven a Conocer Nuestra Tienda</h2>
-        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-          Visítanos en San Salvador para explorar nuestro muestrario físico de telas, probar muestras de tallas o agendar la confección de tu uniforme a la medida.
-        </p>
-        <a href="ubicacion.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#00A896] hover:bg-[#009284] text-white font-bold text-xs">
-          Ver Ubicación & Horarios →
-        </a>
-      </div>
-      <div class="h-64 rounded-2xl overflow-hidden bg-slate-900 border border-slate-700">
-        <img src="imagenes/tienda-martex.png" alt="Taller Martex" class="w-full h-full object-cover">
+      <div class="rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-xl">
+        <img src="imagenes/tienda-martex.png" alt="Instalaciones Martex Usulután" class="w-full h-80 object-cover">
       </div>
     </div>
   </main>
@@ -151,13 +119,13 @@
     <div id="cart-drawer-list" class="flex-1 p-6 overflow-y-auto space-y-4"></div>
     <div class="p-6 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0F172A] space-y-4"><div class="flex justify-between font-black"><span>Total:</span><span id="cart-drawer-total" class="text-[#00A896]">$0.00</span></div><button onclick="openCheckoutModal()" class="w-full py-3.5 rounded-xl bg-[#00A896] text-white font-bold text-xs uppercase">Proceder al Pago</button></div>
   </aside>
-  <div id="checkout-modal" class="auth-modal" onclick="if(event.target === this) closeCheckoutModal()"><div class="auth-dialog p-6 sm:p-8 space-y-6"><form onsubmit="submitOrder(event)" class="space-y-4 text-xs"><div><label class="block font-bold mb-1">Nombre Completo *</label><input type="text" name="client_name" required class="w-full p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800"></div><div class="grid grid-cols-2 gap-3"><div><label class="block font-bold mb-1">DUI *</label><input type="text" name="client_dui" required class="w-full p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800"></div><div><label class="block font-bold mb-1">Teléfono *</label><input type="tel" name="client_phone" required class="w-full p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800"></div></div><div><label class="block font-bold mb-1">Dirección *</label><textarea name="client_address" required rows="2" class="w-full p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800"></textarea></div><div><label class="block font-bold mb-1">Pago *</label><select name="payment_method" class="w-full p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800"><option value="efectivo">Efectivo contra Entrega</option><option value="transferencia">Transferencia Bancaria</option></select></div><button type="submit" class="w-full py-3 rounded-xl bg-[#00A896] text-white font-bold">Confirmar Pedido</button></form></div></div>
+  <div id="checkout-modal" class="auth-modal" onclick="if(event.target === this) closeCheckoutModal()"><div class="auth-dialog p-6 sm:p-8 space-y-6"><form onsubmit="submitOrder(event)" class="space-y-4 text-xs"><div><label class="block font-bold mb-1">Nombre Completo *</label><input type="text" name="client_name" required class="w-full p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800"></div><div class="grid grid-cols-2 gap-3"><div><label class="block font-bold mb-1">DUI *</label><input type="text" name="client_dui" required class="w-full p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800"></div><div><label class="block font-bold mb-1">Teléfono *</label><input type="tel" name="client_phone" required placeholder="6049 7383" class="w-full p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800"></div></div><div><label class="block font-bold mb-1">Dirección *</label><textarea name="client_address" required rows="2" placeholder="Usulután, El Salvador" class="w-full p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800"></textarea></div><div><label class="block font-bold mb-1">Pago *</label><select name="payment_method" class="w-full p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800"><option value="efectivo">Efectivo contra Entrega</option><option value="transferencia">Transferencia Bancaria</option></select></div><button type="submit" class="w-full py-3 rounded-xl bg-[#00A896] text-white font-bold">Confirmar Pedido</button></form></div></div>
   <div id="order-success-modal" class="auth-modal" onclick="if(event.target === this) closeOrderSuccessModal()"><div class="auth-dialog p-6 sm:p-8"><div id="order-success-details"></div><button onclick="closeOrderSuccessModal()" class="w-full py-3 rounded-xl bg-slate-200 dark:bg-slate-800 font-bold text-xs mt-4">Cerrar</button></div></div>
   <div id="auth-modal" class="auth-modal" onclick="if(event.target === this) closeAuthModal()"><div class="auth-dialog p-6 sm:p-8 space-y-6"><button onclick="simulateGoogleAuth()" class="w-full py-3 rounded-xl bg-white dark:bg-slate-800 border text-xs font-bold">Continuar con Google</button></div></div>
 
   <footer class="bg-[#0A111E] text-slate-400 border-t border-slate-800 py-12 text-xs">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
-      <p>© 2026 Martex El Salvador. Sobre Nosotros.</p>
+      <p>© 2026 Martex Usulután, El Salvador. Teléfono: 6049 7383.</p>
       <div class="flex gap-4">
         <a href="index.html" class="hover:text-[#00A896]">Inicio</a>
         <a href="medica.html" class="hover:text-[#00A896]">Colección Médica</a>

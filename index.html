@@ -4,12 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Martex | Uniformes Médicos & Belleza de Alto Nivel</title>
-  <meta name="description" content="Martex — 8 Años Confeccionando Uniformes Médicos y para Salones de Belleza en El Salvador. Telas antifluido premium y confección a la medida.">
+  <meta name="description" content="Martex — 8 Años Confeccionando Uniformes Médicos y para Salones de Belleza en Usulután, El Salvador. Telas antifluido y confección a la medida.">
   
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -31,18 +33,12 @@
 </head>
 <body class="bg-[#F8FAFC] dark:bg-[#0A111E] text-slate-900 dark:text-slate-100 transition-colors duration-300 overflow-x-hidden">
 
-  <!-- TOP ANNOUNCEMENT BAR -->
-  <div class="announcement-bar py-2 px-4 text-center sticky top-0 z-50 flex items-center justify-center gap-2">
-    <svg class="w-3.5 h-3.5 text-[#00A896]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-    <span id="announcement-msg" class="transition-opacity duration-300">8 Años Confeccionando Uniformes Médicos & Belleza | Envíos a todo El Salvador</span>
-  </div>
-
   <!-- FLOATING HEADER WITH RESPONSIVE DESKTOP + MOBILE NAVIGATION -->
   <header class="header-glass">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
       
-      <!-- Logo Vectorial Martex -->
-      <a href="index.html" class="flex items-center gap-2.5 group">
+      <!-- Logo Vectorial Martex (5 clics para ingresar a Admin) -->
+      <a href="index.html" onclick="handleLogoClick(event)" class="flex items-center gap-2.5 group cursor-pointer">
         <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-[#1B2A4A] to-[#0A111E] border border-[#00A896]/40 flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-md shadow-[#00A896]/10">
           <svg class="w-6 h-6 text-[#00A896] stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <path d="M20.38 3.46 16 2a4 4 0 0 0-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23Z"/>
@@ -52,7 +48,7 @@
           <span class="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-none">
             MAR<span class="text-[#00A896]">TEX</span>
           </span>
-          <span class="text-[9px] font-bold text-slate-500 tracking-widest uppercase">Est. 2018 — El Salvador</span>
+          <span class="text-[9px] font-bold text-slate-500 tracking-widest uppercase">Usulután, El Salvador</span>
         </div>
       </a>
 
@@ -121,15 +117,15 @@
         <div class="lg:col-span-7 space-y-6 sm:space-y-8 z-10 text-center lg:text-left">
           <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#00A896]/10 border border-[#00A896]/30 text-[#00A896] text-xs font-extrabold uppercase tracking-widest">
             <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            <span>8 Años de Excelencia Textil Médica</span>
+            <span>8 Años de Excelencia Textil en El Salvador</span>
           </div>
 
           <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white leading-[1.15] tracking-tight">
-            Technical Comfort for <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#00A896] to-teal-400">Medical & Beauty</span> Professionals.
+            Uniformes de Calidad para <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#00A896] to-teal-400">Médicos y Estética</span>.
           </h1>
 
           <p class="text-sm sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl font-medium leading-relaxed mx-auto lg:mx-0">
-            Diseñamos uniformes de alto rendimiento anatómico con telas antifluido de grado quirúrgico. Elegancia moderna, resistencia superior a lavados industriales y ajuste perfecto a la medida.
+            Confeccionamos uniformes anatómicos y cómodos en Usulután con telas antifluido de alta durabilidad y ajuste perfecto a tu medida.
           </p>
 
           <!-- Dual CTA Buttons -->
@@ -164,15 +160,15 @@
         <!-- Hero Visual -->
         <div class="lg:col-span-5 relative">
           <div class="aspect-[3/4] rounded-3xl overflow-hidden border-2 border-slate-200 dark:border-[#00A896]/30 shadow-2xl shadow-[#00A896]/10 relative group">
-            <img src="imagenes/conjunto de uniforme médico.jpeg" alt="Colección Médica Martex FIGS Style" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <img src="imagenes/conjunto de uniforme médico.jpeg" alt="Colección Médica Martex" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
             <div class="absolute inset-0 bg-gradient-to-t from-[#0A111E]/90 via-transparent to-transparent"></div>
             
             <div class="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 p-4 sm:p-5 rounded-2xl bg-[#0A111E]/80 backdrop-blur-xl border border-white/10 text-white space-y-1">
               <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-[#00A896] uppercase tracking-wider">Set Pro Technical Scrub</span>
+                <span class="text-xs font-bold text-[#00A896] uppercase tracking-wider">Conjunto Quirúrgico Azul</span>
                 <span class="text-sm font-black font-mono">$49.99</span>
               </div>
-              <p class="text-[11px] text-slate-300">Protección certificada antimicrobiana y elasticidad 4-way stretch.</p>
+              <p class="text-[11px] text-slate-300">Protección certificada antifluido de alta comodidad.</p>
             </div>
           </div>
         </div>
@@ -273,12 +269,12 @@
           </div>
           <div>
             <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Teléfono *</label>
-            <input type="tel" name="client_phone" required placeholder="7000-0000" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-[#00A896]">
+            <input type="tel" name="client_phone" required placeholder="6049 7383" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-[#00A896]">
           </div>
         </div>
         <div>
           <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Dirección Completa de Envío *</label>
-          <textarea name="client_address" required rows="2" placeholder="Colonia, Calle, Casa No., Departamento" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-[#00A896]"></textarea>
+          <textarea name="client_address" required rows="2" placeholder="Usulután, El Salvador" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-[#00A896]"></textarea>
         </div>
         <div>
           <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Método de Pago *</label>
@@ -382,7 +378,7 @@
           <span class="text-xl font-extrabold text-white tracking-tight">MAR<span class="text-[#00A896]">TEX</span></span>
         </div>
         <p class="text-slate-400 leading-relaxed">
-          8 años confeccionando indumentaria técnica médica y de estética en El Salvador. Innovación, confort y ajuste anatómico.
+          8 años confeccionando indumentaria técnica médica y de estética en Usulután, El Salvador. Innovación, confort y ajuste anatómico.
         </p>
       </div>
 
@@ -401,35 +397,35 @@
         <ul class="space-y-2.5">
           <li class="flex items-center gap-2">
             <svg class="w-4 h-4 text-[#00A896]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            <span>Atención: +503 7000-0000</span>
+            <span>Teléfono / WhatsApp: 6049 7383</span>
           </li>
           <li class="flex items-center gap-2">
             <svg class="w-4 h-4 text-[#00A896]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span>San Salvador, El Salvador</span>
+            <span>Usulután, El Salvador</span>
           </li>
           <li>
-            <a href="https://maps.app.goo.gl/1yhFJQquGmHPWbnj6" target="_blank" rel="noopener noreferrer" class="text-[#00A896] hover:underline font-bold">Ver en Google Maps →</a>
+            <a href="ubicacion.html" class="text-[#00A896] hover:underline font-bold">Ver Ubicación →</a>
           </li>
         </ul>
       </div>
 
       <div class="space-y-3">
-        <h4 class="text-white font-bold uppercase tracking-wider text-xs">Síguenos en Redes</h4>
+        <h4 class="text-white font-bold uppercase tracking-wider text-xs">Síguenos en Instagram</h4>
         <p class="text-slate-400">Conoce los nuevos diseños e ingresos de temporada.</p>
-        <a href="https://instagram.com/martex.sv" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white border border-slate-800 hover:border-[#00A896]/50 transition-all font-semibold">
+        <a href="https://www.instagram.com/martexsv?igsh=a3Izc2YzZGNucmVl" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white border border-slate-800 hover:border-[#00A896]/50 transition-all font-semibold">
           <svg class="w-4 h-4 text-rose-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
             <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
             <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
           </svg>
-          <span>@martex.sv</span>
+          <span>@martexsv</span>
         </a>
       </div>
 
     </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 mt-12 border-t border-slate-800/80 flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] text-slate-500">
-      <p>© 2026 Martex El Salvador. Todos los derechos reservados.</p>
+      <p>© 2026 Martex El Salvador. Usulután, El Salvador.</p>
       <div>Telas Antifluido Nivel 4</div>
     </div>
   </footer>
