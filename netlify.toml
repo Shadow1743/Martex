@@ -1,0 +1,22 @@
+[build]
+  publish = "frontend"
+
+[[redirects]]
+  from = "/medica"
+  to = "/medica.html"
+  status = 200
+
+[[redirects]]
+  from = "/belleza"
+  to = "/belleza.html"
+  status = 200
+
+[[redirects]]
+  from = "/nosotros"
+  to = "/nosotros.html"
+  status = 200
+
+[[redirects]]
+  from = "/ubicacion"
+  to = "/ubicacion.html"
+  status = 200

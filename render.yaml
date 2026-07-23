@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: martex-backend
+    env: node
+    rootDir: martex-app
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: PORT
+        value: 10000

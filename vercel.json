@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "name": "martex-ecommerce",
+  "cleanUrls": true,
+  "routes": [
+    { "src": "/", "dest": "/frontend/index.html" },
+    { "src": "/medica", "dest": "/frontend/medica.html" },
+    { "src": "/belleza", "dest": "/frontend/belleza.html" },
+    { "src": "/nosotros", "dest": "/frontend/nosotros.html" },
+    { "src": "/ubicacion", "dest": "/frontend/ubicacion.html" },
+    { "src": "/catalogo", "dest": "/frontend/catalogo.html" },
+    { "src": "/frontend/(.*)", "dest": "/frontend/$1" },
+    { "src": "/admin/(.*)", "dest": "/admin/$1" },
+    { "src": "/imagenes/(.*)", "dest": "/imagenes/$1" }
+  ]
+}
