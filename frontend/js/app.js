@@ -1,6 +1,6 @@
 /* ============================================================
    MARTEX — Main Application & FIGS-Style Interactive Engine
-   Multi-Page Support (Inicio, Colección Médica, Colección Belleza, Nosotros, Ubicación)
+   Multi-Page & Mobile Navigation Support
    ============================================================ */
 
 // ─── PRODUCT DATABASE (FIGS STANDARD CATALOG) ───
@@ -145,7 +145,6 @@ let selectedQty = 1;
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   
-  // Check if grid has page category filter attribute
   const grid = document.getElementById('products-grid');
   if (grid && grid.dataset.pageCategory) {
     activeFilter = grid.dataset.pageCategory;
@@ -156,6 +155,27 @@ document.addEventListener('DOMContentLoaded', () => {
   initAnnouncementBar();
   initSearch();
 });
+
+// ─── MOBILE DRAWER CONTROLLER ───
+function toggleMobileNav() {
+  const overlay = document.getElementById('mobile-nav-overlay');
+  const drawer = document.getElementById('mobile-nav-drawer');
+  if (overlay && drawer) {
+    overlay.classList.toggle('active');
+    drawer.classList.toggle('active');
+    document.body.style.overflow = drawer.classList.contains('active') ? 'hidden' : '';
+  }
+}
+
+function closeMobileNav() {
+  const overlay = document.getElementById('mobile-nav-overlay');
+  const drawer = document.getElementById('mobile-nav-drawer');
+  if (overlay && drawer) {
+    overlay.classList.remove('active');
+    drawer.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
 
 // ─── THEME CONTROLLER ───
 function initTheme() {
@@ -196,7 +216,7 @@ function updateThemeToggleIcons(theme) {
     } else {
       btn.innerHTML = `
         <svg class="w-5 h-5 text-slate-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+          <path d="M12 3a6 6 0 0 0 9 9 9 0 1 1-9-9Z"/>
         </svg>`;
     }
   });
@@ -317,13 +337,11 @@ function openQuickView(productId) {
 
   dialog.innerHTML = `
     <div class="relative p-6 sm:p-8">
-      <!-- Close Button -->
       <button onclick="closeQuickView()" class="absolute top-4 right-4 z-10 p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">
         <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
       </button>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-        <!-- COL 1: GALLERY & LARGE IMAGE -->
         <div class="space-y-4">
           <div class="aspect-[4/5] rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-800 relative group">
             <img id="qv-main-img" src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
@@ -340,7 +358,6 @@ function openQuickView(productId) {
           </div>
         </div>
 
-        <!-- COL 2: SPECIFICATIONS & ADD TO CART -->
         <div class="space-y-6">
           <div>
             <div class="text-xs font-bold text-[#00A896] uppercase tracking-wider mb-1">${product.categoryLabel}</div>
@@ -359,7 +376,6 @@ function openQuickView(productId) {
             </div>
           </div>
 
-          <!-- Size Selector -->
           <div>
             <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">
               Seleccionar Talla: <span id="qv-selected-size-label" class="text-[#00A896] font-mono">${selectedSize}</span>
@@ -371,7 +387,6 @@ function openQuickView(productId) {
             </div>
           </div>
 
-          <!-- Quantity & CTA -->
           <div class="space-y-4 pt-2 border-t border-slate-200 dark:border-slate-800">
             <div class="flex items-center gap-4">
               <span class="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">Cantidad:</span>
@@ -489,14 +504,12 @@ function updateCartUI() {
   const totalCount = cart.reduce((acc, item) => acc + item.qty, 0);
   const subtotal = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
 
-  // Update Badges
   const badges = document.querySelectorAll('.cart-badge');
   badges.forEach(b => {
     b.textContent = totalCount;
     b.style.display = totalCount > 0 ? 'inline-flex' : 'none';
   });
 
-  // Render Drawer List
   const drawerList = document.getElementById('cart-drawer-list');
   const drawerSubtotal = document.getElementById('cart-drawer-subtotal');
   const drawerTotal = document.getElementById('cart-drawer-total');
@@ -609,12 +622,10 @@ function submitOrder(e) {
     status: 'Pendiente'
   };
 
-  // Save order in localStorage for Admin Panel access
   const existingOrders = JSON.parse(localStorage.getItem('martex_orders') || '[]');
   existingOrders.unshift(newOrder);
   localStorage.setItem('martex_orders', JSON.stringify(existingOrders));
 
-  // Reset cart
   cart = [];
   saveCart();
   updateCartUI();
