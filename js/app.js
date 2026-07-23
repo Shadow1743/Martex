@@ -630,26 +630,75 @@ function submitOrder(e) {
   showOrderSuccessModal(newOrder);
 }
 
+function downloadOrderPDF() {
+  window.print();
+}
+
 function showOrderSuccessModal(order) {
   const modal = document.getElementById('order-success-modal');
   const details = document.getElementById('order-success-details');
   if (!modal || !details) return;
 
-  details.innerHTML = `
-    <div class="text-center space-y-3">
-      <div class="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-[#00A896] flex items-center justify-center mx-auto">
-        <svg class="w-8 h-8 stroke-[2.5]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>
-      </div>
-      <h3 class="text-xl font-extrabold text-slate-900 dark:text-white">¡Pedido Registrado!</h3>
-      <p class="text-xs text-slate-500">Orden <strong class="text-[#00A896] font-mono">#${order.id}</strong> realizada con éxito.</p>
-    </div>
+  const formattedDate = new Date(order.date || Date.now()).toLocaleDateString('es-SV', {
+    year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
+  });
 
-    <div class="my-6 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-xs space-y-2 text-slate-700 dark:text-slate-300">
-      <div class="flex justify-between"><span class="text-slate-400">Cliente:</span> <strong>${order.clientName}</strong></div>
-      <div class="flex justify-between"><span class="text-slate-400">DUI:</span> <strong class="font-mono">${order.dui}</strong></div>
-      <div class="flex justify-between"><span class="text-slate-400">Teléfono:</span> <strong>${order.phone}</strong></div>
-      <div class="flex justify-between"><span class="text-slate-400">Forma de Pago:</span> <strong class="text-[#00A896]">${order.paymentMethod}</strong></div>
-      <div class="flex justify-between border-t border-slate-200 dark:border-slate-700 pt-2"><span class="text-slate-400">Total:</span> <strong class="text-base font-extrabold font-mono text-slate-900 dark:text-white">$${order.total.toFixed(2)}</strong></div>
+  details.innerHTML = `
+    <div id="printable-receipt" class="space-y-4">
+      <div class="text-center space-y-2 border-b border-slate-200 dark:border-slate-800 pb-4">
+        <div class="w-12 h-12 rounded-xl bg-[#00A896]/10 text-[#00A896] flex items-center justify-center mx-auto">
+          <svg class="w-6 h-6 stroke-[2.5]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h3 class="text-lg font-extrabold text-slate-900 dark:text-white">MARTEX EL SALVADOR</h3>
+        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Usulután, El Salvador — Tel: 6049 7383</p>
+        <div class="inline-block px-3 py-1 rounded-full bg-[#00A896]/10 text-[#00A896] text-xs font-mono font-bold">
+          Comprobante de Compra #${order.id}
+        </div>
+      </div>
+
+      <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 text-xs space-y-2 text-slate-700 dark:text-slate-300">
+        <div class="flex justify-between"><span class="text-slate-400">Fecha de Emisión:</span> <strong class="text-slate-800 dark:text-slate-200">${formattedDate}</strong></div>
+        <div class="flex justify-between"><span class="text-slate-400">Cliente:</span> <strong class="text-slate-900 dark:text-white">${order.clientName}</strong></div>
+        <div class="flex justify-between"><span class="text-slate-400">DUI:</span> <strong class="font-mono">${order.dui}</strong></div>
+        <div class="flex justify-between"><span class="text-slate-400">Teléfono:</span> <strong>${order.phone}</strong></div>
+        <div class="flex justify-between"><span class="text-slate-400">Dirección:</span> <strong class="truncate max-w-[200px]">${order.address}</strong></div>
+        <div class="flex justify-between"><span class="text-slate-400">Método de Pago:</span> <strong class="text-[#00A896]">${order.paymentMethod}</strong></div>
+      </div>
+
+      <div class="border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden text-xs">
+        <table class="w-full text-left border-collapse">
+          <thead class="bg-slate-100 dark:bg-slate-800/80 text-[10px] font-bold uppercase text-slate-400 border-b border-slate-200 dark:border-slate-700">
+            <tr>
+              <th class="p-2.5">Prenda</th>
+              <th class="p-2.5 text-center">Cant.</th>
+              <th class="p-2.5 text-right">Precio</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200 dark:divide-slate-800">
+            ${order.items.map(item => `
+              <tr>
+                <td class="p-2.5 font-bold text-slate-800 dark:text-slate-200">
+                  ${item.name} <span class="text-[10px] text-[#00A896] block">Talla: ${item.size}</span>
+                </td>
+                <td class="p-2.5 text-center font-mono font-bold">${item.qty}</td>
+                <td class="p-2.5 text-right font-mono font-bold">$${(item.price * item.qty).toFixed(2)}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="flex justify-between items-center p-3.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+        <span class="text-xs font-bold text-slate-600 dark:text-slate-400 uppercase">Total a Pagar (USD):</span>
+        <span class="text-xl font-black font-mono text-[#00A896]">$${order.total.toFixed(2)}</span>
+      </div>
+
+      <div class="pt-2 space-y-2 no-print">
+        <button onclick="downloadOrderPDF()" class="w-full py-3.5 rounded-xl bg-[#00A896] hover:bg-[#009284] text-white font-extrabold text-xs uppercase tracking-wider transition-all shadow-md flex items-center justify-center gap-2">
+          <svg class="w-4 h-4 stroke-[2.5]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span>Descargar Comprobante PDF / Imprimir</span>
+        </button>
+      </div>
     </div>
   `;
 
