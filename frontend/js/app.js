@@ -2,7 +2,7 @@
    MARTEX — Motor Principal de la Tienda (El Salvador)
    ============================================================ */
 
-// ─── ACCESOS OCULTOS AL PANEL ADMINISTRADOR ───
+// ─── ACCESOS OCULTOS SILENCIOSOS AL PANEL ADMINISTRADOR ───
 let logoClickCount = 0;
 let logoClickTimer = null;
 
@@ -13,10 +13,7 @@ function handleLogoClick(e) {
   if (logoClickCount >= 5) {
     e.preventDefault();
     logoClickCount = 0;
-    showToast('🔑 Acceso concedido al Panel Administrador', 'success');
-    setTimeout(() => {
-      window.location.href = '../admin/admin.html';
-    }, 600);
+    window.location.href = '../admin/admin.html';
     return false;
   }
   
@@ -35,10 +32,7 @@ function handleSecretFooterClick(e) {
 
   if (copyrightClickCount >= 3) {
     copyrightClickCount = 0;
-    showToast('🔑 Acceso Secreto detectado. Redirigiendo...', 'info');
-    setTimeout(() => {
-      window.location.href = '../admin/admin.html';
-    }, 600);
+    window.location.href = '../admin/admin.html';
     return;
   }
 
@@ -51,10 +45,7 @@ let keySequence = '';
 document.addEventListener('keydown', (e) => {
   if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'a') {
     e.preventDefault();
-    showToast('🔑 Modo Administrador activado', 'success');
-    setTimeout(() => {
-      window.location.href = '../admin/admin.html';
-    }, 500);
+    window.location.href = '../admin/admin.html';
     return;
   }
 
@@ -64,10 +55,7 @@ document.addEventListener('keydown', (e) => {
   
   if (keySequence.endsWith('admin')) {
     keySequence = '';
-    showToast('🔑 Acceso Secreto Administrador', 'success');
-    setTimeout(() => {
-      window.location.href = '../admin/admin.html';
-    }, 500);
+    window.location.href = '../admin/admin.html';
   }
 });
 

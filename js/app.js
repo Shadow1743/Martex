@@ -2,8 +2,8 @@
    MARTEX — Motor Principal de la Tienda (El Salvador)
    ============================================================ */
 
-// ─── ACCESOS OCULTOS AL PANEL ADMINISTRADOR ───
-// 1. Cinco clics o toques rápidos en el logo MARTEX
+// ─── ACCESOS OCULTOS SILENCIOSOS AL PANEL ADMINISTRADOR ───
+// 1. Cinco clics o toques rápidos en el logo MARTEX (Sin notificación)
 let logoClickCount = 0;
 let logoClickTimer = null;
 
@@ -14,10 +14,7 @@ function handleLogoClick(e) {
   if (logoClickCount >= 5) {
     e.preventDefault();
     logoClickCount = 0;
-    showToast('🔑 Acceso concedido al Panel Administrador', 'success');
-    setTimeout(() => {
-      window.location.href = 'admin/admin.html';
-    }, 600);
+    window.location.href = 'admin/admin.html';
     return false;
   }
   
@@ -26,7 +23,7 @@ function handleLogoClick(e) {
   }, 1500);
 }
 
-// 2. Tres clics rápidos en el Copyright del Footer
+// 2. Tres clics rápidos en el Copyright del Footer (Sin notificación)
 let copyrightClickCount = 0;
 let copyrightClickTimer = null;
 
@@ -37,10 +34,7 @@ function handleSecretFooterClick(e) {
 
   if (copyrightClickCount >= 3) {
     copyrightClickCount = 0;
-    showToast('🔑 Acceso Secreto detectado. Redirigiendo...', 'info');
-    setTimeout(() => {
-      window.location.href = 'admin/admin.html';
-    }, 600);
+    window.location.href = 'admin/admin.html';
     return;
   }
 
@@ -49,30 +43,22 @@ function handleSecretFooterClick(e) {
   }, 1200);
 }
 
-// 3. Atajo de teclado: Escribir "admin" o presionar "Ctrl+Shift+A"
+// 3. Atajo de teclado: Escribir "admin" o presionar "Ctrl+Shift+A" (Sin notificación)
 let keySequence = '';
 document.addEventListener('keydown', (e) => {
-  // Atajo Ctrl+Shift+A
   if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'a') {
     e.preventDefault();
-    showToast('🔑 Modo Administrador activado', 'success');
-    setTimeout(() => {
-      window.location.href = 'admin/admin.html';
-    }, 500);
+    window.location.href = 'admin/admin.html';
     return;
   }
 
-  // Secuencia de teclado "admin"
   if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
   keySequence += e.key.toLowerCase();
   if (keySequence.length > 10) keySequence = keySequence.substring(keySequence.length - 10);
   
   if (keySequence.endsWith('admin')) {
     keySequence = '';
-    showToast('🔑 Acceso Secreto Administrador', 'success');
-    setTimeout(() => {
-      window.location.href = 'admin/admin.html';
-    }, 500);
+    window.location.href = 'admin/admin.html';
   }
 });
 
@@ -252,7 +238,7 @@ function updateThemeToggleIcons(theme) {
     } else {
       btn.innerHTML = `
         <svg class="w-5 h-5 text-indigo-600 stroke-[2] transition-transform hover:-rotate-12 duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+          <path d="M12 3a6 6 0 0 0 9 9 9 0 1 1-9-9Z"/>
         </svg>`;
     }
   });
