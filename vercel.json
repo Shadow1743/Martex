@@ -2,24 +2,5 @@
   "version": 2,
   "name": "martex-ecommerce",
   "cleanUrls": true,
-  "trailingSlash": false,
-  "rewrites": [
-    { "source": "/", "destination": "/frontend/index.html" },
-    { "source": "/index.html", "destination": "/frontend/index.html" },
-    { "source": "/medica", "destination": "/frontend/medica.html" },
-    { "source": "/medica.html", "destination": "/frontend/medica.html" },
-    { "source": "/belleza", "destination": "/frontend/belleza.html" },
-    { "source": "/belleza.html", "destination": "/frontend/belleza.html" },
-    { "source": "/nosotros", "destination": "/frontend/nosotros.html" },
-    { "source": "/nosotros.html", "destination": "/frontend/nosotros.html" },
-    { "source": "/ubicacion", "destination": "/frontend/ubicacion.html" },
-    { "source": "/ubicacion.html", "destination": "/frontend/ubicacion.html" },
-    { "source": "/catalogo", "destination": "/frontend/catalogo.html" },
-    { "source": "/catalogo.html", "destination": "/frontend/catalogo.html" },
-    { "source": "/admin", "destination": "/admin/admin.html" },
-    { "source": "/admin.html", "destination": "/admin/admin.html" },
-    { "source": "/css/(.*)", "destination": "/frontend/css/$1" },
-    { "source": "/js/(.*)", "destination": "/frontend/js/$1" },
-    { "source": "/imagenes/(.*)", "destination": "/imagenes/$1" }
-  ]
+  "trailingSlash": false
 }

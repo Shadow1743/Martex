@@ -1,11 +1,439 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="dark scroll-smooth">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=frontend/index.html">
-  <title>Martex | Redireccionando...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Martex | Uniformes Médicos & Belleza de Alto Nivel</title>
+  <meta name="description" content="Martex — 8 Años Confeccionando Uniformes Médicos y para Salones de Belleza en El Salvador. Telas antifluido premium y confección a la medida.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            panther: { DEFAULT: '#0A111E', nav: '#0F172A' },
+            navy: { DEFAULT: '#1B2A4A', card: '#162447' },
+            surgical: { DEFAULT: '#00A896', hover: '#009284' }
+          },
+          fontFamily: { sans: ['Inter', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  
+  <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
-  <p>Redireccionando a la tienda de <a href="frontend/index.html">Martex</a>...</p>
+<body class="bg-[#F8FAFC] dark:bg-[#0A111E] text-slate-900 dark:text-slate-100 transition-colors duration-300 overflow-x-hidden">
+
+  <!-- TOP ANNOUNCEMENT BAR -->
+  <div class="announcement-bar py-2 px-4 text-center sticky top-0 z-50 flex items-center justify-center gap-2">
+    <svg class="w-3.5 h-3.5 text-[#00A896]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    <span id="announcement-msg" class="transition-opacity duration-300">8 Años Confeccionando Uniformes Médicos & Belleza | Envíos a todo El Salvador</span>
+  </div>
+
+  <!-- FLOATING HEADER WITH RESPONSIVE DESKTOP + MOBILE NAVIGATION -->
+  <header class="header-glass">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
+      
+      <!-- Logo Vectorial Martex -->
+      <a href="index.html" class="flex items-center gap-2.5 group">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-[#1B2A4A] to-[#0A111E] border border-[#00A896]/40 flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-md shadow-[#00A896]/10">
+          <svg class="w-6 h-6 text-[#00A896] stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M20.38 3.46 16 2a4 4 0 0 0-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23Z"/>
+          </svg>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-none">
+            MAR<span class="text-[#00A896]">TEX</span>
+          </span>
+          <span class="text-[9px] font-bold text-slate-500 tracking-widest uppercase">Est. 2018 — El Salvador</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="hidden lg:flex items-center gap-8 text-xs font-bold uppercase tracking-wider">
+        <a href="index.html" class="text-[#00A896] border-b-2 border-[#00A896] pb-1 transition-colors">Inicio</a>
+        <a href="medica.html" class="text-slate-600 dark:text-slate-300 hover:text-[#00A896] transition-colors">Colección Médica</a>
+        <a href="belleza.html" class="text-slate-600 dark:text-slate-300 hover:text-[#00A896] transition-colors">Colección Belleza</a>
+        <a href="nosotros.html" class="text-slate-600 dark:text-slate-300 hover:text-[#00A896] transition-colors">Nosotros</a>
+        <a href="ubicacion.html" class="text-slate-600 dark:text-slate-300 hover:text-[#00A896] transition-colors">Ubicación</a>
+      </nav>
+
+      <!-- Header Actions -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Theme Toggle -->
+        <button onclick="toggleTheme()" class="theme-toggle-btn p-2 rounded-xl bg-slate-200/60 dark:bg-slate-800/80 hover:bg-slate-300 dark:hover:bg-slate-700 transition-all border border-slate-300 dark:border-slate-700" aria-label="Conmutar Tema">
+        </button>
+
+        <!-- Auth Button -->
+        <button onclick="openAuthModal('login')" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-200/60 dark:bg-slate-800/80 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs font-bold transition-all border border-slate-300 dark:border-slate-700">
+          <svg class="w-4 h-4 text-[#00A896]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>Acceder</span>
+        </button>
+
+        <!-- Cart Drawer Button -->
+        <button onclick="openCartDrawer()" class="relative inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-xl bg-gradient-to-r from-[#00A896] to-teal-500 hover:from-[#009284] hover:to-teal-400 text-white text-xs font-bold shadow-lg shadow-[#00A896]/20 transition-all hover:-translate-y-0.5">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 11-1 9"/><path d="m19 11-4-7"/><path d="M2 11h20"/><path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6l1.6-7.4"/><path d="m4.5 11 4-7"/><path d="m9 11 1 9"/></svg>
+          <span class="hidden sm:inline">Carrito</span>
+          <span class="cart-badge ml-1 px-1.5 py-0.5 rounded-full bg-rose-500 text-white text-[10px] font-black" style="display: none;">0</span>
+        </button>
+
+        <!-- Mobile Hamburger Menu Button -->
+        <button onclick="toggleMobileNav()" class="lg:hidden p-2 rounded-xl bg-slate-200/60 dark:bg-slate-800/80 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700" aria-label="Menú Móvil">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE NAVIGATION DRAWER -->
+  <div id="mobile-nav-overlay" class="mobile-nav-overlay" onclick="closeMobileNav()"></div>
+  <aside id="mobile-nav-drawer" class="mobile-nav-drawer">
+    <div class="p-6 border-b border-slate-800 flex items-center justify-between">
+      <span class="text-xl font-extrabold text-white">MAR<span class="text-[#00A896]">TEX</span></span>
+      <button onclick="closeMobileNav()" class="p-2 text-slate-400 hover:text-white">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+    <nav class="flex-1 p-6 space-y-3 font-bold text-sm">
+      <a href="index.html" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-[#00A896]/10 text-[#00A896] border border-[#00A896]/30">Inicio</a>
+      <a href="medica.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800/60">Colección Médica</a>
+      <a href="belleza.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800/60">Colección Belleza</a>
+      <a href="nosotros.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800/60">Nosotros</a>
+      <a href="ubicacion.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800/60">Ubicación</a>
+    </nav>
+    <div class="p-6 border-t border-slate-800">
+      <button onclick="openAuthModal('login'); closeMobileNav();" class="w-full py-3 rounded-xl bg-[#00A896] text-white font-bold text-xs uppercase">Acceder a mi Cuenta</button>
+    </div>
+  </aside>
+
+  <main>
+    <!-- HERO SECTION EDITORIAL -->
+    <section class="relative min-h-[85vh] flex items-center py-12 sm:py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        
+        <div class="lg:col-span-7 space-y-6 sm:space-y-8 z-10 text-center lg:text-left">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#00A896]/10 border border-[#00A896]/30 text-[#00A896] text-xs font-extrabold uppercase tracking-widest">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>8 Años de Excelencia Textil Médica</span>
+          </div>
+
+          <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white leading-[1.15] tracking-tight">
+            Technical Comfort for <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#00A896] to-teal-400">Medical & Beauty</span> Professionals.
+          </h1>
+
+          <p class="text-sm sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl font-medium leading-relaxed mx-auto lg:mx-0">
+            Diseñamos uniformes de alto rendimiento anatómico con telas antifluido de grado quirúrgico. Elegancia moderna, resistencia superior a lavados industriales y ajuste perfecto a la medida.
+          </p>
+
+          <!-- Dual CTA Buttons -->
+          <div class="flex flex-col sm:flex-row gap-4 pt-2 justify-center lg:justify-start">
+            <a href="medica.html" class="px-8 py-4 rounded-xl bg-gradient-to-r from-[#00A896] to-teal-500 hover:from-[#009284] hover:to-teal-400 text-white font-extrabold text-sm shadow-xl shadow-[#00A896]/25 hover:shadow-[#00A896]/40 transition-all text-center flex items-center justify-center gap-3 group">
+              <span>Ver Colección Médica</span>
+              <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+            <a href="belleza.html" class="px-8 py-4 rounded-xl bg-slate-200/80 dark:bg-[#162447] hover:bg-slate-300 dark:hover:bg-[#1B2A4A] text-slate-900 dark:text-white font-extrabold text-sm border border-slate-300 dark:border-slate-700 transition-all text-center flex items-center justify-center gap-3">
+              <span>Ver Colección Estética</span>
+              <svg class="w-4 h-4 text-[#00A896]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
+
+          <!-- Executive Metrics Strip -->
+          <div class="pt-8 border-t border-slate-200 dark:border-slate-800 grid grid-cols-3 gap-4 sm:gap-6 text-center">
+            <div>
+              <div class="text-xl sm:text-3xl font-black text-slate-900 dark:text-white font-mono">8+</div>
+              <div class="text-[10px] sm:text-[11px] font-bold text-slate-500 uppercase tracking-wider mt-1">Años Experiencia</div>
+            </div>
+            <div>
+              <div class="text-xl sm:text-3xl font-black text-[#00A896] font-mono">Nivel 4</div>
+              <div class="text-[10px] sm:text-[11px] font-bold text-slate-500 uppercase tracking-wider mt-1">Telas Antifluido</div>
+            </div>
+            <div>
+              <div class="text-xl sm:text-3xl font-black text-slate-900 dark:text-white font-mono">100%</div>
+              <div class="text-[10px] sm:text-[11px] font-bold text-slate-500 uppercase tracking-wider mt-1">Confección a Medida</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Visual -->
+        <div class="lg:col-span-5 relative">
+          <div class="aspect-[3/4] rounded-3xl overflow-hidden border-2 border-slate-200 dark:border-[#00A896]/30 shadow-2xl shadow-[#00A896]/10 relative group">
+            <img src="imagenes/conjunto de uniforme médico.jpeg" alt="Colección Médica Martex FIGS Style" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0A111E]/90 via-transparent to-transparent"></div>
+            
+            <div class="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 p-4 sm:p-5 rounded-2xl bg-[#0A111E]/80 backdrop-blur-xl border border-white/10 text-white space-y-1">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-[#00A896] uppercase tracking-wider">Set Pro Technical Scrub</span>
+                <span class="text-sm font-black font-mono">$49.99</span>
+              </div>
+              <p class="text-[11px] text-slate-300">Protección certificada antimicrobiana y elasticidad 4-way stretch.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DESTACADOS DEL CATÁLOGO EN INICIO -->
+    <section class="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-10 sm:space-y-12">
+      <div class="space-y-4 text-center">
+        <span class="text-xs font-extrabold text-[#00A896] uppercase tracking-widest">Catálogo Principal</span>
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          Nuestras Colecciones Destacadas
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-500 max-w-xl mx-auto">
+          Explora los diseños ergonómicos aprobados por profesionales de la salud y estética en El Salvador.
+        </p>
+
+        <!-- Category Filters -->
+        <div class="flex items-center justify-center gap-2 overflow-x-auto pt-2 no-scrollbar">
+          <button onclick="filterProducts('todos', this)" class="filter-btn px-4 py-2 rounded-xl text-xs font-extrabold uppercase tracking-wider transition-all bg-[#00A896] text-white shadow-md shadow-[#00A896]/20">
+            Todos
+          </button>
+          <button onclick="filterProducts('medicos', this)" class="filter-btn px-4 py-2 rounded-xl text-xs font-extrabold uppercase tracking-wider transition-all bg-slate-200/80 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:text-[#00A896]">
+            Uniformes Médicos
+          </button>
+          <button onclick="filterProducts('belleza', this)" class="filter-btn px-4 py-2 rounded-xl text-xs font-extrabold uppercase tracking-wider transition-all bg-slate-200/80 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:text-[#00A896]">
+            Salones de Belleza
+          </button>
+        </div>
+      </div>
+
+      <!-- Product Grid -->
+      <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
+      </div>
+    </section>
+  </main>
+
+  <!-- QUICK VIEW GRID MODAL -->
+  <div id="quickview-modal" class="quick-view-modal" onclick="if(event.target === this) closeQuickView()">
+    <div id="quickview-dialog" class="quick-view-dialog"></div>
+  </div>
+
+  <!-- SLIDE-OVER CART DRAWER -->
+  <div id="cart-overlay" class="cart-overlay" onclick="closeCartDrawer()"></div>
+  <aside id="cart-drawer" class="cart-drawer">
+    <div class="p-6 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-[#0F172A]">
+      <div class="flex items-center gap-2.5">
+        <svg class="w-5 h-5 text-[#00A896]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 11-1 9"/><path d="m19 11-4-7"/><path d="M2 11h20"/><path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6l1.6-7.4"/><path d="m4.5 11 4-7"/><path d="m9 11 1 9"/></svg>
+        <h3 class="text-base font-bold text-slate-900 dark:text-white">Tu Carrito de Compras</h3>
+      </div>
+      <button onclick="closeCartDrawer()" class="p-2 rounded-full text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+
+    <div id="cart-drawer-list" class="flex-1 p-6 overflow-y-auto space-y-4"></div>
+
+    <div class="p-6 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0F172A] space-y-4">
+      <div class="space-y-1.5 text-xs text-slate-600 dark:text-slate-300">
+        <div class="flex justify-between">
+          <span>Subtotal:</span>
+          <span id="cart-drawer-subtotal" class="font-extrabold font-mono text-slate-900 dark:text-white">$0.00</span>
+        </div>
+        <div class="flex justify-between text-sm font-black border-t border-slate-200 dark:border-slate-800 pt-2">
+          <span>Total:</span>
+          <span id="cart-drawer-total" class="font-mono text-[#00A896]">$0.00</span>
+        </div>
+      </div>
+
+      <button onclick="openCheckoutModal()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#00A896] to-teal-500 hover:from-[#009284] hover:to-teal-400 text-white font-extrabold text-xs uppercase tracking-wider shadow-lg shadow-[#00A896]/20 transition-all flex items-center justify-center gap-2">
+        <span>Proceder al Pago</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- CHECKOUT MODAL -->
+  <div id="checkout-modal" class="auth-modal" onclick="if(event.target === this) closeCheckoutModal()">
+    <div class="auth-dialog p-6 sm:p-8 space-y-6">
+      <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4">
+        <div>
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white">Finalizar Compra Directa</h3>
+          <p class="text-xs text-slate-500">Ingresa tus datos para procesar el pedido</p>
+        </div>
+        <button onclick="closeCheckoutModal()" class="p-1.5 text-slate-400 hover:text-slate-900 dark:hover:text-white">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+
+      <form onsubmit="submitOrder(event)" class="space-y-4 text-xs">
+        <div>
+          <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Nombre Completo *</label>
+          <input type="text" name="client_name" required placeholder="Ej. Dr. Carlos Mendoza" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-[#00A896]">
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">DUI *</label>
+            <input type="text" name="client_dui" required placeholder="00000000-0" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-[#00A896]">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Teléfono *</label>
+            <input type="tel" name="client_phone" required placeholder="7000-0000" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-[#00A896]">
+          </div>
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Dirección Completa de Envío *</label>
+          <textarea name="client_address" required rows="2" placeholder="Colonia, Calle, Casa No., Departamento" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-[#00A896]"></textarea>
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Método de Pago *</label>
+          <select name="payment_method" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-[#00A896]">
+            <option value="efectivo">Efectivo Contra Entrega</option>
+            <option value="transferencia">Transferencia Bancaria Directa</option>
+          </select>
+        </div>
+
+        <button type="submit" class="w-full mt-2 py-3.5 rounded-xl bg-[#00A896] hover:bg-[#009284] text-white font-extrabold text-xs uppercase tracking-wider transition-all shadow-md">
+          Confirmar y Enviar Pedido
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ORDER SUCCESS INVOICE MODAL -->
+  <div id="order-success-modal" class="auth-modal" onclick="if(event.target === this) closeOrderSuccessModal()">
+    <div class="auth-dialog p-6 sm:p-8">
+      <div id="order-success-details"></div>
+      <button onclick="closeOrderSuccessModal()" class="w-full py-3 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white text-xs font-bold hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors">
+        Volver a la Tienda
+      </button>
+    </div>
+  </div>
+
+  <!-- AUTH MODAL -->
+  <div id="auth-modal" class="auth-modal" onclick="if(event.target === this) closeAuthModal()">
+    <div class="auth-dialog p-6 sm:p-8 space-y-6">
+      <div class="flex items-center justify-between">
+        <span class="text-sm font-black text-slate-900 dark:text-white uppercase tracking-wider">MAR<span class="text-[#00A896]">TEX</span> Auth</span>
+        <button onclick="closeAuthModal()" class="p-1.5 text-slate-400 hover:text-slate-900 dark:hover:text-white">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+
+      <button onclick="simulateGoogleAuth()" class="w-full py-3 px-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-xs font-bold flex items-center justify-center gap-3 hover:bg-slate-50 dark:hover:bg-slate-750 transition-colors">
+        <svg class="w-4 h-4" viewBox="0 0 24 24">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+        </svg>
+        <span>Continuar con Google</span>
+      </button>
+
+      <div class="relative text-center my-2">
+        <span class="px-3 bg-white dark:bg-[#162447] text-[10px] text-slate-400 font-bold uppercase relative z-10">O correo electrónico</span>
+        <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-slate-200 dark:border-slate-700"></div></div>
+      </div>
+
+      <div class="flex border-b border-slate-200 dark:border-slate-700 text-center">
+        <button id="tab-btn-login" onclick="switchAuthTab('login')" class="flex-1 py-2.5 text-xs font-bold border-b-2 border-[#00A896] text-[#00A896]">
+          Iniciar Sesión
+        </button>
+        <button id="tab-btn-register" onclick="switchAuthTab('register')" class="flex-1 py-2.5 text-xs font-semibold text-slate-400 hover:text-white border-b-2 border-transparent">
+          Registrarse
+        </button>
+      </div>
+
+      <form id="auth-login-form" onsubmit="event.preventDefault(); showToast('Sesión iniciada correctamente', 'success'); closeAuthModal();" class="space-y-4 text-xs">
+        <div>
+          <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Correo Electrónico</label>
+          <input type="email" required placeholder="correo@ejemplo.com" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-[#00A896]">
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Contraseña</label>
+          <input type="password" required placeholder="••••••••" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-[#00A896]">
+        </div>
+        <button type="submit" class="w-full py-3 rounded-xl bg-[#00A896] text-white font-bold text-xs uppercase tracking-wider">
+          Ingresar
+        </button>
+      </form>
+
+      <form id="auth-register-form" onsubmit="event.preventDefault(); showToast('Cuenta creada con éxito', 'success'); closeAuthModal();" class="space-y-4 text-xs hidden">
+        <div>
+          <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Nombre Completo</label>
+          <input type="text" required placeholder="Dra. Sofía Ramos" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-[#00A896]">
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Correo Electrónico</label>
+          <input type="email" required placeholder="sofia@ejemplo.com" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-[#00A896]">
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Contraseña</label>
+          <input type="password" required placeholder="••••••••" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-[#00A896]">
+        </div>
+        <button type="submit" class="w-full py-3 rounded-xl bg-[#00A896] text-white font-bold text-xs uppercase tracking-wider">
+          Crear Cuenta
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="bg-[#0A111E] text-slate-400 border-t border-slate-800 py-16 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10">
+      
+      <div class="space-y-4 md:col-span-1">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-[#00A896] text-white flex items-center justify-center font-black">M</div>
+          <span class="text-xl font-extrabold text-white tracking-tight">MAR<span class="text-[#00A896]">TEX</span></span>
+        </div>
+        <p class="text-slate-400 leading-relaxed">
+          8 años confeccionando indumentaria técnica médica y de estética en El Salvador. Innovación, confort y ajuste anatómico.
+        </p>
+      </div>
+
+      <div class="space-y-3">
+        <h4 class="text-white font-bold uppercase tracking-wider text-xs">Colecciones</h4>
+        <ul class="space-y-2">
+          <li><a href="medica.html" class="hover:text-[#00A896] transition-colors">Colección Médica</a></li>
+          <li><a href="belleza.html" class="hover:text-[#00A896] transition-colors">Colección Belleza</a></li>
+          <li><a href="nosotros.html" class="hover:text-[#00A896] transition-colors">Sobre Martex</a></li>
+          <li><a href="ubicacion.html" class="hover:text-[#00A896] transition-colors">Ubicación de Taller</a></li>
+        </ul>
+      </div>
+
+      <div class="space-y-3">
+        <h4 class="text-white font-bold uppercase tracking-wider text-xs">Contacto Directo</h4>
+        <ul class="space-y-2.5">
+          <li class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-[#00A896]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span>Atención: +503 7000-0000</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-[#00A896]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>San Salvador, El Salvador</span>
+          </li>
+          <li>
+            <a href="https://maps.app.goo.gl/1yhFJQquGmHPWbnj6" target="_blank" rel="noopener noreferrer" class="text-[#00A896] hover:underline font-bold">Ver en Google Maps →</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="space-y-3">
+        <h4 class="text-white font-bold uppercase tracking-wider text-xs">Síguenos en Redes</h4>
+        <p class="text-slate-400">Conoce los nuevos diseños e ingresos de temporada.</p>
+        <a href="https://instagram.com/martex.sv" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white border border-slate-800 hover:border-[#00A896]/50 transition-all font-semibold">
+          <svg class="w-4 h-4 text-rose-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          </svg>
+          <span>@martex.sv</span>
+        </a>
+      </div>
+
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 mt-12 border-t border-slate-800/80 flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] text-slate-500">
+      <p>© 2026 Martex El Salvador. Todos los derechos reservados.</p>
+      <div>Telas Antifluido Nivel 4</div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
 </body>
 </html>

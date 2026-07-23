@@ -1,9 +1,7 @@
 /* ============================================================
    MARTEX — Motor Principal de la Tienda
-   Navegación Móvil y Multi-página sin Alerta de Modo Oscuro
    ============================================================ */
 
-// ─── CATÁLOGO DE PRODUCTOS MARTEX ───
 const PRODUCTS = [
   {
     id: 'm-01',
@@ -134,14 +132,12 @@ const PRODUCTS = [
   }
 ];
 
-// ─── ESTADO GLOBAL ───
 let cart = JSON.parse(localStorage.getItem('martex_cart') || '[]');
 let activeFilter = 'todos';
 let activeQuickViewProduct = null;
 let selectedSize = 'M';
 let selectedQty = 1;
 
-// ─── INICIALIZACIÓN ───
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   
@@ -156,7 +152,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initSearch();
 });
 
-// ─── MENÚ MÓVIL ───
 function toggleMobileNav() {
   const overlay = document.getElementById('mobile-nav-overlay');
   const drawer = document.getElementById('mobile-nav-drawer');
@@ -177,7 +172,6 @@ function closeMobileNav() {
   }
 }
 
-// ─── CONTROL DE MODO OSCURO Y CLARO (SIN ALERTA DE MENSAJE) ───
 function initTheme() {
   const savedTheme = localStorage.getItem('martex_theme') || 'dark';
   if (savedTheme === 'dark') {
@@ -202,7 +196,6 @@ function toggleTheme() {
   }
   localStorage.setItem('martex_theme', newTheme);
   updateThemeToggleIcons(newTheme);
-  // Se eliminó la alerta pop-up según indicación del usuario
 }
 
 function updateThemeToggleIcons(theme) {
@@ -222,7 +215,6 @@ function updateThemeToggleIcons(theme) {
   });
 }
 
-// ─── ANUNCIOS ROTATIVOS ───
 function initAnnouncementBar() {
   const messages = [
     "8 Años Confeccionando Uniformes Médicos & Belleza en El Salvador",
@@ -244,7 +236,6 @@ function initAnnouncementBar() {
   }, 4000);
 }
 
-// ─── BUSCADOR ───
 function initSearch() {
   const searchInput = document.getElementById('catalog-search-input');
   if (!searchInput) return;
@@ -255,7 +246,6 @@ function initSearch() {
   });
 }
 
-// ─── RENDERIZADO DE PRODUCTOS ───
 function filterProducts(category, btnElement) {
   activeFilter = category;
   document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -322,7 +312,6 @@ function renderProducts(searchQuery = '') {
   `).join('');
 }
 
-// ─── MODAL VISTA PREVIA RÁPIDA ───
 function openQuickView(productId) {
   const product = PRODUCTS.find(p => p.id === productId);
   if (!product) return;
@@ -450,7 +439,6 @@ function addQvToCart() {
   closeQuickView();
 }
 
-// ─── CARRITO ───
 function addToCart(productId, size = 'M', qty = 1) {
   const product = PRODUCTS.find(p => p.id === productId);
   if (!product) return;
@@ -574,7 +562,6 @@ function closeCartDrawer() {
   }
 }
 
-// ─── FINALIZAR COMPRA ───
 function openCheckoutModal() {
   if (cart.length === 0) {
     showToast('Añade al menos un producto al carrito', 'error');
@@ -667,7 +654,6 @@ function closeOrderSuccessModal() {
   document.body.style.overflow = '';
 }
 
-// ─── LOGIN Y REGISTRO ───
 function openAuthModal(mode = 'login') {
   const modal = document.getElementById('auth-modal');
   if (modal) {
@@ -710,7 +696,6 @@ function simulateGoogleAuth() {
   }, 1000);
 }
 
-// ─── NOTIFICACIONES TOAST ───
 function showToast(message, type = 'info') {
   let container = document.getElementById('toast-container');
   if (!container) {
