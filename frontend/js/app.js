@@ -1,147 +1,112 @@
 /* ============================================================
-   MARTEX — Motor Principal de la Tienda
-   Navegación Móvil y Multi-página sin Alerta de Modo Oscuro
+   MARTEX — Catálogo con Fotografías Reales de El Salvador
    ============================================================ */
 
-// ─── CATÁLOGO DE PRODUCTOS MARTEX ───
 const PRODUCTS = [
   {
     id: 'm-01',
-    name: 'Set Quirúrgico V-Neck Technical',
+    name: 'Conjunto Quirúrgico Azul Médico',
     category: 'medicos',
     categoryLabel: 'Colección Médica',
     price: 49.99,
     badge: 'Antifluido Premium',
-    image: 'imagenes/conjunto de uniforme médico.jpeg',
+    image: '../imagenes/conjunto de uniforme médico.jpeg',
     gallery: [
-      'imagenes/conjunto de uniforme médico.jpeg',
-      'imagenes/Camisa(scrub)colorAzul.jpeg',
-      'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=800&q=80'
+      '../imagenes/conjunto de uniforme médico.jpeg',
+      '../imagenes/Camisa(scrub)colorAzul.jpeg'
     ],
-    description: 'Filipina médica ergonómica de cuello en V con 4 bolsillos estratégicos y pantalón jogger de tiro medio. Confeccionada en tela antimicrobiana con elastano.',
-    fabric: '72% Poliéster Tecnológico, 21% Rayón, 7% Spandex. Protección Antifluido Nivel 4.',
+    description: 'Filipina médica ergonómica de cuello en V con bolsillos estratégicos y pantalón jogger cómodo. Confeccionada en El Salvador con tela antimicrobiana.',
+    fabric: 'Tela Antifluido Nivel 4 de Secado Rápido.',
     sizes: ['XS', 'S', 'M', 'L', 'XL']
   },
   {
     id: 'm-02',
-    name: 'Filipina Quirúrgica Emerald Executive',
+    name: 'Filipina Verde Esmeralda',
     category: 'medicos',
     categoryLabel: 'Colección Médica',
     price: 28.50,
-    badge: 'Core Collection',
-    image: 'imagenes/Camisa (scrug) color  verde esmeralda.jpeg',
+    badge: 'Popular en El Salvador',
+    image: '../imagenes/Camisa (scrug) color  verde esmeralda.jpeg',
     gallery: [
-      'imagenes/Camisa (scrug) color  verde esmeralda.jpeg',
-      'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=800&q=80'
+      '../imagenes/Camisa (scrug) color  verde esmeralda.jpeg',
+      '../imagenes/conjunto de uniforme médico.jpeg'
     ],
-    description: 'Corte estilizado Verde Quirúrgico con tecnología Silvadur antifluido. Resistente a arrugas y decoloración tras lavados industriales.',
-    fabric: 'Telas Antifluido de Grado Médico con Elasticidad 4-Way Stretch.',
+    description: 'Corte cómodo en tono Verde Esmeralda. Resistente a arrugas y a lavados frecuentes.',
+    fabric: 'Tela Antifluido de Grado Médico.',
     sizes: ['XS', 'S', 'M', 'L', 'XL']
   },
   {
     id: 'm-03',
-    name: 'Filipina Royal Navy Pro',
+    name: 'Filipina Azul Marino Pro',
     category: 'medicos',
     categoryLabel: 'Colección Médica',
     price: 29.00,
     badge: 'Antifluido',
-    image: 'imagenes/Camisa(scrub)colorAzul.jpeg',
+    image: '../imagenes/Camisa(scrub)colorAzul.jpeg',
     gallery: [
-      'imagenes/Camisa(scrub)colorAzul.jpeg',
-      'imagenes/conjunto de uniforme médico.jpeg'
+      '../imagenes/Camisa(scrub)colorAzul.jpeg',
+      '../imagenes/conjunto de uniforme médico.jpeg'
     ],
-    description: 'Diseño clásico Azul Marino corporativo con tres bolsillos reforzados y costuras dobles de alta durabilidad.',
-    fabric: 'Mezcla Antifluido Respirable de Secado Rápido.',
+    description: 'Diseño clásico Azul Marino con tres bolsillos reforzados y costuras dobles para mayor resistencia.',
+    fabric: 'Mezcla Antifluido Fresca y Respirable.',
     sizes: ['XS', 'S', 'M', 'L', 'XL']
   },
   {
     id: 'm-04',
-    name: 'Bata / Abrigo Médico Laboratorio',
+    name: 'Abrigo y Bata de Laboratorio',
     category: 'medicos',
     categoryLabel: 'Colección Médica',
     price: 34.00,
     badge: 'Alta Protección',
-    image: 'imagenes/Abrigo médico.jpeg',
+    image: '../imagenes/Abrigo médico.jpeg',
     gallery: [
-      'imagenes/Abrigo médico.jpeg',
-      'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=80'
+      '../imagenes/Abrigo médico.jpeg',
+      '../imagenes/conjunto de uniforme médico.jpeg'
     ],
-    description: 'Abrigo clínico elegante con botonadura frontal encubierta, solapa entallada y tela repulsora de líquidos biológicos.',
-    fabric: '65% Poliéster Repelente, 35% Algodón Técnico.',
+    description: 'Bata clínica de presentación impecable con botones al frente y bolsillos amplios.',
+    fabric: 'Tela Repelente a Manchas y Químicos.',
     sizes: ['XS', 'S', 'M', 'L', 'XL']
   },
   {
     id: 'b-01',
-    name: 'Set Estética Slate Grey Minimalist',
+    name: 'Uniforme Gris para Estética y Spa',
     category: 'belleza',
     categoryLabel: 'Salón & Estética',
     price: 45.00,
-    badge: 'Edición Estética',
-    image: 'imagenes/Camisa de uniforme color gris.jpeg',
+    badge: 'Especial Estética',
+    image: '../imagenes/Camisa de uniforme color gris.jpeg',
     gallery: [
-      'imagenes/Camisa de uniforme color gris.jpeg',
-      'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=800&q=80'
+      '../imagenes/Camisa de uniforme color gris.jpeg',
+      '../imagenes/Camisa(scrub)colorAzul.jpeg'
     ],
-    description: 'Uniforme moderno para salones de belleza y spas de lujo. Filipina silueta slim con broches ocultos y tejido oleófobo.',
-    fabric: 'Tela Repelente a Tintes, Aceites y Líquidos Químicos.',
+    description: 'Uniforme sobrio y elegante tono Gris para salones de belleza, cosmetología y spas.',
+    fabric: 'Tela Repelente a Tintes de Cabello y Aceites.',
     sizes: ['XS', 'S', 'M', 'L', 'XL']
   },
   {
     id: 'b-02',
-    name: 'Gabacha de Estética Rose Gold',
+    name: 'Filipina Estilo Salón Gris',
     category: 'belleza',
     categoryLabel: 'Salón & Estética',
     price: 32.00,
-    badge: 'Antifluido Tintes',
-    image: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80',
+    badge: 'Resistente a Tintes',
+    image: '../imagenes/Camisa de uniforme color gris.jpeg',
     gallery: [
-      'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80',
-      'imagenes/Camisa de uniforme color gris.jpeg'
+      '../imagenes/Camisa de uniforme color gris.jpeg',
+      '../imagenes/Camisa (scrug) color  verde esmeralda.jpeg'
     ],
-    description: 'Diseño femenino para estilistas y cosmetólogas exigentes. Escote entallado y ajuste cómodo para largas jornadas.',
-    fabric: 'Poliéster Soft-touch con Capa Antimanchas.',
+    description: 'Filipina entallada y cómoda para largas jornadas en salón de belleza.',
+    fabric: 'Poliéster de Tacto Suave y Antifluido.',
     sizes: ['XS', 'S', 'M', 'L', 'XL']
-  },
-  {
-    id: 'a-01',
-    name: 'Mandil de Alta Resistencia Barber & Spa',
-    category: 'accesorios',
-    categoryLabel: 'Mandiles & Accesorios',
-    price: 22.00,
-    badge: 'Ajuste Regulable',
-    image: 'https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&w=800&q=80',
-    gallery: [
-      'https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&w=800&q=80'
-    ],
-    description: 'Mandil multi-bolsillo reforzado con remaches metálicos y tirantes cruzados para no cargar peso en el cuello.',
-    fabric: 'Canvas Industrial Repelente al Agua y Cabello.',
-    sizes: ['ÚNICA']
-  },
-  {
-    id: 'a-02',
-    name: 'Gorro Quirúrgico Técnico Adjust-Fit',
-    category: 'accesorios',
-    categoryLabel: 'Mandiles & Accesorios',
-    price: 12.00,
-    badge: 'Antifluido',
-    image: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=800&q=80',
-    gallery: [
-      'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=800&q=80'
-    ],
-    description: 'Gorro médico ergonómico con toalla absorbente interior en la frente y elástico posterior autorregulable.',
-    fabric: '100% Algodón Técnico Antifluido.',
-    sizes: ['ÚNICA']
   }
 ];
 
-// ─── ESTADO GLOBAL ───
 let cart = JSON.parse(localStorage.getItem('martex_cart') || '[]');
 let activeFilter = 'todos';
 let activeQuickViewProduct = null;
 let selectedSize = 'M';
 let selectedQty = 1;
 
-// ─── INICIALIZACIÓN ───
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   
@@ -156,7 +121,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initSearch();
 });
 
-// ─── MENÚ MÓVIL ───
 function toggleMobileNav() {
   const overlay = document.getElementById('mobile-nav-overlay');
   const drawer = document.getElementById('mobile-nav-drawer');
@@ -177,7 +141,6 @@ function closeMobileNav() {
   }
 }
 
-// ─── CONTROL DE MODO OSCURO Y CLARO (SIN ALERTA DE MENSAJE) ───
 function initTheme() {
   const savedTheme = localStorage.getItem('martex_theme') || 'dark';
   if (savedTheme === 'dark') {
@@ -202,7 +165,6 @@ function toggleTheme() {
   }
   localStorage.setItem('martex_theme', newTheme);
   updateThemeToggleIcons(newTheme);
-  // Se eliminó la alerta pop-up según indicación del usuario
 }
 
 function updateThemeToggleIcons(theme) {
@@ -222,13 +184,12 @@ function updateThemeToggleIcons(theme) {
   });
 }
 
-// ─── ANUNCIOS ROTATIVOS ───
 function initAnnouncementBar() {
   const messages = [
-    "8 Años Confeccionando Uniformes Médicos & Belleza en El Salvador",
+    "8 Años Confeccionando Uniformes Médicos y de Belleza en El Salvador",
     "Telas Antifluido Nivel 4 — Resistentes a Lavados Industriales",
-    "Envíos Express a los 14 Departamentos de El Salvador",
-    "Confección Anatómica a la Medida Disponible en Tienda"
+    "Envíos Rápidos a todo El Salvador",
+    "Confección a la Medida Disponible en Nuestra Tienda"
   ];
   let index = 0;
   const msgEl = document.getElementById('announcement-msg');
@@ -244,7 +205,6 @@ function initAnnouncementBar() {
   }, 4000);
 }
 
-// ─── BUSCADOR ───
 function initSearch() {
   const searchInput = document.getElementById('catalog-search-input');
   if (!searchInput) return;
@@ -255,7 +215,6 @@ function initSearch() {
   });
 }
 
-// ─── RENDERIZADO DE PRODUCTOS ───
 function filterProducts(category, btnElement) {
   activeFilter = category;
   document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -285,7 +244,7 @@ function renderProducts(searchQuery = '') {
     grid.innerHTML = `
       <div class="col-span-full py-16 text-center text-slate-400">
         <svg class="w-12 h-12 mx-auto mb-3 opacity-40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-        <p class="text-base font-semibold">No se encontraron prendas para esta búsqueda</p>
+        <p class="text-base font-semibold">No encontramos prendas para esta búsqueda</p>
       </div>`;
     return;
   }
@@ -300,7 +259,7 @@ function renderProducts(searchQuery = '') {
           <img src="${product.image}" alt="${product.name}" loading="lazy" class="w-full h-full object-cover">
           <button onclick="openQuickView('${product.id}')" class="absolute inset-0 bg-[#0A111E]/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center gap-2 text-white font-semibold text-xs tracking-wide">
             <svg class="w-4 h-4 text-[#00A896]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-            Vista Previa Rápida
+            Ver prenda
           </button>
         </div>
         <div class="p-5">
@@ -322,7 +281,6 @@ function renderProducts(searchQuery = '') {
   `).join('');
 }
 
-// ─── MODAL VISTA PREVIA RÁPIDA ───
 function openQuickView(productId) {
   const product = PRODUCTS.find(p => p.id === productId);
   if (!product) return;
@@ -368,17 +326,17 @@ function openQuickView(productId) {
           <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 space-y-2">
             <div class="flex items-center gap-2 text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wide">
               <svg class="w-4 h-4 text-[#00A896]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              Telas Antifluido de Grado Médico (8 Años de Garantía)
+              Telas Antifluido Nivel 4 (Hecho en El Salvador)
             </div>
             <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">${product.description}</p>
             <div class="text-[11px] text-slate-500 font-medium pt-1 border-t border-slate-200 dark:border-slate-700/60">
-              <strong class="text-slate-700 dark:text-slate-300">Composición:</strong> ${product.fabric}
+              <strong class="text-slate-700 dark:text-slate-300">Material:</strong> ${product.fabric}
             </div>
           </div>
 
           <div>
             <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">
-              Seleccionar Talla: <span id="qv-selected-size-label" class="text-[#00A896] font-mono">${selectedSize}</span>
+              Elegir Talla: <span id="qv-selected-size-label" class="text-[#00A896] font-mono">${selectedSize}</span>
             </label>
             <div class="flex flex-wrap gap-2.5">
               ${product.sizes.map(sz => `
@@ -399,7 +357,7 @@ function openQuickView(productId) {
 
             <button onclick="addQvToCart()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#00A896] to-teal-500 hover:from-[#009284] hover:to-teal-400 text-white font-bold text-sm shadow-lg shadow-[#00A896]/25 hover:shadow-[#00A896]/40 transition-all duration-300 flex items-center justify-center gap-3">
               <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 11-1 9"/><path d="m19 11-4-7"/><path d="M2 11h20"/><path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6l1.6-7.4"/><path d="m4.5 11 4-7"/><path d="m9 11 1 9"/></svg>
-              <span>Añadir al Carrito de Compras</span>
+              <span>Agregar al Carrito de Compras</span>
             </button>
           </div>
         </div>
@@ -450,7 +408,6 @@ function addQvToCart() {
   closeQuickView();
 }
 
-// ─── CARRITO ───
 function addToCart(productId, size = 'M', qty = 1) {
   const product = PRODUCTS.find(p => p.id === productId);
   if (!product) return;
@@ -472,7 +429,7 @@ function addToCart(productId, size = 'M', qty = 1) {
   saveCart();
   updateCartUI();
   openCartDrawer();
-  showToast(`"${product.name}" añadido al carrito`, 'success');
+  showToast(`"${product.name}" agregado al carrito`, 'success');
 }
 
 function updateCartQty(index, delta) {
@@ -492,7 +449,7 @@ function removeFromCart(index) {
     cart.splice(index, 1);
     saveCart();
     updateCartUI();
-    showToast(`Removido: ${item.name}`, 'info');
+    showToast(`Eliminado: ${item.name}`, 'info');
   }
 }
 
@@ -523,7 +480,7 @@ function updateCartUI() {
         <div class="py-20 text-center text-slate-400 space-y-3">
           <svg class="w-12 h-12 mx-auto text-slate-300 dark:text-slate-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
           <p class="text-sm font-semibold">Tu carrito de compras está vacío</p>
-          <button onclick="closeCartDrawer()" class="text-xs text-[#00A896] hover:underline font-bold">Explorar la Colección</button>
+          <button onclick="closeCartDrawer()" class="text-xs text-[#00A896] hover:underline font-bold">Ver catálogo de prendas</button>
         </div>`;
     } else {
       drawerList.innerHTML = cart.map((item, i) => `
@@ -574,10 +531,9 @@ function closeCartDrawer() {
   }
 }
 
-// ─── FINALIZAR COMPRA ───
 function openCheckoutModal() {
   if (cart.length === 0) {
-    showToast('Añade al menos un producto al carrito', 'error');
+    showToast('Agrega al menos una prenda al carrito', 'error');
     return;
   }
   closeCartDrawer();
@@ -604,7 +560,7 @@ function submitOrder(e) {
   const payment = form.querySelector('[name="payment_method"]').value;
 
   if (!name || !dui || !phone || !address) {
-    showToast('Por favor completa todos los campos requeridos', 'error');
+    showToast('Por favor llena todos los datos del pedido', 'error');
     return;
   }
 
@@ -616,7 +572,7 @@ function submitOrder(e) {
     dui: dui,
     phone: phone,
     address: address,
-    paymentMethod: payment === 'efectivo' ? 'Efectivo contra Entrega' : 'Transferencia Bancaria',
+    paymentMethod: payment === 'efectivo' ? 'Efectivo contra entrega' : 'Transferencia bancaria',
     items: [...cart],
     total: orderTotal,
     status: 'Pendiente'
@@ -644,16 +600,16 @@ function showOrderSuccessModal(order) {
       <div class="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-[#00A896] flex items-center justify-center mx-auto">
         <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
-      <h3 class="text-xl font-extrabold text-slate-900 dark:text-white">¡Pedido Confirmado!</h3>
-      <p class="text-xs text-slate-500">Orden <strong class="text-[#00A896] font-mono">#${order.id}</strong> registrada exitosamente.</p>
+      <h3 class="text-xl font-extrabold text-slate-900 dark:text-white">¡Pedido Registrado!</h3>
+      <p class="text-xs text-slate-500">Orden <strong class="text-[#00A896] font-mono">#${order.id}</strong> realizada con éxito.</p>
     </div>
 
     <div class="my-6 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-xs space-y-2 text-slate-700 dark:text-slate-300">
       <div class="flex justify-between"><span class="text-slate-400">Cliente:</span> <strong>${order.clientName}</strong></div>
       <div class="flex justify-between"><span class="text-slate-400">DUI:</span> <strong class="font-mono">${order.dui}</strong></div>
       <div class="flex justify-between"><span class="text-slate-400">Teléfono:</span> <strong>${order.phone}</strong></div>
-      <div class="flex justify-between"><span class="text-slate-400">Método de Pago:</span> <strong class="text-[#00A896]">${order.paymentMethod}</strong></div>
-      <div class="flex justify-between border-t border-slate-200 dark:border-slate-700 pt-2"><span class="text-slate-400">Total a Pagar:</span> <strong class="text-base font-extrabold font-mono text-slate-900 dark:text-white">$${order.total.toFixed(2)}</strong></div>
+      <div class="flex justify-between"><span class="text-slate-400">Forma de Pago:</span> <strong class="text-[#00A896]">${order.paymentMethod}</strong></div>
+      <div class="flex justify-between border-t border-slate-200 dark:border-slate-700 pt-2"><span class="text-slate-400">Total:</span> <strong class="text-base font-extrabold font-mono text-slate-900 dark:text-white">$${order.total.toFixed(2)}</strong></div>
     </div>
   `;
 
@@ -667,7 +623,6 @@ function closeOrderSuccessModal() {
   document.body.style.overflow = '';
 }
 
-// ─── LOGIN Y REGISTRO ───
 function openAuthModal(mode = 'login') {
   const modal = document.getElementById('auth-modal');
   if (modal) {
@@ -703,14 +658,13 @@ function switchAuthTab(tab) {
 }
 
 function simulateGoogleAuth() {
-  showToast('Autenticando con Google Account...', 'info');
+  showToast('Entrando con tu cuenta de Google...', 'info');
   setTimeout(() => {
     closeAuthModal();
-    showToast('¡Bienvenido de nuevo a Martex!', 'success');
+    showToast('¡Bienvenido a Martex!', 'success');
   }, 1000);
 }
 
-// ─── NOTIFICACIONES TOAST ───
 function showToast(message, type = 'info') {
   let container = document.getElementById('toast-container');
   if (!container) {
