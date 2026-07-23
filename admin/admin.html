@@ -384,7 +384,7 @@
     </div>
   </div>
 
-  <!-- PRODUCT EDIT/CREATE MODAL -->
+  <!-- PRODUCT EDIT/CREATE MODAL (DUAL IMAGE SUPPORT) -->
   <div id="product-modal" class="modal-overlay" onclick="if(event.target === this) closeProductModal()">
     <div class="bg-white dark:bg-[#162447] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 max-w-xl w-full space-y-6 max-h-[92vh] overflow-y-auto">
       <div class="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
@@ -399,6 +399,7 @@
           <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Nombre de la Prenda *</label>
           <input type="text" name="p_name" required placeholder="Ej. Conjunto Quirúrgico Azul" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-[#00A896]">
         </div>
+
         <div class="grid grid-cols-2 gap-3">
           <div>
             <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Categoría *</label>
@@ -412,18 +413,49 @@
             <input type="number" step="0.01" name="p_price" required placeholder="49.99" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-[#00A896]">
           </div>
         </div>
+
         <div>
           <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Distintivo / Badge</label>
           <input type="text" name="p_badge" placeholder="Ej. Antifluido Nivel 4" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-[#00A896]">
         </div>
-        <div>
-          <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Ruta de Imagen</label>
-          <input type="text" name="p_image" placeholder="../imagenes/conjunto de uniforme médico.jpeg" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-[#00A896]">
+
+        <!-- SECCIÓN DE IMAGEN: COMPUTADORA O URL WEB -->
+        <div class="space-y-3 p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+          <label class="block font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider text-[11px] text-[#00A896]">
+            Imagen de la Prenda (Computadora o URL Web)
+          </label>
+
+          <div class="space-y-3">
+            <div>
+              <label class="block font-semibold text-slate-600 dark:text-slate-400 mb-1">Subir archivo desde tu Computadora</label>
+              <input type="file" id="p_file_input" accept="image/*" onchange="handleImageFileUpload(event)" class="w-full text-xs text-slate-500 file:mr-3 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-[#00A896]/10 file:text-[#00A896] hover:file:bg-[#00A896]/20 cursor-pointer">
+            </div>
+
+            <div class="relative text-center my-1">
+              <span class="px-2 bg-slate-50 dark:bg-[#0F1A30] text-[10px] text-slate-400 font-bold uppercase relative z-10">O pegar enlace de la web</span>
+              <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-slate-200 dark:border-slate-700"></div></div>
+            </div>
+
+            <div>
+              <input type="text" name="p_image" id="p_image_input" oninput="handleImageUrlInput(this.value)" placeholder="https://ejemplo.com/imagen.jpg o ../imagenes/..." class="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-[#00A896]">
+            </div>
+          </div>
+
+          <!-- Vista Previa -->
+          <div id="p_image_preview_box" class="hidden items-center gap-3 pt-2 border-t border-slate-200 dark:border-slate-800">
+            <span class="text-[11px] text-slate-400 font-semibold">Vista Previa:</span>
+            <div class="w-14 h-16 rounded-lg overflow-hidden bg-slate-200 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 relative">
+              <img id="p_image_preview" src="" class="w-full h-full object-cover">
+            </div>
+            <span id="p_image_source_tag" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#00A896]/10 text-[#00A896]"></span>
+          </div>
         </div>
+
         <div>
           <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Descripción de la Prenda *</label>
           <textarea name="p_description" required rows="3" placeholder="Descripción detallada de la prenda..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-[#00A896]"></textarea>
         </div>
+
         <div>
           <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Tipo de Tela / Material</label>
           <input type="text" name="p_fabric" placeholder="Tela Antifluido Nivel 4 de Secado Rápido" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-[#00A896]">

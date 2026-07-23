@@ -147,6 +147,7 @@ if (products.length === 0) {
 }
 
 let activeEditingProductId = null;
+let uploadedBase64Image = '';
 
 // ─── INITIALIZATION ───
 document.addEventListener('DOMContentLoaded', () => {
@@ -522,7 +523,50 @@ function deleteOrder(orderId) {
   }
 }
 
-// ─── CATALOG MANAGEMENT CONTROLLER (PRODUCT CRUD) ───
+// ─── CATALOG MANAGEMENT CONTROLLER (DUAL IMAGE SUPPORT: FILE & WEB URL) ───
+function handleImageFileUpload(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  if (file.size > 5 * 1024 * 1024) {
+    showAdminToast('La imagen es muy grande. Selecciona un archivo menor a 5MB.', 'error');
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function(evt) {
+    uploadedBase64Image = evt.target.result;
+    const urlInput = document.getElementById('p_image_input');
+    if (urlInput) urlInput.value = '';
+    updateImagePreview(uploadedBase64Image, 'Desde tu Computadora');
+    showAdminToast('Imagen cargada desde tu equipo', 'success');
+  };
+  reader.readAsDataURL(file);
+}
+
+function handleImageUrlInput(url) {
+  if (url.trim()) {
+    uploadedBase64Image = '';
+    updateImagePreview(url.trim(), 'Enlace Web / Ruta');
+  } else {
+    const previewBox = document.getElementById('p_image_preview_box');
+    if (previewBox) previewBox.classList.add('hidden');
+  }
+}
+
+function updateImagePreview(src, label) {
+  const previewBox = document.getElementById('p_image_preview_box');
+  const previewImg = document.getElementById('p_image_preview');
+  const tag = document.getElementById('p_image_source_tag');
+
+  if (previewBox && previewImg) {
+    previewImg.src = src;
+    if (tag) tag.textContent = label;
+    previewBox.classList.remove('hidden');
+    previewBox.classList.add('flex');
+  }
+}
+
 function renderAdminProducts() {
   const container = document.getElementById('admin-products-container');
   if (!container) return;
@@ -539,7 +583,7 @@ function renderAdminProducts() {
       <div class="space-y-3">
         <div class="aspect-[4/3] rounded-xl overflow-hidden bg-slate-200 dark:bg-slate-800 relative">
           <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover">
-          <span class="absolute top-2 left-2 text-[9px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-[#0A111E]/80 text-[#00A896] backdrop-blur-md">
+          <span class="absolute top-2 left-2 text-[9px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-[#0A111E]/80 text-[#00A896] backdrop-blur-md border border-[#00A896]/30">
             ${p.categoryLabel}
           </span>
         </div>
@@ -566,11 +610,16 @@ function renderAdminProducts() {
 
 function openProductModal(productId = null) {
   activeEditingProductId = productId;
+  uploadedBase64Image = '';
+
   const modal = document.getElementById('product-modal');
   const title = document.getElementById('product-modal-title');
   const form = document.getElementById('product-form');
+  const fileInput = document.getElementById('p_file_input');
 
   if (!modal || !form) return;
+
+  if (fileInput) fileInput.value = '';
 
   if (productId) {
     const p = products.find(item => item.id === productId);
@@ -583,10 +632,13 @@ function openProductModal(productId = null) {
       form.querySelector('[name="p_image"]').value = p.image;
       form.querySelector('[name="p_description"]').value = p.description;
       form.querySelector('[name="p_fabric"]').value = p.fabric;
+      updateImagePreview(p.image, 'Imagen Actual');
     }
   } else {
     if (title) title.textContent = 'Agregar Nueva Prenda al Catálogo';
     form.reset();
+    const previewBox = document.getElementById('p_image_preview_box');
+    if (previewBox) previewBox.classList.add('hidden');
   }
 
   modal.classList.add('active');
@@ -596,6 +648,7 @@ function closeProductModal() {
   const modal = document.getElementById('product-modal');
   if (modal) modal.classList.remove('active');
   activeEditingProductId = null;
+  uploadedBase64Image = '';
 }
 
 function saveProductForm(e) {
@@ -605,9 +658,11 @@ function saveProductForm(e) {
   const category = form.querySelector('[name="p_category"]').value;
   const price = parseFloat(form.querySelector('[name="p_price"]').value) || 0;
   const badge = form.querySelector('[name="p_badge"]').value.trim() || 'Antifluido';
-  const image = form.querySelector('[name="p_image"]').value.trim() || '../imagenes/conjunto de uniforme médico.jpeg';
+  const urlInputVal = form.querySelector('[name="p_image"]').value.trim();
   const description = form.querySelector('[name="p_description"]').value.trim();
   const fabric = form.querySelector('[name="p_fabric"]').value.trim() || 'Tela Antifluido Nivel 4';
+
+  const image = uploadedBase64Image || urlInputVal || '../imagenes/conjunto de uniforme médico.jpeg';
 
   if (!name || !price) {
     showAdminToast('Completa el nombre y el precio del producto', 'error');
@@ -623,7 +678,9 @@ function saveProductForm(e) {
     if (idx > -1) {
       products[idx] = {
         ...products[idx],
-        name, category, categoryLabel, price, badge, image, description, fabric
+        name, category, categoryLabel, price, badge, image,
+        gallery: [image],
+        description, fabric
       };
       showAdminToast(`Prenda "${name}" actualizada`, 'success');
     }
