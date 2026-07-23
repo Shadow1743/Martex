@@ -1,0 +1,128 @@
+/* ============================================================
+   MARTEX ADMIN — Premium FIGS Style Dashboard CSS
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --panther-deep: #0A111E;
+  --navy-corporate: #1B2A4A;
+  --navy-card: #162447;
+  --surgical-teal: #00A896;
+  --sidebar-width: 260px;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #F8FAFC;
+  color: #0F172A;
+  -webkit-font-smoothing: antialiased;
+}
+
+.dark body {
+  background-color: #0A111E;
+  color: #F8FAFC;
+}
+
+/* ─── Layout Structure ─── */
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar-admin {
+  width: var(--sidebar-width);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  background-color: #0F172A;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.main-admin {
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  min-height: 100vh;
+  transition: margin-left 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (max-width: 768px) {
+  .sidebar-admin {
+    transform: translateX(-100%);
+  }
+  .sidebar-admin.active {
+    transform: translateX(0);
+  }
+  .main-admin {
+    margin-left: 0;
+  }
+}
+
+/* ─── Dynamic Field Transitions ─── */
+.measurement-section {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.measurement-section.disabled-section {
+  opacity: 0.35;
+  pointer-events: none;
+  filter: grayscale(80%);
+}
+
+/* ─── Toast System ─── */
+.toast-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 500;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.toast {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-left: 4px solid #00A896;
+  border-radius: 0.875rem;
+  padding: 0.875rem 1.25rem;
+  box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.dark .toast {
+  background: #162447;
+  border-color: #1E293B;
+  color: #F8FAFC;
+}
+
+/* ─── Modal Overlay ─── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 17, 30, 0.8);
+  backdrop-filter: blur(10px);
+  z-index: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+  padding: 1.5rem;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}

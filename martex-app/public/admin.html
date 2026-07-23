@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Administración | Martex</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            navy: { DEFAULT: '#1B2A4A', dark: '#0F1A30' },
+            teal: { DEFAULT: '#2A9D8F', hover: '#228176' },
+            panther: { DEFAULT: '#121212', card: '#1A1A1A' }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-slate-50 dark:bg-[#121212] text-slate-900 dark:text-slate-100 transition-colors duration-300">
+
+  <!-- ═══ PANTALLA 1: LOGIN ADMIN PREVIO ═══ -->
+  <div id="admin-login-view" class="min-h-screen bg-slate-900 text-white flex items-center justify-center p-6">
+    <div class="w-full max-w-md bg-slate-900/90 backdrop-blur-xl border border-slate-800 rounded-2xl p-8 shadow-2xl">
+      <div class="text-center mb-8">
+        <div class="inline-flex items-center gap-2 font-display text-2xl font-bold text-white mb-2">
+          <svg class="w-7 h-7 text-emerald-500 stroke-[1.8]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20.38 3.46 16 2a4 4 0 0 0-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23Z"/></svg>
+          <span>Mar<span class="text-emerald-500">tex</span> Admin</span>
+        </div>
+        <p class="text-xs text-slate-400">Acceso Privado para Personal Autorizado</p>
+      </div>
+
+      <div id="admin-login-error" class="hidden mb-4 p-3 rounded-lg bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs text-center font-medium"></div>
+
+      <form id="admin-login-form" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Correo Electrónico</label>
+          <input type="email" id="admin-email" required placeholder="admin@martex.com" class="w-full px-4 py-2.5 rounded-xl bg-slate-800/60 border border-slate-700 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Contraseña</label>
+          <input type="password" id="admin-pass" required placeholder="••••••••" class="w-full px-4 py-2.5 rounded-xl bg-slate-800/60 border border-slate-700 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500">
+        </div>
+
+        <button type="submit" class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition-colors shadow-lg shadow-emerald-600/20">
+          Iniciar Sesión en el Sistema
+        </button>
+      </form>
+
+      <div class="mt-6 text-center">
+        <a href="index.html" class="text-xs text-slate-500 hover:text-slate-300 transition-colors">Volver a la tienda pública</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PANTALLA 2: DASHBOARD ADMIN COMPLETO ═══ -->
+  <div id="admin-dashboard-view" class="hidden flex min-h-screen">
+    <!-- Sidebar Navigation -->
+    <aside class="w-64 bg-slate-900 text-slate-300 border-r border-slate-800 flex flex-col fixed inset-y-0 z-40">
+      <div class="p-6 border-b border-slate-800 flex items-center justify-between">
+        <div class="flex items-center gap-2 font-display text-lg font-bold text-white">
+          <svg class="w-6 h-6 text-emerald-500 stroke-[1.8]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20.38 3.46 16 2a4 4 0 0 0-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23Z"/></svg>
+          <span>Martex Admin</span>
+        </div>
+      </div>
+
+      <nav class="flex-1 p-4 space-y-1">
+        <button onclick="switchAdminTab('dashboard')" id="nav-link-dashboard" class="admin-nav-link w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold bg-emerald-600/15 border border-emerald-500/20 text-emerald-400">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+          <span>Dashboard</span>
+        </button>
+
+        <button onclick="switchAdminTab('medidas')" id="nav-link-medidas" class="admin-nav-link w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.4 2.4 0 0 1 0-3.4l2.6-2.6a2.4 2.4 0 0 1 3.4 0l12.6 12.6z"/></svg>
+          <span>Registro Medidas</span>
+        </button>
+
+        <button onclick="switchAdminTab('productos')" id="nav-link-productos" class="admin-nav-link w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 12v10"/></svg>
+          <span>Catálogo</span>
+        </button>
+
+        <button onclick="switchAdminTab('pedidos')" id="nav-link-pedidos" class="admin-nav-link w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 11-1 9"/><path d="m19 11-4-7"/><path d="M2 11h20"/><path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6l1.6-7.4"/><path d="m4.5 11 4-7"/><path d="m9 11 1 9"/></svg>
+          <span>Gestión Pedidos</span>
+        </button>
+      </nav>
+
+      <div class="p-4 border-t border-slate-800">
+        <button onclick="sessionStorage.clear(); location.reload();" class="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          <span>Cerrar Sesión</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Panel -->
+    <div class="flex-1 ml-64 min-h-screen">
+      <!-- Topbar Header -->
+      <header class="h-20 bg-white dark:bg-[#1A1A1A] border-b border-slate-200 dark:border-slate-800 px-8 flex items-center justify-between sticky top-0 z-30">
+        <h1 class="text-xl font-bold font-display text-slate-900 dark:text-white">Panel Interno Martex</h1>
+        <div class="flex items-center gap-4">
+          <button class="theme-toggle-btn p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors" aria-label="Cambiar tema"></button>
+          <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">Administrador</span>
+        </div>
+      </header>
+
+      <div class="p-8">
+        <!-- ═══ TAB 1: DASHBOARD ANALÍTICO ═══ -->
+        <div id="tab-dashboard" class="admin-tab-content space-y-8">
+          <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            <div class="bg-white dark:bg-[#1A1A1A] p-5 rounded-2xl border border-slate-200 dark:border-slate-800">
+              <span class="text-xs font-semibold uppercase text-slate-400">Total Ingresos</span>
+              <div id="stat-ingresos" class="text-2xl font-bold text-slate-900 dark:text-white font-display mt-2">$0.00</div>
+            </div>
+            <div class="bg-white dark:bg-[#1A1A1A] p-5 rounded-2xl border border-slate-200 dark:border-slate-800">
+              <span class="text-xs font-semibold uppercase text-slate-400">Total Pedidos</span>
+              <div id="stat-pedidos" class="text-2xl font-bold text-slate-900 dark:text-white font-display mt-2">0</div>
+            </div>
+            <div class="bg-white dark:bg-[#1A1A1A] p-5 rounded-2xl border border-slate-200 dark:border-slate-800">
+              <span class="text-xs font-semibold uppercase text-slate-400">Pendientes</span>
+              <div id="stat-pendientes" class="text-2xl font-bold text-slate-900 dark:text-white font-display mt-2">0</div>
+            </div>
+            <div class="bg-white dark:bg-[#1A1A1A] p-5 rounded-2xl border border-slate-200 dark:border-slate-800">
+              <span class="text-xs font-semibold uppercase text-slate-400">Medidas Tomadas</span>
+              <div id="stat-medidas" class="text-2xl font-bold text-slate-900 dark:text-white font-display mt-2">0</div>
+            </div>
+            <div class="bg-white dark:bg-[#1A1A1A] p-5 rounded-2xl border border-slate-200 dark:border-slate-800">
+              <span class="text-xs font-semibold uppercase text-slate-400">Prendas Activas</span>
+              <div id="stat-prendas" class="text-2xl font-bold text-slate-900 dark:text-white font-display mt-2">0</div>
+            </div>
+          </div>
+
+          <div class="grid lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2 bg-white dark:bg-[#1A1A1A] rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+              <div class="p-6 border-b border-slate-100 dark:border-slate-800">
+                <h3 class="text-sm font-bold uppercase tracking-wider">Pedidos Recientes</h3>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                  <thead>
+                    <tr class="bg-slate-50 dark:bg-slate-900/50 text-[10px] uppercase font-bold text-slate-400 border-b border-slate-100 dark:border-slate-800">
+                      <th class="py-3 px-4">ID</th>
+                      <th class="py-3 px-4">Cliente</th>
+                      <th class="py-3 px-4">Total</th>
+                      <th class="py-3 px-4">Estado</th>
+                      <th class="py-3 px-4">Fecha</th>
+                    </tr>
+                  </thead>
+                  <tbody id="recent-orders-tbody"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="bg-white dark:bg-[#1A1A1A] rounded-2xl border border-slate-200 dark:border-slate-800 p-6">
+              <h3 class="text-sm font-bold uppercase tracking-wider mb-4 pb-3 border-b border-slate-100 dark:border-slate-800">
+                Prendas Más Vendidas
+              </h3>
+              <div id="top-products-container"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ TAB 2: FORMULARIO INTELIGENTE DE MEDIDAS ═══ -->
+        <div id="tab-medidas" class="admin-tab-content space-y-8 hidden">
+          <div class="bg-white dark:bg-[#1A1A1A] rounded-2xl border border-slate-200 dark:border-slate-800 p-6">
+            <h3 class="text-sm font-bold uppercase tracking-wider mb-6 pb-3 border-b border-slate-100 dark:border-slate-800">
+              Formulario Especializado de Toma de Medidas
+            </h3>
+
+            <form id="medida-form" class="space-y-6">
+              <div class="grid sm:grid-cols-3 gap-4">
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Nombre Completo del Cliente *</label>
+                  <input type="text" id="medida-nombre" required placeholder="Ej. Dra. María Fernández" class="w-full px-3.5 py-2 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+                </div>
+
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Teléfono</label>
+                  <input type="text" id="medida-telefono" placeholder="0000-0000" class="w-full px-3.5 py-2 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+                </div>
+
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Tipo de Prenda *</label>
+                  <select id="medida-tipo-select" required class="w-full px-3.5 py-2 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+                    <option value="">— Seleccionar prenda —</option>
+                    <option value="filipina">Solo Filipina / Gabacha</option>
+                    <option value="pantalon">Solo Pantalón</option>
+                    <option value="ambos">Ambos (Filipina + Pantalón)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Sección Filipina / Gabacha -->
+              <div id="box-filipina" class="p-5 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 space-y-4 hidden">
+                <h4 class="text-xs font-bold uppercase text-emerald-500">Campos Filipina / Gabacha</h4>
+                <div class="grid sm:grid-cols-4 gap-4">
+                  <div>
+                    <label class="block text-[11px] font-medium text-slate-500 mb-1">Hombro (cm)</label>
+                    <input type="number" id="m-hombro" step="0.1" placeholder="0.0" class="w-full px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-medium text-slate-500 mb-1">Busto (cm)</label>
+                    <input type="number" id="m-busto" step="0.1" placeholder="0.0" class="w-full px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-medium text-slate-500 mb-1">Cintura Top (cm)</label>
+                    <input type="number" id="m-cintura-top" step="0.1" placeholder="0.0" class="w-full px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-medium text-slate-500 mb-1">Cadera Top (cm)</label>
+                    <input type="number" id="m-cadera-top" step="0.1" placeholder="0.0" class="w-full px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-medium text-slate-500 mb-1">Largo Cintura (cm)</label>
+                    <input type="number" id="m-largo-cintura" step="0.1" placeholder="0.0" class="w-full px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-medium text-slate-500 mb-1">Largo Manga (cm)</label>
+                    <input type="number" id="m-manga-largo" step="0.1" placeholder="0.0" class="w-full px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-medium text-slate-500 mb-1">Grosor Brazo (cm)</label>
+                    <input type="number" id="m-grosor-brazo" step="0.1" placeholder="0.0" class="w-full px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-medium text-slate-500 mb-1">Largo Total Top (cm)</label>
+                    <input type="number" id="m-largo-total-top" step="0.1" placeholder="0.0" class="w-full px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Sección Pantalón -->
+              <div id="box-pantalon" class="p-5 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 space-y-4 hidden">
+                <h4 class="text-xs font-bold uppercase text-emerald-500">Campos Pantalón</h4>
+                <div class="grid sm:grid-cols-4 gap-4">
+                  <div>
+                    <label class="block text-[11px] font-medium text-slate-500 mb-1">Cintura Pantalón (cm)</label>
+                    <input type="number" id="m-cintura-pant" step="0.1" placeholder="0.0" class="w-full px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-medium text-slate-500 mb-1">Cadera Pantalón (cm)</label>
+                    <input type="number" id="m-cadera-pant" step="0.1" placeholder="0.0" class="w-full px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-medium text-slate-500 mb-1">Largo Rodilla (cm)</label>
+                    <input type="number" id="m-largo-rodilla" step="0.1" placeholder="0.0" class="w-full px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-medium text-slate-500 mb-1">Largo Total Pantalón (cm)</label>
+                    <input type="number" id="m-largo-total-pant" step="0.1" placeholder="0.0" class="w-full px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-medium text-slate-500 mb-1">Grosor Muslo (cm)</label>
+                    <input type="number" id="m-grosor-muslo" step="0.1" placeholder="0.0" class="w-full px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-medium text-slate-500 mb-1">Tiro (cm)</label>
+                    <input type="number" id="m-tiro" step="0.1" placeholder="0.0" class="w-full px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+                  </div>
+                  <div>
+                    <label class="block text-[11px] font-medium text-slate-500 mb-1">Grosor Rodilla (cm)</label>
+                    <input type="number" id="m-grosor-rodilla" step="0.1" placeholder="0.0" class="w-full px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Notas de Sastrería</label>
+                <textarea id="medida-notas" rows="2" placeholder="Observaciones de holgura, aperturas, etc." class="w-full px-3.5 py-2 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500"></textarea>
+              </div>
+
+              <button type="submit" class="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition-colors">
+                Guardar Ficha de Medidas
+              </button>
+            </form>
+          </div>
+
+          <!-- Historial Medidas -->
+          <div class="bg-white dark:bg-[#1A1A1A] rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+            <div class="p-6 border-b border-slate-100 dark:border-slate-800">
+              <h3 class="text-sm font-bold uppercase tracking-wider">Historial de Fichas</h3>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left">
+                <thead>
+                  <tr class="bg-slate-50 dark:bg-slate-900/50 text-[10px] uppercase font-bold text-slate-400 border-b border-slate-100 dark:border-slate-800">
+                    <th class="py-3 px-4">Cliente</th>
+                    <th class="py-3 px-4">Teléfono</th>
+                    <th class="py-3 px-4">Prenda</th>
+                    <th class="py-3 px-4">Medidas Resumen</th>
+                    <th class="py-3 px-4">Fecha</th>
+                    <th class="py-3 px-4">Acción</th>
+                  </tr>
+                </thead>
+                <tbody id="medidas-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ TAB 3: GESTOR DE CATÁLOGO (CRUD) ═══ -->
+        <div id="tab-productos" class="admin-tab-content space-y-8 hidden">
+          <div class="bg-white dark:bg-[#1A1A1A] rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+            <div class="p-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
+              <h3 class="text-sm font-bold uppercase tracking-wider">Catálogo de Productos</h3>
+              <button onclick="openProductModal()" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition-colors">
+                Nuevo Producto
+              </button>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full text-left">
+                <thead>
+                  <tr class="bg-slate-50 dark:bg-slate-900/50 text-[10px] uppercase font-bold text-slate-400 border-b border-slate-100 dark:border-slate-800">
+                    <th class="py-3 px-4">Producto</th>
+                    <th class="py-3 px-4">Categoría</th>
+                    <th class="py-3 px-4">Precio</th>
+                    <th class="py-3 px-4">Estado</th>
+                    <th class="py-3 px-4">Fecha</th>
+                    <th class="py-3 px-4">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="products-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ TAB 4: GESTIÓN DE PEDIDOS ═══ -->
+        <div id="tab-pedidos" class="admin-tab-content space-y-8 hidden">
+          <div class="bg-white dark:bg-[#1A1A1A] rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+            <div class="p-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
+              <h3 class="text-sm font-bold uppercase tracking-wider">Gestor de Compras</h3>
+              <select id="order-filter-select" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs font-semibold">
+                <option value="">Todos los pedidos</option>
+                <option value="pendiente">Pendientes</option>
+                <option value="completado">Completados</option>
+              </select>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full text-left">
+                <thead>
+                  <tr class="bg-slate-50 dark:bg-slate-900/50 text-[10px] uppercase font-bold text-slate-400 border-b border-slate-100 dark:border-slate-800">
+                    <th class="py-3 px-4">ID</th>
+                    <th class="py-3 px-4">Cliente / DUI</th>
+                    <th class="py-3 px-4">Dirección</th>
+                    <th class="py-3 px-4">Teléfono</th>
+                    <th class="py-3 px-4">Pago</th>
+                    <th class="py-3 px-4">Total</th>
+                    <th class="py-3 px-4">Estado</th>
+                    <th class="py-3 px-4">Fecha</th>
+                  </tr>
+                </thead>
+                <tbody id="orders-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ MODAL PRODUCTO CRUD ═══ -->
+  <div id="product-modal" class="modal-overlay">
+    <div class="modal-card max-w-lg p-6">
+      <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-100 dark:border-slate-800">
+        <h3 id="product-modal-title" class="text-base font-bold">Nuevo Producto</h3>
+        <button onclick="closeProductModal()" class="p-1 text-slate-400 hover:text-white">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+
+      <form id="product-form" class="space-y-4">
+        <input type="hidden" id="prod-id">
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Título del Producto *</label>
+          <input type="text" id="prod-titulo" required class="w-full px-3.5 py-2 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Descripción</label>
+          <textarea id="prod-desc" rows="2" class="w-full px-3.5 py-2 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500"></textarea>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Categoría *</label>
+            <select id="prod-cat" required class="w-full px-3.5 py-2 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+              <option value="medico">Médico</option>
+              <option value="belleza">Belleza</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Precio ($) *</label>
+            <input type="number" id="prod-precio" step="0.01" required class="w-full px-3.5 py-2 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">URL Imagen</label>
+          <input type="text" id="prod-imagen" placeholder="/imagenes/Abrigo médico.jpeg" class="w-full px-3.5 py-2 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+        </div>
+        <div class="flex items-center gap-2">
+          <input type="checkbox" id="prod-activo" checked class="w-4 h-4 accent-emerald-500">
+          <label for="prod-activo" class="text-xs font-medium">Producto Activo</label>
+        </div>
+        <div class="flex gap-3 pt-2">
+          <button type="button" onclick="closeProductModal()" class="w-1/2 py-2 rounded-lg border border-slate-200 dark:border-slate-800 text-xs font-semibold">Cancelar</button>
+          <button type="submit" class="w-1/2 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/theme.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

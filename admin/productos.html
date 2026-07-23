@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Productos | Martex Admin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            navy: { DEFAULT: '#1B2A4A', dark: '#0F1A30' },
+            teal: { DEFAULT: '#2A9D8F', hover: '#228176' },
+            panther: { DEFAULT: '#121212', card: '#1A1A1A' }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="bg-slate-50 dark:bg-[#121212] text-slate-900 dark:text-slate-100 transition-colors duration-300">
+  <div class="admin-layout">
+
+    <!-- ═══ SIDEBAR ═══ -->
+    <aside id="sidebar" class="sidebar-admin bg-slate-900 text-slate-300 border-r border-slate-800">
+      <div class="p-6 border-b border-slate-800 flex items-center justify-between">
+        <a href="dashboard.html" class="flex items-center gap-2 font-display text-xl font-bold text-white">
+          <svg class="w-6 h-6 text-emerald-500 stroke-[1.8]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20.38 3.46 16 2a4 4 0 0 0-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23Z"/></svg>
+          <span>Martex Admin</span>
+        </a>
+      </div>
+
+      <nav class="flex-1 p-4 space-y-1">
+        <a href="dashboard.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+          <span>Dashboard</span>
+        </a>
+        <a href="productos.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold text-white bg-emerald-600/15 border border-emerald-500/20 text-emerald-400">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 12v10"/></svg>
+          <span>Productos</span>
+        </a>
+        <a href="pedidos.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 11-1 9"/><path d="m19 11-4-7"/><path d="M2 11h20"/><path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6l1.6-7.4"/><path d="m4.5 11 4-7"/><path d="m9 11 1 9"/></svg>
+          <span>Pedidos</span>
+        </a>
+        <a href="medidas.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.4 2.4 0 0 1 0-3.4l2.6-2.6a2.4 2.4 0 0 1 3.4 0l12.6 12.6z"/></svg>
+          <span>Registro Medidas</span>
+        </a>
+      </nav>
+
+      <div class="p-4 border-t border-slate-800">
+        <button onclick="logout()" class="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          <span>Cerrar Sesión</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- ═══ MAIN CONTENT ═══ -->
+    <main class="main-admin flex-1">
+      <div class="h-20 bg-white dark:bg-[#1A1A1A] border-b border-slate-200 dark:border-slate-800 px-8 flex items-center justify-between sticky top-0 z-50">
+        <div class="flex items-center gap-4">
+          <button id="sidebar-toggle" class="md:hidden p-2 text-slate-500 hover:text-slate-900 dark:hover:text-white">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </button>
+          <h1 class="text-xl font-bold font-display text-slate-900 dark:text-white">Gestión de Catálogo</h1>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <button id="admin-theme-toggle" class="p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors" aria-label="Cambiar tema"></button>
+          <div class="text-xs font-semibold text-slate-700 dark:text-slate-300" id="admin-user-name">Administrador</div>
+        </div>
+      </div>
+
+      <div class="p-8">
+        <div class="bg-white dark:bg-[#1A1A1A] rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
+          <div class="p-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
+            <div>
+              <h3 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">Productos del Catálogo</h3>
+              <p class="text-xs text-slate-400 mt-0.5">Control de inventario, precios y disponibilidad</p>
+            </div>
+            <button onclick="openProductModal()" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition-colors shadow-sm shadow-emerald-600/20">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              <span>Nuevo Producto</span>
+            </button>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="bg-slate-50 dark:bg-slate-900/50 text-[10px] uppercase tracking-wider font-bold text-slate-400 border-b border-slate-100 dark:border-slate-800">
+                  <th class="py-3 px-4">Producto</th>
+                  <th class="py-3 px-4">Categoría</th>
+                  <th class="py-3 px-4">Precio</th>
+                  <th class="py-3 px-4">Estado</th>
+                  <th class="py-3 px-4">Fecha</th>
+                  <th class="py-3 px-4">Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="products-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ═══ MODAL PRODUCTO ═══ -->
+  <div id="product-modal" class="modal-overlay">
+    <div class="admin-modal-card p-6">
+      <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-100 dark:border-slate-800">
+        <h3 id="modal-title" class="text-base font-bold text-slate-900 dark:text-white">Nuevo Producto</h3>
+        <button onclick="closeProductModal()" class="p-1 text-slate-400 hover:text-slate-600 dark:hover:text-white transition-colors">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+
+      <form id="product-form" class="space-y-4">
+        <input type="hidden" id="product-id">
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Título del Producto *</label>
+          <input type="text" id="product-titulo" required placeholder="Ej. Scrub Quirúrgico Verde Esmeralda" class="w-full px-3.5 py-2 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Descripción</label>
+          <textarea id="product-descripcion" rows="3" placeholder="Descripción detallada de materiales y confección" class="w-full px-3.5 py-2 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500"></textarea>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Categoría *</label>
+            <select id="product-categoria" required class="w-full px-3.5 py-2 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+              <option value="medico">Médico & Quirúrgico</option>
+              <option value="belleza">Salón de Belleza & Estética</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Precio ($) *</label>
+            <input type="number" id="product-precio" step="0.01" min="0" required placeholder="0.00" class="w-full px-3.5 py-2 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">URL de Imagen</label>
+          <input type="text" id="product-imagen" placeholder="/imagenes/Abrigo médico.jpeg" class="w-full px-3.5 py-2 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+        </div>
+
+        <div class="flex items-center gap-2 pt-2">
+          <input type="checkbox" id="product-activo" checked class="w-4 h-4 accent-emerald-500 rounded">
+          <label for="product-activo" class="text-xs font-medium text-slate-700 dark:text-slate-300">Producto Activo en Tienda</label>
+        </div>
+
+        <div class="flex gap-3 pt-4">
+          <button type="button" onclick="closeProductModal()" class="w-1/2 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+            Cancelar
+          </button>
+          <button type="submit" class="w-1/2 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition-colors">
+            Guardar Producto
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/admin-app.js"></script>
+  <script src="js/productos.js"></script>
+</body>
+</html>

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Martex — 8 años confeccionando indumentaria médica y de salón en El Salvador. Uniformes premium, tela antifluido, confección a la medida.">
+  <title>Martex | Uniformes Médicos y de Belleza — Inicio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            navy: { DEFAULT: '#1B2A4A', deep: '#0B0F19', mid: '#0F172A' },
+            teal: { DEFAULT: '#2A9D8F', glow: '#00A896', hover: '#228176' },
+            panther: { DEFAULT: '#0F172A', card: '#1E293B', surface: '#162032' }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-white dark:bg-[#0B0F19] text-slate-900 dark:text-slate-100 transition-colors duration-300">
+
+  <!-- HEADER FLOTANTE GLASSMORPHISM -->
+  <header class="header-glass sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <!-- Logo Vectorial SVG -->
+      <a href="index.html" class="flex items-center gap-2.5 font-display text-2xl font-bold tracking-tight text-white">
+        <svg class="w-8 h-8 text-emerald-500 stroke-[1.8]" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M20.38 3.46 16 2a4 4 0 0 0-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23Z"/>
+        </svg>
+        <span>Mar<span class="text-emerald-500">tex</span></span>
+      </a>
+
+      <!-- Links de Navegación Entre Páginas -->
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="index.html" class="text-sm font-semibold text-emerald-400 border-b-2 border-emerald-400 pb-1">Inicio</a>
+        <a href="nosotros.html" class="text-sm font-medium text-slate-300 hover:text-white transition-colors pb-1">Nosotros</a>
+        <a href="catalogo.html" class="text-sm font-medium text-slate-300 hover:text-white transition-colors pb-1">Catálogo</a>
+      </nav>
+
+      <!-- Acciones Header -->
+      <div class="flex items-center gap-3">
+        <button class="theme-toggle-btn p-2 rounded-full bg-slate-800/80 hover:bg-slate-700 text-slate-200 transition-colors border border-slate-700/50" aria-label="Cambiar tema"></button>
+
+        <button id="auth-btn" onclick="openAuthModal()" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700/50 transition-all">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>Acceder</span>
+        </button>
+
+        <button onclick="toggleCart()" class="relative inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold shadow-lg shadow-emerald-600/20 transition-all btn-glow">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 11-1 9"/><path d="m19 11-4-7"/><path d="M2 11h20"/><path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6l1.6-7.4"/><path d="m4.5 11 4-7"/><path d="m9 11 1 9"/></svg>
+          <span class="hidden sm:inline">Carrito</span>
+          <span id="cart-badge" class="ml-1 px-1.5 py-0.5 rounded-full bg-rose-500 text-white text-[10px] font-bold" style="display: none;">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- SECTION: HERO PRINCIPAL (FIGS STYLE) -->
+  <section class="relative w-full h-[85vh] min-h-[600px] flex items-center justify-center overflow-hidden">
+    <!-- Full background image -->
+    <div class="absolute inset-0">
+      <img src="/imagenes/conjunto de uniforme médico.jpeg" alt="Hero Martex" class="w-full h-full object-cover object-top">
+      <!-- Gradient overlays for dark mode palette integration -->
+      <div class="absolute inset-0 bg-gradient-to-t from-[#0B0F19] via-[#0B0F19]/40 to-transparent"></div>
+      <div class="absolute inset-0 bg-slate-900/30 dark:bg-[#0B0F19]/30"></div>
+    </div>
+
+    <div class="relative z-10 text-center px-6 max-w-5xl mx-auto mt-20 animate-fade-in-up">
+      <span class="block text-xs font-bold tracking-[0.2em] text-emerald-400 uppercase mb-4">Nueva Colección 2024</span>
+      <h1 class="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tighter text-white uppercase font-display leading-[0.9]">
+        La Evolución<br>
+        del <span class="text-emerald-400">Uniforme.</span>
+      </h1>
+      <p class="mt-8 text-base sm:text-lg text-slate-200 max-w-2xl mx-auto font-medium leading-relaxed">
+        Ingeniería textil diseñada para profesionales. Comodidad extrema, ajuste preciso y tecnología antifluido en cada costura.
+      </p>
+      <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="catalogo.html" class="w-full sm:w-auto inline-flex items-center justify-center px-12 py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs tracking-[0.15em] uppercase transition-all shadow-xl shadow-emerald-900/20 rounded-sm">
+          Comprar Mujeres
+        </a>
+        <a href="catalogo.html" class="w-full sm:w-auto inline-flex items-center justify-center px-12 py-4 bg-white hover:bg-slate-100 text-slate-900 font-bold text-xs tracking-[0.15em] uppercase transition-all shadow-xl shadow-slate-900/10 rounded-sm">
+          Comprar Hombres
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: ESTADÍSTICAS DE IMPACTO -->
+  <section class="relative bg-white dark:bg-[#0F172A] border-y border-slate-200 dark:border-slate-800/50">
+    <div class="max-w-7xl mx-auto px-6 py-16">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="stat-card">
+          <div class="text-3xl sm:text-4xl font-bold font-display text-emerald-600 dark:text-emerald-400">8+</div>
+          <p class="mt-2 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Años de Trayectoria</p>
+        </div>
+        <div class="stat-card">
+          <div class="text-3xl sm:text-4xl font-bold font-display text-emerald-600 dark:text-emerald-400">10,000+</div>
+          <p class="mt-2 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Uniformes Confeccionados</p>
+        </div>
+        <div class="stat-card">
+          <div class="text-3xl sm:text-4xl font-bold font-display text-emerald-600 dark:text-emerald-400">100%</div>
+          <p class="mt-2 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Tela Antifluido</p>
+        </div>
+        <div class="stat-card">
+          <div class="text-3xl sm:text-4xl font-bold font-display text-emerald-600 dark:text-emerald-400">500+</div>
+          <p class="mt-2 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Clientes Satisfechos</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: CATÁLOGO DESTACADO -->
+  <section class="py-24 bg-slate-50 dark:bg-[#121212] transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <span class="text-xs font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400">Top Ventas</span>
+        <h2 class="text-3xl sm:text-4xl font-bold font-display text-slate-900 dark:text-white mt-3">Colección Destacada</h2>
+      </div>
+      
+      <!-- Contenedor dinámico (app.js renderizará los productos aquí) -->
+      <div id="featured-product-grid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Render dinámico -->
+      </div>
+      
+      <div class="mt-12 text-center">
+        <a href="catalogo.html" class="inline-flex items-center justify-center px-10 py-3 border border-slate-900 dark:border-white text-slate-900 dark:text-white hover:bg-slate-900 hover:text-white dark:hover:bg-white dark:hover:text-slate-900 font-bold text-xs tracking-widest uppercase transition-all">
+          Ver Todo el Catálogo
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: VISTA PREVIA VALORES DE MARCA -->
+  <section class="py-24 bg-slate-50 dark:bg-[#0B0F19]">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400">¿Por qué Elegir Martex?</span>
+        <h2 class="text-3xl sm:text-4xl font-bold font-display text-slate-900 dark:text-white mt-3">Calidad Textil al Servicio de tu Profesión</h2>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div class="feature-card">
+          <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3 class="text-sm font-bold text-slate-900 dark:text-white mb-2">Durabilidad Garantizada</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Telas resistentes a lavados industriales y desinfectantes clínicos.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
+          </div>
+          <h3 class="text-sm font-bold text-slate-900 dark:text-white mb-2">Diseños Ergonómicos</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Patrones anatomicos que garantizan libertad de movimiento.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.4 2.4 0 0 1 0-3.4l2.6-2.6a2.4 2.4 0 0 1 3.4 0l12.6 12.6z"/></svg>
+          </div>
+          <h3 class="text-sm font-bold text-slate-900 dark:text-white mb-2">Confección a la Medida</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Toma especializada de 15 medidas para un ajuste ideal.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <h3 class="text-sm font-bold text-slate-900 dark:text-white mb-2">Envíos Nacionales</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Despacho seguro a todo El Salvador a domicilio.</p>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <a href="nosotros.html" class="inline-flex items-center gap-2 text-xs font-semibold text-emerald-400 hover:text-emerald-300 transition-colors">
+          <span>Conoce nuestra historia y proceso de confección</span>
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BANNER CTA AL CATÁLOGO -->
+  <section class="py-20 bg-gradient-to-r from-slate-900 via-[#0F172A] to-slate-900 text-white border-y border-slate-800">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <h2 class="text-3xl font-bold font-display text-white">¿Listo para renovar tu vestuario profesional?</h2>
+      <p class="text-sm text-slate-400 mt-2 max-w-xl mx-auto">Explora nuestras colecciones médicas y de estética con opciones de talla desde XS hasta XXL.</p>
+      <div class="mt-8">
+        <a href="catalogo.html" class="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm transition-all shadow-lg shadow-emerald-600/20 btn-glow">
+          <span>Ver Catálogo Completo</span>
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER CORPORATIVO -->
+  <footer class="footer-section text-slate-400 py-16">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <!-- Col 1: Marca -->
+        <div>
+          <a href="index.html" class="flex items-center gap-2 font-display text-xl font-bold text-white mb-4">
+            <svg class="w-6 h-6 text-emerald-500 stroke-[1.8]" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M20.38 3.46 16 2a4 4 0 0 0-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23Z"/>
+            </svg>
+            <span>Mar<span class="text-emerald-500">tex</span></span>
+          </a>
+          <p class="text-xs leading-relaxed text-slate-500 mb-4">
+            Desde 2016 confeccionando uniformes médicos y de salón de belleza con los más altos estándares de calidad en El Salvador.
+          </p>
+          <div class="flex items-center gap-2">
+            <a href="https://www.instagram.com/martex.sv" target="_blank" class="footer-social-icon" aria-label="Instagram">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="https://wa.me/50300000000" target="_blank" class="footer-social-icon" aria-label="WhatsApp">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Col 2: Navegación Rápida -->
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-widest text-white mb-4">Navegación</h4>
+          <ul class="space-y-2.5">
+            <li><a href="index.html" class="footer-link">Inicio</a></li>
+            <li><a href="nosotros.html" class="footer-link">Nosotros</a></li>
+            <li><a href="catalogo.html" class="footer-link">Catálogo de Productos</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Contacto -->
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-widest text-white mb-4">Contacto</h4>
+          <ul class="space-y-3">
+            <li class="flex items-center gap-2.5">
+              <svg class="w-4 h-4 text-emerald-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <span class="text-xs text-slate-400">+503 0000-0000</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <svg class="w-4 h-4 text-emerald-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+              <span class="text-xs text-slate-400">WhatsApp Disponible</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <svg class="w-4 h-4 text-emerald-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span class="text-xs text-slate-400">Lun - Sáb: 8:00 AM - 5:00 PM</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Ubicación Física -->
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-widest text-white mb-4">Ubicación</h4>
+          <p class="text-xs text-slate-500 leading-relaxed mb-3">
+            Sucursal principal en El Salvador. Visita nuestra tienda para asesoramiento personalizado.
+          </p>
+          <a href="https://maps.app.goo.gl/1yhFJQquGmHPWbnj6" target="_blank" class="inline-flex items-center gap-2 text-xs font-semibold text-emerald-400 hover:text-emerald-300 transition-colors">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Abrir en Google Maps</span>
+          </a>
+        </div>
+      </div>
+
+
+
+      <div class="divider-gradient mb-6"></div>
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
+        <p class="text-[11px] text-slate-600">2016 - 2024 Martex Uniformes. Todos los derechos reservados.</p>
+        <p class="text-[11px] text-slate-700">Hecho con dedicación en El Salvador</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CART DRAWER -->
+  <div id="cart-overlay" class="cart-overlay"></div>
+  <div id="cart-drawer" class="cart-drawer">
+    <div class="p-6 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+      <h3 class="text-base font-bold text-slate-900 dark:text-white">Carrito de Compras</h3>
+      <button onclick="closeCart()" class="p-1 text-slate-400 hover:text-slate-600 dark:hover:text-white transition-colors">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+    <div id="cart-items" class="flex-1 overflow-y-auto p-6"></div>
+    <div class="p-6 border-t border-slate-200 dark:border-slate-800">
+      <div class="flex justify-between items-center mb-4">
+        <span class="text-sm font-medium text-slate-500">Subtotal:</span>
+        <span id="cart-total-price" class="text-lg font-bold text-emerald-600 dark:text-emerald-400">$0.00</span>
+      </div>
+      <button onclick="openCheckoutModal()" class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition-colors shadow-lg shadow-emerald-600/20 btn-glow">
+        Proceder al Checkout
+      </button>
+    </div>
+  </div>
+
+  <!-- MODAL AUTH -->
+  <div id="auth-modal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="p-6 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+        <div class="flex gap-6">
+          <button id="tab-login" onclick="switchAuthTab('login')" class="pb-2 text-sm font-bold border-b-2 border-emerald-500 text-emerald-500 transition-colors">Iniciar Sesión</button>
+          <button id="tab-reg" onclick="switchAuthTab('register')" class="pb-2 text-sm font-bold border-b-2 border-transparent text-slate-400 transition-colors">Registrarse</button>
+        </div>
+        <button onclick="closeAuthModal()" class="p-1 text-slate-400 hover:text-white transition-colors">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+
+      <div class="p-6">
+        <button onclick="loginWithGoogleSimulation()" class="w-full flex items-center justify-center gap-3 py-2.5 px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 transition-colors mb-5">
+          <svg class="w-4 h-4" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+          <span>Continuar con Google</span>
+        </button>
+
+        <form id="auth-login-form" class="space-y-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Correo Electrónico</label>
+            <input type="email" id="auth-email" required class="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-[#0F172A] border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500 transition-colors">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Contraseña</label>
+            <input type="password" id="auth-pass" required class="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-[#0F172A] border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500 transition-colors">
+          </div>
+          <button type="submit" class="w-full py-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition-colors shadow-md shadow-emerald-600/20">
+            Iniciar Sesión
+          </button>
+        </form>
+
+        <form id="auth-reg-form" class="space-y-4 hidden">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Nombre Completo</label>
+            <input type="text" id="reg-nombre" required class="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-[#0F172A] border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500 transition-colors">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Correo Electrónico</label>
+            <input type="email" id="reg-email" required class="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-[#0F172A] border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500 transition-colors">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Contraseña</label>
+            <input type="password" id="reg-pass" required class="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-[#0F172A] border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500 transition-colors">
+          </div>
+          <button type="submit" class="w-full py-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition-colors shadow-md shadow-emerald-600/20">
+            Crear Cuenta
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL CHECKOUT (Sin Transferencia) -->
+  <div id="checkout-modal" class="modal-overlay">
+    <div class="modal-card max-w-xl p-6">
+      <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-200 dark:border-slate-800">
+        <h3 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">Finalizar Compra — Pago Directo</h3>
+        <button onclick="closeCheckoutModal()" class="p-1 text-slate-400 hover:text-white transition-colors">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+
+      <form id="checkout-form" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Nombre Completo *</label>
+          <input type="text" id="checkout-nombre" required placeholder="Ej. Juan Carlos Martínez" class="w-full px-3.5 py-2 rounded-lg bg-slate-50 dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">DUI (00000000-0) *</label>
+            <input type="text" id="checkout-dui" required placeholder="00000000-0" maxlength="10" class="w-full px-3.5 py-2 rounded-lg bg-slate-50 dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Teléfono *</label>
+            <input type="text" id="checkout-telefono" required placeholder="0000-0000" maxlength="9" class="w-full px-3.5 py-2 rounded-lg bg-slate-50 dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Dirección de Entrega *</label>
+          <textarea id="checkout-direccion" required rows="2" placeholder="Colonia, calle, número de casa, departamento" class="w-full px-3.5 py-2 rounded-lg bg-slate-50 dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500"></textarea>
+        </div>
+
+        <div class="mt-4">
+          <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2">Método de Pago *</label>
+          <div class="grid grid-cols-2 gap-3">
+            <label class="flex items-center gap-2 p-3 border border-slate-200 dark:border-slate-700 rounded-lg cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+              <input type="radio" name="metodo_pago" value="efectivo" checked class="text-emerald-500 focus:ring-emerald-500">
+              <span class="text-xs font-medium">Pago contra Entrega</span>
+            </label>
+            <label class="flex items-center gap-2 p-3 border border-slate-200 dark:border-slate-700 rounded-lg cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+              <input type="radio" name="metodo_pago" value="transferencia" class="text-emerald-500 focus:ring-emerald-500">
+              <span class="text-xs font-medium">Transferencia</span>
+            </label>
+          </div>
+        </div>
+
+        <div id="checkout-summary-items" class="py-2"></div>
+
+        <div class="flex justify-between items-center pt-3 border-t border-slate-200 dark:border-slate-800">
+          <span class="text-xs font-bold">Total a Pagar:</span>
+          <span id="checkout-modal-total" class="text-lg font-bold text-emerald-500">$0.00</span>
+        </div>
+
+        <button type="submit" class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition-colors shadow-lg shadow-emerald-600/20 btn-glow">
+          Confirmar y Procesar Pedido
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL ÉXITO COMPRA -->
+  <div id="success-order-modal" class="modal-overlay">
+    <div class="modal-card p-8 text-center max-w-sm mx-auto">
+      <div class="w-14 h-14 rounded-full bg-emerald-500/10 flex items-center justify-center mx-auto mb-4">
+        <svg class="w-7 h-7 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 dark:text-white">¡Pedido Registrado con Éxito!</h2>
+      <p class="text-xs text-slate-400 mt-2">
+        Tu orden <span id="success-order-id" class="font-mono font-bold text-slate-200">#0</span> ha sido procesada.<br>
+        Monto Total: <span id="success-order-total" class="font-bold text-emerald-500">$0.00</span>
+      </p>
+      <div id="receipt-btn-container" class="mt-4"></div>
+      <button onclick="closeSuccessOrderModal()" class="mt-4 w-full py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-900 dark:text-white text-xs font-semibold transition-colors">
+        Cerrar
+      </button>
+    </div>
+  </div>
+
+  <!-- MODAL DETALLE DE PRODUCTO -->
+  <div id="product-detail-modal" class="modal-overlay">
+    <div class="modal-card max-w-md p-6">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
+        <h3 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">Detalles de la Prenda</h3>
+        <button onclick="closeProductDetailModal()" class="p-1 text-slate-400 hover:text-white transition-colors">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+      <div class="py-6 text-center">
+        <h4 id="detail-title" class="text-lg font-bold text-slate-900 dark:text-white uppercase mb-2"></h4>
+        <p id="detail-desc" class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-medium"></p>
+      </div>
+      <button onclick="closeProductDetailModal()" class="w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition-colors">
+        Entendido
+      </button>
+    </div>
+  </div>
+
+  <script src="js/theme.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
