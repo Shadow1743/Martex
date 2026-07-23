@@ -3,7 +3,6 @@
    ============================================================ */
 
 // ─── ACCESOS OCULTOS SILENCIOSOS AL PANEL ADMINISTRADOR ───
-// 1. Cinco clics o toques rápidos en el logo MARTEX (Sin notificación)
 let logoClickCount = 0;
 let logoClickTimer = null;
 
@@ -23,7 +22,6 @@ function handleLogoClick(e) {
   }, 1500);
 }
 
-// 2. Tres clics rápidos en el Copyright del Footer (Sin notificación)
 let copyrightClickCount = 0;
 let copyrightClickTimer = null;
 
@@ -43,7 +41,6 @@ function handleSecretFooterClick(e) {
   }, 1200);
 }
 
-// 3. Atajo de teclado: Escribir "admin" o presionar "Ctrl+Shift+A" (Sin notificación)
 let keySequence = '';
 document.addEventListener('keydown', (e) => {
   if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'a') {
@@ -63,7 +60,7 @@ document.addEventListener('keydown', (e) => {
 });
 
 // ─── CATÁLOGO DE PRODUCTOS MARTEX ───
-const PRODUCTS = [
+let PRODUCTS = [
   {
     id: 'm-01',
     name: 'Conjunto Quirúrgico Azul Médico',
@@ -143,24 +140,18 @@ const PRODUCTS = [
     description: 'Uniforme sobrio y elegante tono Gris para salones de belleza, cosmetología y spas.',
     fabric: 'Tela Repelente a Tintes de Cabello y Aceites.',
     sizes: ['XS', 'S', 'M', 'L', 'XL']
-  },
-  {
-    id: 'b-02',
-    name: 'Filipina Estilo Salón Gris',
-    category: 'belleza',
-    categoryLabel: 'Salón & Estética',
-    price: 32.00,
-    badge: 'Resistente a Tintes',
-    image: 'imagenes/Camisa de uniforme color gris.jpeg',
-    gallery: [
-      'imagenes/Camisa de uniforme color gris.jpeg',
-      'imagenes/Camisa (scrug) color  verde esmeralda.jpeg'
-    ],
-    description: 'Filipina entallada y cómoda para largas jornadas en salón de belleza.',
-    fabric: 'Poliéster de Tacto Suave y Antifluido.',
-    sizes: ['XS', 'S', 'M', 'L', 'XL']
   }
 ];
+
+// Load catalog from localStorage if modified by Admin Panel
+const savedAdminProducts = JSON.parse(localStorage.getItem('martex_products') || '[]');
+if (savedAdminProducts.length > 0) {
+  PRODUCTS = savedAdminProducts.map(p => ({
+    ...p,
+    image: p.image.replace('../', ''),
+    gallery: p.gallery ? p.gallery.map(g => g.replace('../', '')) : [p.image.replace('../', '')]
+  }));
+}
 
 let cart = JSON.parse(localStorage.getItem('martex_cart') || '[]');
 let activeFilter = 'todos';
@@ -310,7 +301,7 @@ function renderProducts(searchQuery = '') {
           <h3 class="text-base font-bold text-slate-900 dark:text-white line-clamp-1 mb-2 group-hover:text-[#00A896] transition-colors">${product.name}</h3>
           <div class="flex items-baseline justify-between mt-3">
             <div class="text-lg font-extrabold text-slate-900 dark:text-white font-mono">$${product.price.toFixed(2)}</div>
-            <div class="text-[11px] text-slate-500 font-medium">Tallas: ${product.sizes.join(', ')}</div>
+            <div class="text-[11px] text-slate-500 font-medium">Tallas: ${(product.sizes || ['XS','S','M','L','XL']).join(', ')}</div>
           </div>
         </div>
       </div>
@@ -329,7 +320,7 @@ function openQuickView(productId) {
   if (!product) return;
 
   activeQuickViewProduct = product;
-  selectedSize = product.sizes[0] || 'M';
+  selectedSize = (product.sizes && product.sizes[0]) || 'M';
   selectedQty = 1;
 
   const modal = document.getElementById('quickview-modal');
@@ -337,12 +328,12 @@ function openQuickView(productId) {
   if (!modal || !dialog) return;
 
   dialog.innerHTML = `
-    <div class="relative p-6 sm:p-8">
+    <div class="relative p-5 sm:p-8">
       <button onclick="closeQuickView()" class="absolute top-4 right-4 z-10 p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">
         <svg class="w-5 h-5 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
       </button>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 items-start">
         <div class="space-y-4">
           <div class="aspect-[4/5] rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-800 relative group">
             <img id="qv-main-img" src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
@@ -351,22 +342,24 @@ function openQuickView(productId) {
               ${product.badge}
             </span>
           </div>
-          <div class="flex gap-3 overflow-x-auto pb-1 no-scrollbar">
-            ${product.gallery.map((imgUrl, i) => `
-              <button onclick="swapQvImage('${imgUrl}', this)" class="qv-thumb-btn flex-shrink-0 w-16 h-20 rounded-xl overflow-hidden border-2 ${i === 0 ? 'border-[#00A896]' : 'border-transparent'} transition-all opacity-80 hover:opacity-100">
-                <img src="${imgUrl}" class="w-full h-full object-cover">
-              </button>
-            `).join('')}
-          </div>
+          ${product.gallery && product.gallery.length > 1 ? `
+            <div class="flex gap-3 overflow-x-auto pb-1 no-scrollbar">
+              ${product.gallery.map((imgUrl, i) => `
+                <button onclick="swapQvImage('${imgUrl}', this)" class="qv-thumb-btn flex-shrink-0 w-16 h-20 rounded-xl overflow-hidden border-2 ${i === 0 ? 'border-[#00A896]' : 'border-transparent'} transition-all opacity-80 hover:opacity-100">
+                  <img src="${imgUrl}" class="w-full h-full object-cover">
+                </button>
+              `).join('')}
+            </div>
+          ` : ''}
         </div>
 
-        <div class="space-y-6">
+        <div class="space-y-5">
           <div>
             <div class="text-xs font-bold text-[#00A896] uppercase tracking-wider mb-1 flex items-center gap-1.5">
               <svg class="w-4 h-4 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20.38 3.46 16 2a4 4 0 0 0-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23Z"/></svg>
               ${product.categoryLabel}
             </div>
-            <h2 class="text-2xl font-extrabold text-slate-900 dark:text-white leading-tight mb-2">${product.name}</h2>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white leading-tight mb-2">${product.name}</h2>
             <div class="text-2xl font-black text-slate-900 dark:text-white font-mono">$${product.price.toFixed(2)}</div>
           </div>
 
@@ -385,8 +378,8 @@ function openQuickView(productId) {
             <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">
               Elegir Talla: <span id="qv-selected-size-label" class="text-[#00A896] font-mono">${selectedSize}</span>
             </label>
-            <div class="flex flex-wrap gap-2.5">
-              ${product.sizes.map(sz => `
+            <div class="flex flex-wrap gap-2">
+              ${(product.sizes || ['XS','S','M','L','XL']).map(sz => `
                 <button onclick="selectQvSize('${sz}', this)" class="size-pill ${sz === selectedSize ? 'active' : ''}">${sz}</button>
               `).join('')}
             </div>
@@ -396,9 +389,9 @@ function openQuickView(productId) {
             <div class="flex items-center gap-4">
               <span class="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">Cantidad:</span>
               <div class="flex items-center border border-slate-300 dark:border-slate-700 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800">
-                <button onclick="adjustQvQty(-1)" class="px-3 py-1.5 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 font-bold">-</button>
+                <button onclick="adjustQvQty(-1)" class="px-3.5 py-2 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 font-bold">-</button>
                 <span id="qv-qty-val" class="px-4 text-xs font-bold text-slate-900 dark:text-white font-mono">1</span>
-                <button onclick="adjustQvQty(1)" class="px-3 py-1.5 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 font-bold">+</button>
+                <button onclick="adjustQvQty(1)" class="px-3.5 py-2 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 font-bold">+</button>
               </div>
             </div>
 

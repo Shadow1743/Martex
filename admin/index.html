@@ -1,9 +1,15 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es" class="dark scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Acceso Admin | Martex</title>
+  <title>Panel de Administración | Martex Usulután</title>
+  <meta name="description" content="Sistema Interno de Gestión de Pedidos y Medidas Anatómicas para Martex El Salvador.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -11,87 +17,425 @@
       theme: {
         extend: {
           colors: {
-            navy: { DEFAULT: '#1B2A4A', dark: '#0F1A30' },
-            teal: { DEFAULT: '#2A9D8F', hover: '#228176' },
-            panther: { DEFAULT: '#121212', card: '#1A1A1A' }
+            panther: { DEFAULT: '#0A111E', nav: '#0F172A' },
+            navy: { DEFAULT: '#1B2A4A', card: '#162447' },
+            surgical: { DEFAULT: '#00A896', hover: '#009284' }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif']
           }
         }
       }
     }
   </script>
+  
   <link rel="stylesheet" href="css/admin.css">
 </head>
-<body class="bg-slate-900 text-white min-h-screen flex items-center justify-center p-6">
+<body class="bg-[#F8FAFC] dark:bg-[#0A111E] text-slate-900 dark:text-slate-100 transition-colors duration-300">
+  <div class="admin-layout">
 
-  <div class="w-full max-w-md bg-slate-900/90 backdrop-blur-xl border border-slate-800 rounded-2xl p-8 shadow-2xl">
-    <div class="text-center mb-8">
-      <div class="inline-flex items-center gap-2 font-display text-2xl font-bold text-white mb-2">
-        <svg class="w-7 h-7 text-emerald-500 stroke-[1.8]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20.38 3.46 16 2a4 4 0 0 0-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23Z"/></svg>
-        <span>Mar<span class="text-emerald-500">tex</span></span>
-      </div>
-      <p class="text-xs text-slate-400">Sistema Interno de Administración</p>
-    </div>
+    <!-- Mobile Sidebar Backdrop Overlay -->
+    <div id="sidebar-overlay" onclick="closeMobileSidebar()" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-[199] hidden md:hidden"></div>
 
-    <div id="login-error" class="hidden mb-4 p-3 rounded-lg bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs text-center font-medium"></div>
-
-    <form id="login-form" class="space-y-4">
-      <div>
-        <label class="block text-xs font-semibold text-slate-300 mb-1">Correo Electrónico</label>
-        <input type="email" id="email" required placeholder="admin@martex.com" class="w-full px-4 py-2.5 rounded-xl bg-slate-800/60 border border-slate-700 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500">
-      </div>
-
-      <div>
-        <label class="block text-xs font-semibold text-slate-300 mb-1">Contraseña</label>
-        <input type="password" id="password" required placeholder="••••••••" class="w-full px-4 py-2.5 rounded-xl bg-slate-800/60 border border-slate-700 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500">
+    <!-- 1. SIDEBAR NAVEGABLE PROFESIONAL -->
+    <aside id="sidebar" class="sidebar-admin">
+      <div class="p-5 sm:p-6 border-b border-slate-800 flex items-center justify-between">
+        <a href="../index.html" class="flex items-center gap-2.5 group">
+          <div class="w-8 h-8 rounded-lg bg-[#00A896] text-white flex items-center justify-center font-black text-sm">M</div>
+          <span class="text-lg font-extrabold text-white tracking-tight">MAR<span class="text-[#00A896]">TEX</span> <span class="text-[10px] font-bold text-[#00A896] bg-[#00A896]/10 px-2 py-0.5 rounded border border-[#00A896]/30 uppercase ml-1">Admin</span></span>
+        </a>
+        <button onclick="closeMobileSidebar()" class="md:hidden p-1.5 text-slate-400 hover:text-white">
+          <svg class="w-5 h-5 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
       </div>
 
-      <button type="submit" id="login-btn" class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition-colors shadow-lg shadow-emerald-600/20">
-        Acceder al Panel
-      </button>
-    </form>
+      <nav class="flex-1 p-3 sm:p-4 space-y-2 overflow-y-auto">
+        <button onclick="switchTab('dashboard')" id="nav-dashboard" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition-all text-[#00A896] bg-[#00A896]/10 border-l-4 border-[#00A896]">
+          <svg class="w-4 h-4 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+          <span>Dashboard Métricas</span>
+        </button>
 
-    <div class="mt-6 text-center">
-      <a href="../frontend/index.html" class="text-xs text-slate-500 hover:text-slate-300 transition-colors">Volver a la tienda pública</a>
+        <button onclick="switchTab('medidas')" id="nav-medidas" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition-all text-slate-400 hover:text-white hover:bg-slate-800/60">
+          <svg class="w-4 h-4 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.4 2.4 0 0 1 0-3.4l2.6-2.6a2.4 2.4 0 0 1 3.4 0l12.6 12.6z"/></svg>
+          <span>Medidas de Sastrería</span>
+        </button>
+
+        <button onclick="switchTab('pedidos')" id="nav-pedidos" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition-all text-slate-400 hover:text-white hover:bg-slate-800/60">
+          <svg class="w-4 h-4 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m15 11-1 9"/><path d="m19 11-4-7"/><path d="M2 11h20"/><path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6l1.6-7.4"/><path d="m4.5 11 4-7"/><path d="m9 11 1 9"/></svg>
+          <span>Registro de Ventas</span>
+        </button>
+
+        <button onclick="switchTab('productos')" id="nav-productos" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition-all text-slate-400 hover:text-white hover:bg-slate-800/60">
+          <svg class="w-4 h-4 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/></svg>
+          <span>Gestión de Catálogo</span>
+        </button>
+      </nav>
+
+      <div class="p-4 border-t border-slate-800 space-y-2">
+        <a href="../index.html" class="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-bold text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">
+          <svg class="w-4 h-4 text-[#00A896] stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          <span>Ir a la Tienda Pública</span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- 2. MAIN ADMIN CONTENT -->
+    <main class="main-admin flex-1 min-w-0">
+      <!-- Admin Top Header Bar -->
+      <div class="h-16 sm:h-20 bg-white dark:bg-[#0F172A] border-b border-slate-200 dark:border-slate-800 px-4 sm:px-8 flex items-center justify-between sticky top-0 z-50">
+        <div class="flex items-center gap-3">
+          <button onclick="toggleMobileSidebar()" class="md:hidden p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-200 border border-slate-300 dark:border-slate-700" aria-label="Menú Móvil Admin">
+            <svg class="w-5 h-5 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </button>
+          <h1 id="view-title" class="text-base sm:text-xl font-extrabold text-slate-900 dark:text-white truncate">Dashboard Ejecutivo</h1>
+        </div>
+
+        <div class="flex items-center gap-2 sm:gap-4">
+          <button onclick="toggleAdminTheme()" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+            <svg class="w-5 h-5 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+          </button>
+          <div class="text-xs font-bold text-slate-700 dark:text-slate-300 hidden sm:flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#00A896]"></span>
+            <span>Administración Martex</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 1: DASHBOARD (MÉTRICAS & KPIS) -->
+      <section id="view-dashboard" class="p-4 sm:p-8 space-y-6 sm:space-y-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          
+          <div class="p-5 sm:p-6 rounded-2xl bg-white dark:bg-[#162447] border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
+            <div class="flex items-center justify-between text-slate-400">
+              <span class="text-[11px] font-bold uppercase tracking-wider">Ingresos Acumulados</span>
+              <svg class="w-5 h-5 text-[#00A896] stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <div id="stat-total-ventas" class="text-2xl sm:text-3xl font-black font-mono text-slate-900 dark:text-white">$0.00</div>
+            <div class="text-[11px] text-emerald-500 font-bold flex items-center gap-1">
+              <svg class="w-3.5 h-3.5 stroke-[2.5]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+              <span>Ventas Confirmadas</span>
+            </div>
+          </div>
+
+          <div class="p-5 sm:p-6 rounded-2xl bg-white dark:bg-[#162447] border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
+            <div class="flex items-center justify-between text-slate-400">
+              <span class="text-[11px] font-bold uppercase tracking-wider">Total de Pedidos</span>
+              <svg class="w-5 h-5 text-[#00A896] stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m15 11-1 9"/><path d="m19 11-4-7"/><path d="M2 11h20"/><path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6l1.6-7.4"/></svg>
+            </div>
+            <div id="stat-total-pedidos" class="text-2xl sm:text-3xl font-black font-mono text-slate-900 dark:text-white">0</div>
+            <div class="text-[11px] text-slate-400 font-medium">Registrados en Tienda Web</div>
+          </div>
+
+          <div class="p-5 sm:p-6 rounded-2xl bg-white dark:bg-[#162447] border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
+            <div class="flex items-center justify-between text-slate-400">
+              <span class="text-[11px] font-bold uppercase tracking-wider">Pedidos Pendientes</span>
+              <svg class="w-5 h-5 text-amber-500 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div id="stat-pedidos-pendientes" class="text-2xl sm:text-3xl font-black font-mono text-amber-500">0</div>
+            <div class="text-[11px] text-amber-500 font-medium">Requieren Confección / Envío</div>
+          </div>
+
+          <div class="p-5 sm:p-6 rounded-2xl bg-white dark:bg-[#162447] border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
+            <div class="flex items-center justify-between text-slate-400">
+              <span class="text-[11px] font-bold uppercase tracking-wider">Fichas de Sastrería</span>
+              <svg class="w-5 h-5 text-[#00A896] stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.4 2.4 0 0 1 0-3.4l2.6-2.6a2.4 2.4 0 0 1 3.4 0l12.6 12.6z"/></svg>
+            </div>
+            <div id="stat-total-medidas" class="text-2xl sm:text-3xl font-black font-mono text-slate-900 dark:text-white">0</div>
+            <div class="text-[11px] text-slate-400 font-medium">Medidas Corporales Guardadas</div>
+          </div>
+
+        </div>
+
+        <div class="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#162447] border border-slate-200 dark:border-slate-800 space-y-3">
+          <h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white">Resumen de Operación Martex Usulután (8 Años)</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+            El sistema recopila en tiempo real las compras realizadas desde la tienda pública y mantiene sincronizadas las fichas de sastrería personalizadas para la producción de prendas médicas y para salones de belleza.
+          </p>
+        </div>
+      </section>
+
+      <!-- VIEW 2: FORMULARIO DINÁMICO DE MEDIDAS ANATÓMICAS -->
+      <section id="view-medidas" class="p-4 sm:p-8 space-y-6 sm:space-y-8 hidden">
+        <div class="p-5 sm:p-8 rounded-3xl bg-white dark:bg-[#162447] border border-slate-200 dark:border-slate-800 space-y-6">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
+            <div>
+              <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">Toma de Medidas Corporales (Sastrería)</h2>
+              <p class="text-xs text-slate-500">Selecciona el tipo de prenda para habilitar dinámicamente sus campos anatómicos</p>
+            </div>
+            
+            <div class="flex items-center gap-2 w-full sm:w-auto">
+              <label class="text-xs font-bold uppercase text-slate-700 dark:text-slate-300 whitespace-nowrap">Prenda:</label>
+              <select id="medida-tipo-prenda" name="garment_type" onchange="handleMeasurementTypeChange()" class="w-full sm:w-auto px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-bold text-slate-900 dark:text-white focus:outline-none focus:border-[#00A896]">
+                <option value="ambos">Filipina + Pantalón (Ambos)</option>
+                <option value="filipina">Solo Filipina / Gabacha</option>
+                <option value="pantalon">Solo Pantalón</option>
+              </select>
+            </div>
+          </div>
+
+          <form onsubmit="saveMedidaForm(event)" class="space-y-6 text-xs">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Nombre Completo del Cliente *</label>
+                <input type="text" name="medida_cliente" required placeholder="Ej. Dr. Alejandro Rivas" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-[#00A896]">
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Teléfono de Contacto *</label>
+                <input type="tel" name="medida_telefono" required placeholder="6049 7383" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-[#00A896]">
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Observaciones / Preferencias</label>
+                <input type="text" name="medida_notas" placeholder="Ej. Filipina holgada, manga corta" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-[#00A896]">
+              </div>
+            </div>
+
+            <div id="sec-medidas-filipina" class="measurement-section p-4 sm:p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 space-y-4">
+              <h3 class="text-xs sm:text-sm font-extrabold text-[#00A896] uppercase tracking-wider flex items-center gap-2">
+                <svg class="w-4 h-4 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20.38 3.46 16 2a4 4 0 0 0-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23Z"/></svg>
+                <span>Medidas Anatómicas — Filipina / Gabacha</span>
+              </h3>
+
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+                <div>
+                  <label class="block font-semibold text-slate-600 dark:text-slate-400 mb-1">Hombro (cm)</label>
+                  <input type="text" name="f_hombro" placeholder="Ej. 44" class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white">
+                </div>
+                <div>
+                  <label class="block font-semibold text-slate-600 dark:text-slate-400 mb-1">Busto / Pecho (cm)</label>
+                  <input type="text" name="f_busto" placeholder="Ej. 98" class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white">
+                </div>
+                <div>
+                  <label class="block font-semibold text-slate-600 dark:text-slate-400 mb-1">Cintura (cm)</label>
+                  <input type="text" name="f_cintura" placeholder="Ej. 86" class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white">
+                </div>
+                <div>
+                  <label class="block font-semibold text-slate-600 dark:text-slate-400 mb-1">Cadera (cm)</label>
+                  <input type="text" name="f_cadera" placeholder="Ej. 96" class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white">
+                </div>
+                <div>
+                  <label class="block font-semibold text-slate-600 dark:text-slate-400 mb-1">Largo Cintura (cm)</label>
+                  <input type="text" name="f_largo_cintura" placeholder="Ej. 45" class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white">
+                </div>
+                <div>
+                  <label class="block font-semibold text-slate-600 dark:text-slate-400 mb-1">Manga Largo (cm)</label>
+                  <input type="text" name="f_manga_largo" placeholder="Ej. 24" class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white">
+                </div>
+                <div>
+                  <label class="block font-semibold text-slate-600 dark:text-slate-400 mb-1">Grosor Brazo (cm)</label>
+                  <input type="text" name="f_grosor_brazo" placeholder="Ej. 34" class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white">
+                </div>
+                <div>
+                  <label class="block font-semibold text-slate-600 dark:text-slate-400 mb-1">Largo Total Filipina (cm)</label>
+                  <input type="text" name="f_largo_total" placeholder="Ej. 72" class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white">
+                </div>
+              </div>
+            </div>
+
+            <div id="sec-medidas-pantalon" class="measurement-section p-4 sm:p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 space-y-4">
+              <h3 class="text-xs sm:text-sm font-extrabold text-[#00A896] uppercase tracking-wider flex items-center gap-2">
+                <svg class="w-4 h-4 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.4 2.4 0 0 1 0-3.4l2.6-2.6a2.4 2.4 0 0 1 3.4 0l12.6 12.6z"/></svg>
+                <span>Medidas Anatómicas — Pantalón</span>
+              </h3>
+
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+                <div>
+                  <label class="block font-semibold text-slate-600 dark:text-slate-400 mb-1">Cintura (cm)</label>
+                  <input type="text" name="p_cintura" placeholder="Ej. 86" class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white">
+                </div>
+                <div>
+                  <label class="block font-semibold text-slate-600 dark:text-slate-400 mb-1">Cadera (cm)</label>
+                  <input type="text" name="p_cadera" placeholder="Ej. 98" class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white">
+                </div>
+                <div>
+                  <label class="block font-semibold text-slate-600 dark:text-slate-400 mb-1">Largo Rodilla (cm)</label>
+                  <input type="text" name="p_largo_rodilla" placeholder="Ej. 54" class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white">
+                </div>
+                <div>
+                  <label class="block font-semibold text-slate-600 dark:text-slate-400 mb-1">Largo Total Pantalón (cm)</label>
+                  <input type="text" name="p_largo_total" placeholder="Ej. 102" class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white">
+                </div>
+                <div>
+                  <label class="block font-semibold text-slate-600 dark:text-slate-400 mb-1">Grosor Muslo (cm)</label>
+                  <input type="text" name="p_grosor_muslo" placeholder="Ej. 58" class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white">
+                </div>
+                <div>
+                  <label class="block font-semibold text-slate-600 dark:text-slate-400 mb-1">Tiro (cm)</label>
+                  <input type="text" name="p_tiro" placeholder="Ej. 28" class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white">
+                </div>
+                <div>
+                  <label class="block font-semibold text-slate-600 dark:text-slate-400 mb-1">Grosor Rodilla (cm)</label>
+                  <input type="text" name="p_grosor_rodilla" placeholder="Ej. 40" class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white">
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="w-full py-3.5 rounded-xl bg-[#00A896] hover:bg-[#009284] text-white font-extrabold text-xs uppercase tracking-wider transition-all shadow-md">
+              Guardar Ficha de Medidas Anatómicas
+            </button>
+          </form>
+        </div>
+
+        <div class="p-5 sm:p-8 rounded-3xl bg-white dark:bg-[#162447] border border-slate-200 dark:border-slate-800 space-y-4">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+            <h3 class="text-base font-bold text-slate-900 dark:text-white">Fichas de Medidas Guardadas</h3>
+            <input type="text" oninput="renderMedidas(this.value)" placeholder="Buscar cliente o teléfono..." class="w-full sm:w-64 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-[#00A896]">
+          </div>
+
+          <div class="overflow-x-auto border border-slate-200 dark:border-slate-800 rounded-xl">
+            <table class="w-full text-left border-collapse min-w-[600px]">
+              <thead>
+                <tr class="border-b border-slate-200 dark:border-slate-800 text-[10px] font-extrabold uppercase text-slate-400 bg-slate-50 dark:bg-slate-900/40">
+                  <th class="py-3 px-4">Código</th>
+                  <th class="py-3 px-4">Cliente / Teléfono</th>
+                  <th class="py-3 px-4">Prenda</th>
+                  <th class="py-3 px-4">Resumen Anatómico</th>
+                  <th class="py-3 px-4 text-right">Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="medidas-table-body">
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 3: REGISTRO DE VENTAS (TABLA DE PEDIDOS DESDE LA LANDING PAGE) -->
+      <section id="view-pedidos" class="p-4 sm:p-8 space-y-6 sm:space-y-8 hidden">
+        <div class="p-5 sm:p-8 rounded-3xl bg-white dark:bg-[#162447] border border-slate-200 dark:border-slate-800 space-y-6">
+          
+          <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
+            <div>
+              <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">Historial & Registro de Ventas</h2>
+              <p class="text-xs text-slate-500">Pedidos recibidos desde la tienda web pública con recopilación de DUI y datos de envío</p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full lg:w-auto">
+              <select onchange="renderOrders(this.value)" class="px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-bold text-slate-900 dark:text-white focus:outline-none focus:border-[#00A896]">
+                <option value="todos">Todos los Estados</option>
+                <option value="Pendiente">Pendientes</option>
+                <option value="En Confección">En Confección</option>
+                <option value="Enviado">Enviados</option>
+                <option value="Entregado">Entregados</option>
+              </select>
+              <input type="text" oninput="renderOrders('todos', this.value)" placeholder="Buscar cliente, DUI o ID..." class="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-[#00A896]">
+            </div>
+          </div>
+
+          <div class="overflow-x-auto border border-slate-200 dark:border-slate-800 rounded-xl">
+            <table class="w-full text-left border-collapse min-w-[700px]">
+              <thead>
+                <tr class="border-b border-slate-200 dark:border-slate-800 text-[10px] font-extrabold uppercase text-slate-400 bg-slate-50 dark:bg-slate-900/40">
+                  <th class="py-3 px-4">ID Pedido</th>
+                  <th class="py-3 px-4">Cliente / DUI</th>
+                  <th class="py-3 px-4">Dirección de Envío</th>
+                  <th class="py-3 px-4">Prendas & Tallas</th>
+                  <th class="py-3 px-4">Total ($)</th>
+                  <th class="py-3 px-4">Estado del Pedido</th>
+                  <th class="py-3 px-4 text-right">Acción</th>
+                </tr>
+              </thead>
+              <tbody id="pedidos-table-body">
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- VIEW 4: GESTIÓN DE CATÁLOGO -->
+      <section id="view-productos" class="p-4 sm:p-8 space-y-6 sm:space-y-8 hidden">
+        <div class="p-5 sm:p-8 rounded-3xl bg-white dark:bg-[#162447] border border-slate-200 dark:border-slate-800 space-y-6">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div>
+              <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">Catálogo de Indumentaria Médica & Belleza</h2>
+              <p class="text-xs text-slate-500">Agrega, edita o elimina prendas visibles en la tienda web principal</p>
+            </div>
+            <button onclick="openProductModal()" class="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-[#00A896] hover:bg-[#009284] text-white font-bold text-xs shadow-md flex items-center justify-center gap-2">
+              <svg class="w-4 h-4 stroke-[2.5]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              <span>+ Agregar Nueva Prenda</span>
+            </button>
+          </div>
+
+          <div id="admin-products-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- MEDIDA SHEET MODAL -->
+  <div id="medida-modal" class="modal-overlay" onclick="if(event.target === this) closeMedidaModal()">
+    <div class="bg-white dark:bg-[#162447] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 max-w-2xl w-full space-y-6 max-h-[92vh] overflow-y-auto">
+      <div class="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
+        <h3 class="font-bold text-base text-slate-900 dark:text-white">Ficha Anatómica Completa</h3>
+        <button onclick="closeMedidaModal()" class="text-slate-400 hover:text-white">
+          <svg class="w-5 h-5 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+
+      <div id="medida-modal-body"></div>
+
+      <div class="flex justify-end gap-3 pt-2">
+        <button onclick="window.print()" class="px-4 py-2 rounded-xl bg-[#00A896] text-white text-xs font-bold">Imprimir Ficha</button>
+        <button onclick="closeMedidaModal()" class="px-4 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-xs font-bold">Cerrar</button>
+      </div>
     </div>
   </div>
 
-  <script src="js/admin-app.js"></script>
-  <script>
-    document.getElementById('login-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const email = document.getElementById('email').value.trim();
-      const password = document.getElementById('password').value;
-      const errorEl = document.getElementById('login-error');
-      const btn = document.getElementById('login-btn');
+  <!-- PRODUCT EDIT/CREATE MODAL -->
+  <div id="product-modal" class="modal-overlay" onclick="if(event.target === this) closeProductModal()">
+    <div class="bg-white dark:bg-[#162447] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 max-w-xl w-full space-y-6 max-h-[92vh] overflow-y-auto">
+      <div class="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
+        <h3 id="product-modal-title" class="font-bold text-base text-slate-900 dark:text-white">Agregar Nueva Prenda</h3>
+        <button onclick="closeProductModal()" class="text-slate-400 hover:text-white">
+          <svg class="w-5 h-5 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
 
-      errorEl.classList.add('hidden');
-      btn.disabled = true;
-      btn.innerHTML = 'Verificando...';
+      <form id="product-form" onsubmit="saveProductForm(event)" class="space-y-4 text-xs">
+        <div>
+          <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Nombre de la Prenda *</label>
+          <input type="text" name="p_name" required placeholder="Ej. Conjunto Quirúrgico Azul" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-[#00A896]">
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Categoría *</label>
+            <select name="p_category" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-[#00A896]">
+              <option value="medicos">Colección Médica</option>
+              <option value="belleza">Salón & Estética</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Precio USD ($) *</label>
+            <input type="number" step="0.01" name="p_price" required placeholder="49.99" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-[#00A896]">
+          </div>
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Distintivo / Badge</label>
+          <input type="text" name="p_badge" placeholder="Ej. Antifluido Nivel 4" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-[#00A896]">
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Ruta de Imagen</label>
+          <input type="text" name="p_image" placeholder="../imagenes/conjunto de uniforme médico.jpeg" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-[#00A896]">
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Descripción de la Prenda *</label>
+          <textarea name="p_description" required rows="3" placeholder="Descripción detallada de la prenda..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-[#00A896]"></textarea>
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Tipo de Tela / Material</label>
+          <input type="text" name="p_fabric" placeholder="Tela Antifluido Nivel 4 de Secado Rápido" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-[#00A896]">
+        </div>
 
-      try {
-        const response = await fetch(`${API_URL}/auth/login`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password })
-        });
+        <button type="submit" class="w-full py-3.5 rounded-xl bg-[#00A896] hover:bg-[#009284] text-white font-extrabold text-xs uppercase tracking-wider transition-all shadow-md">
+          Guardar Prenda en el Catálogo
+        </button>
+      </form>
+    </div>
+  </div>
 
-        const data = await response.json();
-
-        if (!response.ok) {
-          throw new Error(data.error || 'Error de autenticación');
-        }
-
-        sessionStorage.setItem('martex-admin-token', data.token);
-        sessionStorage.setItem('martex-admin-user', JSON.stringify(data.user));
-
-        window.location.href = 'admin.html';
-      } catch (error) {
-        errorEl.textContent = error.message;
-        errorEl.classList.remove('hidden');
-        btn.disabled = false;
-        btn.innerHTML = 'Acceder al Panel';
-      }
-    });
-  </script>
+  <script src="js/admin.js"></script>
 </body>
 </html>

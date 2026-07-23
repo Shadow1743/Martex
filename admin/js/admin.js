@@ -2,7 +2,7 @@
    MARTEX ADMIN — Executive Dashboard & Measurement Engine (El Salvador)
    ============================================================ */
 
-// Seed initial demo orders if empty
+// ─── SEED DEMO DATA IF EMPTY ───
 let orders = JSON.parse(localStorage.getItem('martex_orders') || '[]');
 if (orders.length === 0) {
   orders = [
@@ -38,7 +38,6 @@ if (orders.length === 0) {
   localStorage.setItem('martex_orders', JSON.stringify(orders));
 }
 
-// Seed initial tailoring measurements if empty
 let medidas = JSON.parse(localStorage.getItem('martex_medidas') || '[]');
 if (medidas.length === 0) {
   medidas = [
@@ -51,11 +50,103 @@ if (medidas.length === 0) {
       garmentLabel: 'Filipina + Pantalón (Set Completo)',
       filipina: { hombro: '44 cm', busto: '98 cm', cintura: '86 cm', cadera: '96 cm', largoCintura: '45 cm', mangaLargo: '24 cm', grosorBrazo: '34 cm', largoTotal: '72 cm' },
       pantalon: { cintura: '86 cm', cadera: '98 cm', largoRodilla: '54 cm', largoTotal: '102 cm', grosorMuslo: '58 cm', tiro: '28 cm', grosorRodilla: '40 cm' },
-      notes: 'Cliente prefiere filipina ligeramente holgada en hombros y pantalón jogger con resorte.'
+      notes: 'Cliente prefiere filipina holgada y pantalón jogger con resorte.'
     }
   ];
   localStorage.setItem('martex_medidas', JSON.stringify(medidas));
 }
+
+// Default Products Seed
+const DEFAULT_PRODUCTS = [
+  {
+    id: 'm-01',
+    name: 'Conjunto Quirúrgico Azul Médico',
+    category: 'medicos',
+    categoryLabel: 'Colección Médica',
+    price: 49.99,
+    badge: 'Antifluido Premium',
+    image: '../imagenes/conjunto de uniforme médico.jpeg',
+    gallery: [
+      '../imagenes/conjunto de uniforme médico.jpeg',
+      '../imagenes/Camisa(scrub)colorAzul.jpeg'
+    ],
+    description: 'Filipina médica ergonómica de cuello en V con bolsillos estratégicos y pantalón jogger cómodo. Confeccionada en El Salvador con tela antimicrobiana.',
+    fabric: 'Tela Antifluido Nivel 4 de Secado Rápido.',
+    sizes: ['XS', 'S', 'M', 'L', 'XL']
+  },
+  {
+    id: 'm-02',
+    name: 'Filipina Verde Esmeralda',
+    category: 'medicos',
+    categoryLabel: 'Colección Médica',
+    price: 28.50,
+    badge: 'Popular en El Salvador',
+    image: '../imagenes/Camisa (scrug) color  verde esmeralda.jpeg',
+    gallery: [
+      '../imagenes/Camisa (scrug) color  verde esmeralda.jpeg',
+      '../imagenes/conjunto de uniforme médico.jpeg'
+    ],
+    description: 'Corte cómodo en tono Verde Esmeralda. Resistente a arrugas y a lavados frecuentes.',
+    fabric: 'Tela Antifluido de Grado Médico.',
+    sizes: ['XS', 'S', 'M', 'L', 'XL']
+  },
+  {
+    id: 'm-03',
+    name: 'Filipina Azul Marino Pro',
+    category: 'medicos',
+    categoryLabel: 'Colección Médica',
+    price: 29.00,
+    badge: 'Antifluido',
+    image: '../imagenes/Camisa(scrub)colorAzul.jpeg',
+    gallery: [
+      '../imagenes/Camisa(scrub)colorAzul.jpeg',
+      '../imagenes/conjunto de uniforme médico.jpeg'
+    ],
+    description: 'Diseño clásico Azul Marino con tres bolsillos reforzados y costuras dobles para mayor resistencia.',
+    fabric: 'Mezcla Antifluido Fresca y Respirable.',
+    sizes: ['XS', 'S', 'M', 'L', 'XL']
+  },
+  {
+    id: 'm-04',
+    name: 'Abrigo y Bata de Laboratorio',
+    category: 'medicos',
+    categoryLabel: 'Colección Médica',
+    price: 34.00,
+    badge: 'Alta Protección',
+    image: '../imagenes/Abrigo médico.jpeg',
+    gallery: [
+      '../imagenes/Abrigo médico.jpeg',
+      '../imagenes/conjunto de uniforme médico.jpeg'
+    ],
+    description: 'Bata clínica de presentación impecable con botones al frente y bolsillos amplios.',
+    fabric: 'Tela Repelente a Manchas y Químicos.',
+    sizes: ['XS', 'S', 'M', 'L', 'XL']
+  },
+  {
+    id: 'b-01',
+    name: 'Uniforme Gris para Estética y Spa',
+    category: 'belleza',
+    categoryLabel: 'Salón & Estética',
+    price: 45.00,
+    badge: 'Especial Estética',
+    image: '../imagenes/Camisa de uniforme color gris.jpeg',
+    gallery: [
+      '../imagenes/Camisa de uniforme color gris.jpeg',
+      '../imagenes/Camisa(scrub)colorAzul.jpeg'
+    ],
+    description: 'Uniforme sobrio y elegante tono Gris para salones de belleza, cosmetología y spas.',
+    fabric: 'Tela Repelente a Tintes de Cabello y Aceites.',
+    sizes: ['XS', 'S', 'M', 'L', 'XL']
+  }
+];
+
+let products = JSON.parse(localStorage.getItem('martex_products') || '[]');
+if (products.length === 0) {
+  products = DEFAULT_PRODUCTS;
+  localStorage.setItem('martex_products', JSON.stringify(products));
+}
+
+let activeEditingProductId = null;
 
 // ─── INITIALIZATION ───
 document.addEventListener('DOMContentLoaded', () => {
@@ -63,6 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateKPIs();
   renderOrders();
   renderMedidas();
+  renderAdminProducts();
   handleMeasurementTypeChange();
 });
 
@@ -96,7 +188,7 @@ function switchTab(tabId) {
     const navBtn = document.getElementById(`nav-${v}`);
     if (el) el.classList.add('hidden');
     if (navBtn) {
-      navBtn.classList.remove('text-[#00A896]', 'bg-[#00A896]/10', 'border-[#00A896]/30', 'text-white');
+      navBtn.classList.remove('text-[#00A896]', 'bg-[#00A896]/10', 'border-l-4', 'border-[#00A896]', 'text-white');
       navBtn.classList.add('text-slate-400');
     }
   });
@@ -109,7 +201,6 @@ function switchTab(tabId) {
     activeNavBtn.classList.add('text-[#00A896]', 'bg-[#00A896]/10', 'border-l-4', 'border-[#00A896]', 'text-white');
   }
 
-  // Update Page Title
   const titles = {
     dashboard: 'Dashboard Ejecutivo & Métricas',
     medidas: 'Ficha de Medidas Anatómicas (Sastrería)',
@@ -119,12 +210,11 @@ function switchTab(tabId) {
   const titleEl = document.getElementById('view-title');
   if (titleEl) titleEl.textContent = titles[tabId] || 'Panel de Administración';
 
-  // Refresh lists
   if (tabId === 'dashboard') updateKPIs();
   if (tabId === 'pedidos') renderOrders();
   if (tabId === 'medidas') renderMedidas();
+  if (tabId === 'productos') renderAdminProducts();
 
-  // Close mobile sidebar if open
   closeMobileSidebar();
 }
 
@@ -146,12 +236,12 @@ function closeMobileSidebar() {
   if (overlay) overlay.classList.add('hidden');
 }
 
-// ─── DYNAMIC ANATOMICAL MEASUREMENT FORM CONTROLLER ───
+// ─── DYNAMIC TAILORING MEASUREMENT FORM ───
 function handleMeasurementTypeChange() {
   const select = document.getElementById('medida-tipo-prenda');
   if (!select) return;
 
-  const value = select.value; // 'filipina', 'pantalon', 'ambos'
+  const value = select.value;
   const filipinaSec = document.getElementById('sec-medidas-filipina');
   const pantalonSec = document.getElementById('sec-medidas-pantalon');
 
@@ -173,7 +263,6 @@ function handleMeasurementTypeChange() {
     filipinaSec.classList.add('disabled-section');
     filipinaInputs.forEach(i => { i.disabled = true; i.value = ''; });
   } else {
-    // Ambos
     filipinaSec.classList.remove('disabled-section');
     filipinaInputs.forEach(i => i.disabled = false);
 
@@ -238,12 +327,14 @@ function saveMedidaForm(e) {
   handleMeasurementTypeChange();
   renderMedidas();
   updateKPIs();
-  showAdminToast(`Medidas registradas para ${clientName}`, 'success');
+  showAdminToast(`Medidas guardadas para ${clientName}`, 'success');
 }
 
 function renderMedidas(searchQuery = '') {
   const tbody = document.getElementById('medidas-table-body');
   if (!tbody) return;
+
+  medidas = JSON.parse(localStorage.getItem('martex_medidas') || '[]');
 
   let list = medidas;
   if (searchQuery) {
@@ -272,10 +363,10 @@ function renderMedidas(searchQuery = '') {
         ${m.garmentType !== 'filipina' ? `<strong>Pantalón:</strong> Cintura ${m.pantalon.cintura}, Tiro ${m.pantalon.tiro}, Largo ${m.pantalon.largoTotal}` : ''}
       </td>
       <td class="py-4 px-4 text-right space-x-2">
-        <button onclick="viewMedidaDetail('${m.id}')" class="p-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-[#00A896] hover:text-white text-slate-600 dark:text-slate-300 transition-colors" title="Ver Ficha Completa">
+        <button onclick="viewMedidaDetail('${m.id}')" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-[#00A896] hover:text-white text-slate-600 dark:text-slate-300 transition-colors" title="Ver Ficha Completa">
           <svg class="w-4 h-4 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
         </button>
-        <button onclick="deleteMedida(${index})" class="p-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-rose-500 hover:text-white text-slate-600 dark:text-slate-300 transition-colors" title="Eliminar Ficha">
+        <button onclick="deleteMedida(${index})" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-rose-500 hover:text-white text-slate-600 dark:text-slate-300 transition-colors" title="Eliminar Ficha">
           <svg class="w-4 h-4 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
         </button>
       </td>
@@ -378,7 +469,7 @@ function renderOrders(filterStatus = 'todos', searchQuery = '') {
     return;
   }
 
-  tbody.innerHTML = list.map((o, idx) => `
+  tbody.innerHTML = list.map((o) => `
     <tr class="border-b border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/40 text-xs">
       <td class="py-4 px-4 font-mono font-bold text-[#00A896]">${o.id}</td>
       <td class="py-4 px-4 font-bold text-slate-900 dark:text-white">
@@ -401,7 +492,7 @@ function renderOrders(filterStatus = 'todos', searchQuery = '') {
         </select>
       </td>
       <td class="py-4 px-4 text-right">
-        <button onclick="deleteOrder('${o.id}')" class="p-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-rose-500 hover:text-white text-slate-600 dark:text-slate-300 transition-colors" title="Eliminar Pedido">
+        <button onclick="deleteOrder('${o.id}')" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-rose-500 hover:text-white text-slate-600 dark:text-slate-300 transition-colors" title="Eliminar Pedido">
           <svg class="w-4 h-4 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
         </button>
       </td>
@@ -410,6 +501,7 @@ function renderOrders(filterStatus = 'todos', searchQuery = '') {
 }
 
 function updateOrderStatus(orderId, newStatus) {
+  orders = JSON.parse(localStorage.getItem('martex_orders') || '[]');
   const order = orders.find(o => o.id === orderId);
   if (order) {
     order.status = newStatus;
@@ -421,11 +513,144 @@ function updateOrderStatus(orderId, newStatus) {
 
 function deleteOrder(orderId) {
   if (confirm(`¿Deseas eliminar el pedido ${orderId}?`)) {
+    orders = JSON.parse(localStorage.getItem('martex_orders') || '[]');
     orders = orders.filter(o => o.id !== orderId);
     localStorage.setItem('martex_orders', JSON.stringify(orders));
     renderOrders();
     updateKPIs();
     showAdminToast(`Pedido ${orderId} eliminado`, 'info');
+  }
+}
+
+// ─── CATALOG MANAGEMENT CONTROLLER (PRODUCT CRUD) ───
+function renderAdminProducts() {
+  const container = document.getElementById('admin-products-container');
+  if (!container) return;
+
+  products = JSON.parse(localStorage.getItem('martex_products') || '[]');
+
+  if (products.length === 0) {
+    container.innerHTML = `<div class="col-span-full py-12 text-center text-slate-400 text-xs">No hay prendas registradas en el catálogo.</div>`;
+    return;
+  }
+
+  container.innerHTML = products.map(p => `
+    <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 space-y-3 flex flex-col justify-between">
+      <div class="space-y-3">
+        <div class="aspect-[4/3] rounded-xl overflow-hidden bg-slate-200 dark:bg-slate-800 relative">
+          <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover">
+          <span class="absolute top-2 left-2 text-[9px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-[#0A111E]/80 text-[#00A896] backdrop-blur-md">
+            ${p.categoryLabel}
+          </span>
+        </div>
+        <div>
+          <div class="flex justify-between items-start">
+            <h4 class="font-bold text-sm text-slate-900 dark:text-white line-clamp-1">${p.name}</h4>
+            <span class="font-black font-mono text-sm text-[#00A896]">$${p.price.toFixed(2)}</span>
+          </div>
+          <p class="text-xs text-slate-500 line-clamp-2 mt-1">${p.description}</p>
+        </div>
+      </div>
+      <div class="pt-3 border-t border-slate-200 dark:border-slate-800 flex justify-between items-center text-xs">
+        <span class="text-emerald-500 font-bold flex items-center gap-1">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Activo
+        </span>
+        <div class="flex gap-2">
+          <button onclick="openProductModal('${p.id}')" class="px-3 py-1.5 rounded-lg bg-slate-200 dark:bg-slate-800 hover:bg-[#00A896] hover:text-white font-bold transition-colors">Editar</button>
+          <button onclick="deleteProduct('${p.id}')" class="px-3 py-1.5 rounded-lg bg-rose-500/10 text-rose-500 hover:bg-rose-500 hover:text-white font-bold transition-colors">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function openProductModal(productId = null) {
+  activeEditingProductId = productId;
+  const modal = document.getElementById('product-modal');
+  const title = document.getElementById('product-modal-title');
+  const form = document.getElementById('product-form');
+
+  if (!modal || !form) return;
+
+  if (productId) {
+    const p = products.find(item => item.id === productId);
+    if (p) {
+      if (title) title.textContent = 'Editar Prenda del Catálogo';
+      form.querySelector('[name="p_name"]').value = p.name;
+      form.querySelector('[name="p_category"]').value = p.category;
+      form.querySelector('[name="p_price"]').value = p.price;
+      form.querySelector('[name="p_badge"]').value = p.badge;
+      form.querySelector('[name="p_image"]').value = p.image;
+      form.querySelector('[name="p_description"]').value = p.description;
+      form.querySelector('[name="p_fabric"]').value = p.fabric;
+    }
+  } else {
+    if (title) title.textContent = 'Agregar Nueva Prenda al Catálogo';
+    form.reset();
+  }
+
+  modal.classList.add('active');
+}
+
+function closeProductModal() {
+  const modal = document.getElementById('product-modal');
+  if (modal) modal.classList.remove('active');
+  activeEditingProductId = null;
+}
+
+function saveProductForm(e) {
+  e.preventDefault();
+  const form = e.target;
+  const name = form.querySelector('[name="p_name"]').value.trim();
+  const category = form.querySelector('[name="p_category"]').value;
+  const price = parseFloat(form.querySelector('[name="p_price"]').value) || 0;
+  const badge = form.querySelector('[name="p_badge"]').value.trim() || 'Antifluido';
+  const image = form.querySelector('[name="p_image"]').value.trim() || '../imagenes/conjunto de uniforme médico.jpeg';
+  const description = form.querySelector('[name="p_description"]').value.trim();
+  const fabric = form.querySelector('[name="p_fabric"]').value.trim() || 'Tela Antifluido Nivel 4';
+
+  if (!name || !price) {
+    showAdminToast('Completa el nombre y el precio del producto', 'error');
+    return;
+  }
+
+  products = JSON.parse(localStorage.getItem('martex_products') || '[]');
+
+  const categoryLabel = category === 'medicos' ? 'Colección Médica' : 'Salón & Estética';
+
+  if (activeEditingProductId) {
+    const idx = products.findIndex(p => p.id === activeEditingProductId);
+    if (idx > -1) {
+      products[idx] = {
+        ...products[idx],
+        name, category, categoryLabel, price, badge, image, description, fabric
+      };
+      showAdminToast(`Prenda "${name}" actualizada`, 'success');
+    }
+  } else {
+    const newP = {
+      id: 'prod-' + Math.floor(1000 + Math.random() * 9000),
+      name, category, categoryLabel, price, badge, image,
+      gallery: [image],
+      description, fabric,
+      sizes: ['XS', 'S', 'M', 'L', 'XL']
+    };
+    products.unshift(newP);
+    showAdminToast(`Nueva prenda "${name}" agregada`, 'success');
+  }
+
+  localStorage.setItem('martex_products', JSON.stringify(products));
+  closeProductModal();
+  renderAdminProducts();
+}
+
+function deleteProduct(productId) {
+  if (confirm('¿Seguro que deseas eliminar esta prenda del catálogo?')) {
+    products = JSON.parse(localStorage.getItem('martex_products') || '[]');
+    products = products.filter(p => p.id !== productId);
+    localStorage.setItem('martex_products', JSON.stringify(products));
+    renderAdminProducts();
+    showAdminToast('Prenda eliminada del catálogo', 'info');
   }
 }
 
@@ -439,13 +664,12 @@ function updateKPIs() {
   const pendingOrdersCount = orders.filter(o => o.status === 'Pendiente' || o.status === 'En Confección').length;
   const totalMedidasCount = medidas.length;
 
-  const kpiSales = document.getElementById('stat-total-[#00A896]');
-  const kpiSalesReal = document.getElementById('stat-total-ventas');
+  const kpiSales = document.getElementById('stat-total-ventas');
   const kpiOrders = document.getElementById('stat-total-pedidos');
   const kpiPending = document.getElementById('stat-pedidos-pendientes');
   const kpiMedidas = document.getElementById('stat-total-medidas');
 
-  if (kpiSalesReal) kpiSalesReal.textContent = `$${totalSales.toFixed(2)}`;
+  if (kpiSales) kpiSales.textContent = `$${totalSales.toFixed(2)}`;
   if (kpiOrders) kpiOrders.textContent = totalOrdersCount;
   if (kpiPending) kpiPending.textContent = pendingOrdersCount;
   if (kpiMedidas) kpiMedidas.textContent = totalMedidasCount;
