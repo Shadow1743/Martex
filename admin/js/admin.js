@@ -71,7 +71,7 @@ const DEFAULT_PRODUCTS = [
       '../imagenes/Camisa(scrub)colorAzul.jpeg'
     ],
     description: 'Filipina médica ergonómica de cuello en V con bolsillos estratégicos y pantalón jogger cómodo. Confeccionada en El Salvador con tela antimicrobiana.',
-    fabric: 'Tela Antifluido Nivel 4 de Secado Rápido.',
+    fabric: 'Tela Antifluido de Secado Rápido y Alta Durabilidad.',
     sizes: ['XS', 'S', 'M', 'L', 'XL']
   },
   {
@@ -660,7 +660,7 @@ function saveProductForm(e) {
   const badge = form.querySelector('[name="p_badge"]').value.trim() || 'Antifluido';
   const urlInputVal = form.querySelector('[name="p_image"]').value.trim();
   const description = form.querySelector('[name="p_description"]').value.trim();
-  const fabric = form.querySelector('[name="p_fabric"]').value.trim() || 'Tela Antifluido Nivel 4';
+  const fabric = form.querySelector('[name="p_fabric"]').value.trim() || 'Tela Antifluido de Alta Durabilidad';
 
   const image = uploadedBase64Image || urlInputVal || '../imagenes/conjunto de uniforme médico.jpeg';
 

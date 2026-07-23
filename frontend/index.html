@@ -3,13 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Martex | Uniformes Médicos & Belleza de Alto Nivel</title>
-  <meta name="description" content="Martex — 8 Años Confeccionando Uniformes Médicos y para Salones de Belleza en Usulután, El Salvador. Telas antifluido y confección a la medida.">
+  <title>Martex | Uniformes Médicos & Belleza en El Salvador</title>
+  <meta name="description" content="Martex — 8 Años Confeccionando Uniformes Médicos y para Salones de Belleza en Usulután, El Salvador. Telas antifluido de alta calidad y confección a tu medida.">
   
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -27,7 +29,7 @@
     }
   </script>
   
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body class="bg-[#F8FAFC] dark:bg-[#0A111E] text-slate-900 dark:text-slate-100 transition-colors duration-300 overflow-x-hidden">
 
@@ -138,49 +140,52 @@
   </aside>
 
   <main>
-    <!-- HERO SECTION EDITORIAL -->
-    <section class="relative min-h-[85vh] flex items-center py-12 sm:py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
-      <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+    <!-- HERO SECTION MODERNO & ATRACTIVO -->
+    <section class="relative min-h-[85vh] flex items-center py-12 sm:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <!-- Background Glow Orbs -->
+      <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-[#00A896]/15 rounded-full blur-[120px] pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center relative z-10">
         
-        <div class="lg:col-span-7 space-y-6 sm:space-y-8 z-10 text-center lg:text-left">
-          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#00A896]/10 border border-[#00A896]/30 text-[#00A896] text-xs font-extrabold uppercase tracking-widest">
-            <svg class="w-3.5 h-3.5 stroke-[2.5]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>
-            <span>8 Años de Excelencia Textil en El Salvador</span>
+        <div class="lg:col-span-7 space-y-6 sm:space-y-8 text-center lg:text-left">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#00A896]/10 border border-[#00A896]/30 text-[#00A896] text-xs font-extrabold uppercase tracking-wider">
+            <svg class="w-4 h-4 text-[#00A896] stroke-[2.5]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>8 Años Confeccionando en Usulután, El Salvador</span>
           </div>
 
           <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white leading-[1.15] tracking-tight">
-            Uniformes de Calidad para <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#00A896] to-teal-400">Médicos y Estética</span>.
+            Uniformes Cómodos y Bonitos para <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#00A896] to-teal-400">Médicos y Salones de Belleza</span>.
           </h1>
 
           <p class="text-sm sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl font-medium leading-relaxed mx-auto lg:mx-0">
-            Confeccionamos uniformes anatómicos y cómodos en Usulután con telas antifluido de alta durabilidad y ajuste perfecto a tu medida.
+            Diseñamos prendas duraderas con telas especiales que repelen líquidos, no se despintan y se adaptan perfectamente a la forma de tu cuerpo.
           </p>
 
           <!-- Dual CTA Buttons -->
           <div class="flex flex-col sm:flex-row gap-4 pt-2 justify-center lg:justify-start">
-            <a href="medica.html" class="px-8 py-4 rounded-xl bg-gradient-to-r from-[#00A896] to-teal-500 hover:from-[#009284] hover:to-teal-400 text-white font-extrabold text-sm shadow-xl shadow-[#00A896]/25 hover:shadow-[#00A896]/40 transition-all text-center flex items-center justify-center gap-3 group">
+            <a href="medica.html" class="px-8 py-4 rounded-2xl bg-gradient-to-r from-[#00A896] to-teal-500 hover:from-[#009284] hover:to-teal-400 text-white font-extrabold text-sm shadow-xl shadow-[#00A896]/25 hover:shadow-[#00A896]/40 transition-all text-center flex items-center justify-center gap-3 group">
               <span>Ver Colección Médica</span>
               <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform stroke-[2.5]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
-            <a href="belleza.html" class="px-8 py-4 rounded-xl bg-slate-200/80 dark:bg-[#162447] hover:bg-slate-300 dark:hover:bg-[#1B2A4A] text-slate-900 dark:text-white font-extrabold text-sm border border-slate-300 dark:border-slate-700 transition-all text-center flex items-center justify-center gap-3">
+            <a href="belleza.html" class="px-8 py-4 rounded-2xl bg-slate-200/80 dark:bg-[#162447] hover:bg-slate-300 dark:hover:bg-[#1B2A4A] text-slate-900 dark:text-white font-extrabold text-sm border border-slate-300 dark:border-slate-700 transition-all text-center flex items-center justify-center gap-3">
               <span>Ver Colección Estética</span>
               <svg class="w-4 h-4 text-[#00A896] stroke-[2.5]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
           </div>
 
-          <!-- Executive Metrics Strip -->
+          <!-- Executive Metrics Strip (Sin "Nivel 4") -->
           <div class="pt-8 border-t border-slate-200 dark:border-slate-800 grid grid-cols-3 gap-4 sm:gap-6 text-center">
             <div>
               <div class="text-xl sm:text-3xl font-black text-slate-900 dark:text-white font-mono">8+</div>
-              <div class="text-[10px] sm:text-[11px] font-bold text-slate-500 uppercase tracking-wider mt-1">Años Experiencia</div>
+              <div class="text-[10px] sm:text-[11px] font-bold text-slate-500 uppercase tracking-wider mt-1">Años de Experiencia</div>
             </div>
             <div>
-              <div class="text-xl sm:text-3xl font-black text-[#00A896] font-mono">Nivel 4</div>
-              <div class="text-[10px] sm:text-[11px] font-bold text-slate-500 uppercase tracking-wider mt-1">Telas Antifluido</div>
+              <div class="text-xl sm:text-3xl font-black text-[#00A896] font-mono">100%</div>
+              <div class="text-[10px] sm:text-[11px] font-bold text-slate-500 uppercase tracking-wider mt-1">Repelente a Líquidos</div>
             </div>
             <div>
-              <div class="text-xl sm:text-3xl font-black text-slate-900 dark:text-white font-mono">100%</div>
-              <div class="text-[10px] sm:text-[11px] font-bold text-slate-500 uppercase tracking-wider mt-1">Confección a Medida</div>
+              <div class="text-xl sm:text-3xl font-black text-slate-900 dark:text-white font-mono">Hecho</div>
+              <div class="text-[10px] sm:text-[11px] font-bold text-slate-500 uppercase tracking-wider mt-1">A tu Medida</div>
             </div>
           </div>
         </div>
@@ -196,8 +201,52 @@
                 <span class="text-xs font-bold text-[#00A896] uppercase tracking-wider">Conjunto Quirúrgico Azul</span>
                 <span class="text-sm font-black font-mono">$49.99</span>
               </div>
-              <p class="text-[11px] text-slate-300">Protección certificada antifluido de alta comodidad.</p>
+              <p class="text-[11px] text-slate-300">Tela cómoda que repela fluidos y no arruga.</p>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VENTAJAS / POR QUÉ ELEGIR MARTEX -->
+    <section class="py-12 sm:py-16 bg-white dark:bg-[#0F172A] border-y border-slate-200 dark:border-slate-800 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center space-y-3 mb-10">
+          <span class="text-xs font-extrabold text-[#00A896] uppercase tracking-widest">Lo que nos distingue</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">¿Por qué preferir nuestros uniformes?</h2>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="p-6 rounded-2xl bg-slate-50 dark:bg-[#162447] border border-slate-200 dark:border-slate-800 space-y-3">
+            <div class="w-10 h-10 rounded-xl bg-[#00A896]/10 text-[#00A896] flex items-center justify-center">
+              <svg class="w-5 h-5 stroke-[2.5]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3 class="font-bold text-base text-slate-900 dark:text-white">Telas Antifluido</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Protección real contra salpicaduras de líquidos, agua, tintes y fluidos corporales.</p>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-slate-50 dark:bg-[#162447] border border-slate-200 dark:border-slate-800 space-y-3">
+            <div class="w-10 h-10 rounded-xl bg-[#00A896]/10 text-[#00A896] flex items-center justify-center">
+              <svg class="w-5 h-5 stroke-[2.5]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.4 2.4 0 0 1 0-3.4l2.6-2.6a2.4 2.4 0 0 1 3.4 0l12.6 12.6z"/></svg>
+            </div>
+            <h3 class="font-bold text-base text-slate-900 dark:text-white">Toma de Medidas</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Confección personalizada para que la prenda te quede exacta y muy cómoda en tus turnos.</p>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-slate-50 dark:bg-[#162447] border border-slate-200 dark:border-slate-800 space-y-3">
+            <div class="w-10 h-10 rounded-xl bg-[#00A896]/10 text-[#00A896] flex items-center justify-center">
+              <svg class="w-5 h-5 stroke-[2.5]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <h3 class="font-bold text-base text-slate-900 dark:text-white">Precios Justos</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Venta directa de fábrica sin intermediarios en Usulután a precios accesibles para El Salvador.</p>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-slate-50 dark:bg-[#162447] border border-slate-200 dark:border-slate-800 space-y-3">
+            <div class="w-10 h-10 rounded-xl bg-[#00A896]/10 text-[#00A896] flex items-center justify-center">
+              <svg class="w-5 h-5 stroke-[2.5]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+            </div>
+            <h3 class="font-bold text-base text-slate-900 dark:text-white">Pago en Efectivo o Envíos</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Puedes pagar en efectivo al recibir tu pedido o hacer transferencia bancaria fácil.</p>
           </div>
         </div>
       </div>
@@ -206,12 +255,12 @@
     <!-- DESTACADOS DEL CATÁLOGO EN INICIO -->
     <section class="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-10 sm:space-y-12">
       <div class="space-y-4 text-center">
-        <span class="text-xs font-extrabold text-[#00A896] uppercase tracking-widest">Catálogo Principal</span>
+        <span class="text-xs font-extrabold text-[#00A896] uppercase tracking-widest">Catálogo de Prendas</span>
         <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
           Nuestras Colecciones Destacadas
         </h2>
         <p class="text-xs sm:text-sm text-slate-500 max-w-xl mx-auto">
-          Explora los diseños ergonómicos aprobados por profesionales de la salud y estética en El Salvador.
+          Elige entre la colección para clínicas y hospitales o para salones de belleza y estética.
         </p>
 
         <!-- Category Filters -->
@@ -406,7 +455,7 @@
           <span class="text-xl font-extrabold text-white tracking-tight">MAR<span class="text-[#00A896]">TEX</span></span>
         </div>
         <p class="text-slate-400 leading-relaxed">
-          8 años confeccionando indumentaria técnica médica y de estética en Usulután, El Salvador. Innovación, confort y ajuste anatómico.
+          8 años confeccionando uniformes médicos y de estética en Usulután, El Salvador. Comodidad, buena calidad y ajuste a tu medida.
         </p>
       </div>
 
@@ -453,10 +502,11 @@
     </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 mt-12 border-t border-slate-800/80 flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] text-slate-500">
+      <!-- Acceso secreto en footer con 3 clics -->
       <p onclick="handleSecretFooterClick(event)" class="cursor-pointer hover:text-slate-300 transition-colors">
         © 2026 Martex El Salvador. Usulután, El Salvador.
       </p>
-      <div>Telas Antifluido Nivel 4</div>
+      <div>Telas Antifluido de Alta Durabilidad</div>
     </div>
   </footer>
 

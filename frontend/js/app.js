@@ -74,7 +74,7 @@ let PRODUCTS = [
       '../imagenes/Camisa(scrub)colorAzul.jpeg'
     ],
     description: 'Filipina médica ergonómica de cuello en V con bolsillos estratégicos y pantalón jogger cómodo. Confeccionada en El Salvador con tela antimicrobiana.',
-    fabric: 'Tela Antifluido Nivel 4 de Secado Rápido.',
+    fabric: 'Tela Antifluido de Secado Rápido y Alta Durabilidad.',
     sizes: ['XS', 'S', 'M', 'L', 'XL']
   },
   {
@@ -361,7 +361,7 @@ function openQuickView(productId) {
           <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 space-y-2">
             <div class="flex items-center gap-2 text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wide">
               <svg class="w-4 h-4 text-[#00A896] stroke-[2.5]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              Telas Antifluido Nivel 4 (Hecho en El Salvador)
+              Telas Antifluido de Alta Calidad (Hecho en El Salvador)
             </div>
             <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">${product.description}</p>
             <div class="text-[11px] text-slate-500 font-medium pt-1 border-t border-slate-200 dark:border-slate-700/60">
