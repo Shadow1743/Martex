@@ -1,10 +1,5 @@
 /* ============================================================
-   MARTEX — Premium FIGS-Style UX/UI Design System v3.0
-   Palette:
-     Azul Pantera (Deep Panther / Midnight Blue): #0A111E / #0F172A
-     Azul Marino (Corporate Navy): #1B2A4A / #162447
-     Verde Quirúrgico (Surgical Teal - Accent): #00A896 / #2A9D8F
-     Blanco / Off-White: #FFFFFF / #F8FAFC
+   MARTEX — Premium FIGS-Style UX/UI Design System v4.0
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
@@ -92,7 +87,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: rgba(10, 17, 30, 0.92);
+  background-color: rgba(10, 17, 30, 0.94);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -100,7 +95,7 @@ body {
 }
 
 .light .header-glass {
-  background-color: rgba(255, 255, 255, 0.92);
+  background-color: rgba(255, 255, 255, 0.94);
   border-bottom: 1px solid rgba(226, 232, 240, 0.8);
 }
 
@@ -138,26 +133,27 @@ body {
   transform: scale(1.06);
 }
 
-/* ─── Quick View Modal (Grid 2-Columns) ─── */
+/* ─── Quick View Modal (Strict display: none when inactive) ─── */
 .quick-view-modal {
   position: fixed;
   inset: 0;
-  z-index: 300;
-  display: flex;
+  z-index: 400;
+  display: none;
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  background: rgba(10, 17, 30, 0.82);
+  background: rgba(10, 17, 30, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
 }
 
 .quick-view-modal.active {
-  opacity: 1;
-  visibility: visible;
+  display: flex !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
 }
 
 .quick-view-dialog {
@@ -168,13 +164,13 @@ body {
   max-width: 960px;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
-  transform: scale(0.95) translateY(10px);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  transform: scale(0.95);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .quick-view-modal.active .quick-view-dialog {
-  transform: scale(1) translateY(0);
+  transform: scale(1);
 }
 
 /* ─── Cart Drawer Slide-over ─── */
@@ -184,15 +180,17 @@ body {
   background: rgba(10, 17, 30, 0.75);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  z-index: 200;
+  z-index: 300;
+  display: none;
   opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
 }
 
 .cart-overlay.active {
-  opacity: 1;
-  visibility: visible;
+  display: block !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
 }
 
 .cart-drawer {
@@ -204,9 +202,9 @@ body {
   height: 100vh;
   background: var(--bg-card);
   border-left: 1px solid var(--border-light);
-  z-index: 201;
+  z-index: 301;
   transform: translateX(100%);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
   box-shadow: -20px 0 50px rgba(0, 0, 0, 0.35);
@@ -216,26 +214,27 @@ body {
   transform: translateX(0);
 }
 
-/* ─── Generic Auth Modal ─── */
+/* ─── Generic Auth & Checkout Modals (Strict display: none when inactive) ─── */
 .auth-modal {
   position: fixed;
   inset: 0;
-  z-index: 350;
-  display: flex;
+  z-index: 450;
+  display: none;
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  background: rgba(10, 17, 30, 0.8);
+  background: rgba(10, 17, 30, 0.85);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
 }
 
 .auth-modal.active {
-  opacity: 1;
-  visibility: visible;
+  display: flex !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
 }
 
 .auth-dialog {
@@ -244,14 +243,55 @@ body {
   border-radius: 1.5rem;
   width: 100%;
   max-width: 440px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   transform: scale(0.95);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  overflow: hidden;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .auth-modal.active .auth-dialog {
   transform: scale(1);
+}
+
+/* ─── Mobile Navigation Drawer (Strict display: none when inactive) ─── */
+.mobile-nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 17, 30, 0.7);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 250;
+  display: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.mobile-nav-overlay.active {
+  display: block !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+.mobile-nav-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px;
+  max-width: 85vw;
+  height: 100vh;
+  background: #0A111E;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 251;
+  transform: translateX(-100%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-nav-drawer.active {
+  transform: translateX(0);
 }
 
 /* ─── Size Selector Pill Buttons ─── */
@@ -279,7 +319,7 @@ body {
   position: fixed;
   bottom: 2rem;
   right: 2rem;
-  z-index: 500;
+  z-index: 600;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -297,19 +337,8 @@ body {
   gap: 0.75rem;
   font-size: 0.875rem;
   font-weight: 500;
-  animation: toastSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes toastSlideIn {
-  from { opacity: 0; transform: translateX(30px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-/* ─── Hide Scrollbar for clean horizontal filters ─── */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
+/* ─── Hide Scrollbar ─── */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
