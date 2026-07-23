@@ -37,8 +37,8 @@
   <header class="header-glass">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
       
-      <!-- Logo Vectorial Martex (5 clics para ingresar a Admin) -->
-      <a href="index.html" onclick="handleLogoClick(event)" class="flex items-center gap-2.5 group cursor-pointer">
+      <!-- Logo Vectorial Martex (Acceso secreto: 5 clics) -->
+      <a href="index.html" onclick="handleLogoClick(event)" class="flex items-center gap-2.5 group cursor-pointer" title="Martex El Salvador">
         <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-[#1B2A4A] to-[#0A111E] border border-[#00A896]/40 flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-md shadow-[#00A896]/10">
           <svg class="w-6 h-6 text-[#00A896] stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <path d="M20.38 3.46 16 2a4 4 0 0 0-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23Z"/>
@@ -54,11 +54,26 @@
 
       <!-- Desktop Navigation Menu -->
       <nav class="hidden lg:flex items-center gap-8 text-xs font-bold uppercase tracking-wider">
-        <a href="index.html" class="text-[#00A896] border-b-2 border-[#00A896] pb-1 transition-colors">Inicio</a>
-        <a href="medica.html" class="text-slate-600 dark:text-slate-300 hover:text-[#00A896] transition-colors">Colección Médica</a>
-        <a href="belleza.html" class="text-slate-600 dark:text-slate-300 hover:text-[#00A896] transition-colors">Colección Belleza</a>
-        <a href="nosotros.html" class="text-slate-600 dark:text-slate-300 hover:text-[#00A896] transition-colors">Nosotros</a>
-        <a href="ubicacion.html" class="text-slate-600 dark:text-slate-300 hover:text-[#00A896] transition-colors">Ubicación</a>
+        <a href="index.html" class="text-[#00A896] border-b-2 border-[#00A896] pb-1 transition-colors flex items-center gap-1.5">
+          <svg class="w-4 h-4 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span>Inicio</span>
+        </a>
+        <a href="medica.html" class="text-slate-600 dark:text-slate-300 hover:text-[#00A896] transition-colors flex items-center gap-1.5">
+          <svg class="w-4 h-4 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4.8 2.3A.3.3 0 0 0 4.5 2.6V6h15V2.6a.3.3 0 0 0-.3-.3H4.8z"/><path d="M12 8v13"/><path d="M8 12h8"/></svg>
+          <span>Colección Médica</span>
+        </a>
+        <a href="belleza.html" class="text-slate-600 dark:text-slate-300 hover:text-[#00A896] transition-colors flex items-center gap-1.5">
+          <svg class="w-4 h-4 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 3h12l2 6-8 12L4 9l2-6z"/><path d="M12 3v18"/></svg>
+          <span>Colección Belleza</span>
+        </a>
+        <a href="nosotros.html" class="text-slate-600 dark:text-slate-300 hover:text-[#00A896] transition-colors flex items-center gap-1.5">
+          <svg class="w-4 h-4 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+          <span>Nosotros</span>
+        </a>
+        <a href="ubicacion.html" class="text-slate-600 dark:text-slate-300 hover:text-[#00A896] transition-colors flex items-center gap-1.5">
+          <svg class="w-4 h-4 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Ubicación</span>
+        </a>
       </nav>
 
       <!-- Header Actions -->
@@ -69,20 +84,20 @@
 
         <!-- Auth Button -->
         <button onclick="openAuthModal('login')" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-200/60 dark:bg-slate-800/80 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs font-bold transition-all border border-slate-300 dark:border-slate-700">
-          <svg class="w-4 h-4 text-[#00A896]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <svg class="w-4 h-4 text-[#00A896] stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           <span>Acceder</span>
         </button>
 
         <!-- Cart Drawer Button -->
         <button onclick="openCartDrawer()" class="relative inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-xl bg-gradient-to-r from-[#00A896] to-teal-500 hover:from-[#009284] hover:to-teal-400 text-white text-xs font-bold shadow-lg shadow-[#00A896]/20 transition-all hover:-translate-y-0.5">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 11-1 9"/><path d="m19 11-4-7"/><path d="M2 11h20"/><path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6l1.6-7.4"/><path d="m4.5 11 4-7"/><path d="m9 11 1 9"/></svg>
+          <svg class="w-4 h-4 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m15 11-1 9"/><path d="m19 11-4-7"/><path d="M2 11h20"/><path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6l1.6-7.4"/><path d="m4.5 11 4-7"/><path d="m9 11 1 9"/></svg>
           <span class="hidden sm:inline">Carrito</span>
           <span class="cart-badge ml-1 px-1.5 py-0.5 rounded-full bg-rose-500 text-white text-[10px] font-black" style="display: none;">0</span>
         </button>
 
         <!-- Mobile Hamburger Menu Button -->
         <button onclick="toggleMobileNav()" class="lg:hidden p-2 rounded-xl bg-slate-200/60 dark:bg-slate-800/80 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700" aria-label="Menú Móvil">
-          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+          <svg class="w-5 h-5 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
         </button>
       </div>
     </div>
@@ -94,15 +109,30 @@
     <div class="p-6 border-b border-slate-800 flex items-center justify-between">
       <span class="text-xl font-extrabold text-white">MAR<span class="text-[#00A896]">TEX</span></span>
       <button onclick="closeMobileNav()" class="p-2 text-slate-400 hover:text-white">
-        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        <svg class="w-5 h-5 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
       </button>
     </div>
     <nav class="flex-1 p-6 space-y-3 font-bold text-sm">
-      <a href="index.html" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-[#00A896]/10 text-[#00A896] border border-[#00A896]/30">Inicio</a>
-      <a href="medica.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800/60">Colección Médica</a>
-      <a href="belleza.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800/60">Colección Belleza</a>
-      <a href="nosotros.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800/60">Nosotros</a>
-      <a href="ubicacion.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800/60">Ubicación</a>
+      <a href="index.html" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-[#00A896]/10 text-[#00A896] border border-[#00A896]/30">
+        <svg class="w-4 h-4 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>Inicio</span>
+      </a>
+      <a href="medica.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800/60">
+        <svg class="w-4 h-4 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4.8 2.3A.3.3 0 0 0 4.5 2.6V6h15V2.6a.3.3 0 0 0-.3-.3H4.8z"/><path d="M12 8v13"/><path d="M8 12h8"/></svg>
+        <span>Colección Médica</span>
+      </a>
+      <a href="belleza.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800/60">
+        <svg class="w-4 h-4 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 3h12l2 6-8 12L4 9l2-6z"/><path d="M12 3v18"/></svg>
+        <span>Colección Belleza</span>
+      </a>
+      <a href="nosotros.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800/60">
+        <svg class="w-4 h-4 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+        <span>Nosotros</span>
+      </a>
+      <a href="ubicacion.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800/60">
+        <svg class="w-4 h-4 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>Ubicación</span>
+      </a>
     </nav>
     <div class="p-6 border-t border-slate-800">
       <button onclick="openAuthModal('login'); closeMobileNav();" class="w-full py-3 rounded-xl bg-[#00A896] text-white font-bold text-xs uppercase">Acceder a mi Cuenta</button>
@@ -116,7 +146,7 @@
         
         <div class="lg:col-span-7 space-y-6 sm:space-y-8 z-10 text-center lg:text-left">
           <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#00A896]/10 border border-[#00A896]/30 text-[#00A896] text-xs font-extrabold uppercase tracking-widest">
-            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg class="w-3.5 h-3.5 stroke-[2.5]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>
             <span>8 Años de Excelencia Textil en El Salvador</span>
           </div>
 
@@ -132,11 +162,11 @@
           <div class="flex flex-col sm:flex-row gap-4 pt-2 justify-center lg:justify-start">
             <a href="medica.html" class="px-8 py-4 rounded-xl bg-gradient-to-r from-[#00A896] to-teal-500 hover:from-[#009284] hover:to-teal-400 text-white font-extrabold text-sm shadow-xl shadow-[#00A896]/25 hover:shadow-[#00A896]/40 transition-all text-center flex items-center justify-center gap-3 group">
               <span>Ver Colección Médica</span>
-              <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform stroke-[2.5]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
             <a href="belleza.html" class="px-8 py-4 rounded-xl bg-slate-200/80 dark:bg-[#162447] hover:bg-slate-300 dark:hover:bg-[#1B2A4A] text-slate-900 dark:text-white font-extrabold text-sm border border-slate-300 dark:border-slate-700 transition-all text-center flex items-center justify-center gap-3">
               <span>Ver Colección Estética</span>
-              <svg class="w-4 h-4 text-[#00A896]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              <svg class="w-4 h-4 text-[#00A896] stroke-[2.5]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
           </div>
 
@@ -216,11 +246,11 @@
   <aside id="cart-drawer" class="cart-drawer">
     <div class="p-6 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-[#0F172A]">
       <div class="flex items-center gap-2.5">
-        <svg class="w-5 h-5 text-[#00A896]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 11-1 9"/><path d="m19 11-4-7"/><path d="M2 11h20"/><path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6l1.6-7.4"/><path d="m4.5 11 4-7"/><path d="m9 11 1 9"/></svg>
+        <svg class="w-5 h-5 text-[#00A896] stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m15 11-1 9"/><path d="m19 11-4-7"/><path d="M2 11h20"/><path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6l1.6-7.4"/><path d="m4.5 11 4-7"/><path d="m9 11 1 9"/></svg>
         <h3 class="text-base font-bold text-slate-900 dark:text-white">Tu Carrito de Compras</h3>
       </div>
       <button onclick="closeCartDrawer()" class="p-2 rounded-full text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
-        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        <svg class="w-5 h-5 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
       </button>
     </div>
 
@@ -253,7 +283,7 @@
           <p class="text-xs text-slate-500">Ingresa tus datos para procesar el pedido</p>
         </div>
         <button onclick="closeCheckoutModal()" class="p-1.5 text-slate-400 hover:text-slate-900 dark:hover:text-white">
-          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          <svg class="w-5 h-5 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </button>
       </div>
 
@@ -307,7 +337,7 @@
       <div class="flex items-center justify-between">
         <span class="text-sm font-black text-slate-900 dark:text-white uppercase tracking-wider">MAR<span class="text-[#00A896]">TEX</span> Auth</span>
         <button onclick="closeAuthModal()" class="p-1.5 text-slate-400 hover:text-slate-900 dark:hover:text-white">
-          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          <svg class="w-5 h-5 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </button>
       </div>
 
@@ -396,11 +426,11 @@
         <h4 class="text-white font-bold uppercase tracking-wider text-xs">Contacto Directo</h4>
         <ul class="space-y-2.5">
           <li class="flex items-center gap-2">
-            <svg class="w-4 h-4 text-[#00A896]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <svg class="w-4 h-4 text-[#00A896] stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             <span>Teléfono / WhatsApp: 6049 7383</span>
           </li>
           <li class="flex items-center gap-2">
-            <svg class="w-4 h-4 text-[#00A896]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            <svg class="w-4 h-4 text-[#00A896] stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
             <span>Usulután, El Salvador</span>
           </li>
           <li>
@@ -413,7 +443,7 @@
         <h4 class="text-white font-bold uppercase tracking-wider text-xs">Síguenos en Instagram</h4>
         <p class="text-slate-400">Conoce los nuevos diseños e ingresos de temporada.</p>
         <a href="https://www.instagram.com/martexsv?igsh=a3Izc2YzZGNucmVl" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white border border-slate-800 hover:border-[#00A896]/50 transition-all font-semibold">
-          <svg class="w-4 h-4 text-rose-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg class="w-4 h-4 text-rose-400 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
             <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
             <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
@@ -425,7 +455,10 @@
     </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 mt-12 border-t border-slate-800/80 flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] text-slate-500">
-      <p>© 2026 Martex El Salvador. Usulután, El Salvador.</p>
+      <!-- Acceso secreto en footer con 3 clics -->
+      <p onclick="handleSecretFooterClick(event)" class="cursor-pointer hover:text-slate-300 transition-colors">
+        © 2026 Martex El Salvador. Usulután, El Salvador.
+      </p>
       <div>Telas Antifluido Nivel 4</div>
     </div>
   </footer>

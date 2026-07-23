@@ -2,6 +2,7 @@
    MARTEX — Motor Principal de la Tienda (El Salvador)
    ============================================================ */
 
+// ─── ACCESOS OCULTOS AL PANEL ADMINISTRADOR ───
 let logoClickCount = 0;
 let logoClickTimer = null;
 
@@ -12,7 +13,7 @@ function handleLogoClick(e) {
   if (logoClickCount >= 5) {
     e.preventDefault();
     logoClickCount = 0;
-    showToast('Redirigiendo al Panel de Administración...', 'info');
+    showToast('🔑 Acceso concedido al Panel Administrador', 'success');
     setTimeout(() => {
       window.location.href = '../admin/admin.html';
     }, 600);
@@ -24,6 +25,53 @@ function handleLogoClick(e) {
   }, 1500);
 }
 
+let copyrightClickCount = 0;
+let copyrightClickTimer = null;
+
+function handleSecretFooterClick(e) {
+  e.preventDefault();
+  copyrightClickCount++;
+  clearTimeout(copyrightClickTimer);
+
+  if (copyrightClickCount >= 3) {
+    copyrightClickCount = 0;
+    showToast('🔑 Acceso Secreto detectado. Redirigiendo...', 'info');
+    setTimeout(() => {
+      window.location.href = '../admin/admin.html';
+    }, 600);
+    return;
+  }
+
+  copyrightClickTimer = setTimeout(() => {
+    copyrightClickCount = 0;
+  }, 1200);
+}
+
+let keySequence = '';
+document.addEventListener('keydown', (e) => {
+  if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'a') {
+    e.preventDefault();
+    showToast('🔑 Modo Administrador activado', 'success');
+    setTimeout(() => {
+      window.location.href = '../admin/admin.html';
+    }, 500);
+    return;
+  }
+
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  keySequence += e.key.toLowerCase();
+  if (keySequence.length > 10) keySequence = keySequence.substring(keySequence.length - 10);
+  
+  if (keySequence.endsWith('admin')) {
+    keySequence = '';
+    showToast('🔑 Acceso Secreto Administrador', 'success');
+    setTimeout(() => {
+      window.location.href = '../admin/admin.html';
+    }, 500);
+  }
+});
+
+// ─── CATÁLOGO DE PRODUCTOS MARTEX ───
 const PRODUCTS = [
   {
     id: 'm-01',
@@ -193,12 +241,12 @@ function updateThemeToggleIcons(theme) {
   themeBtns.forEach(btn => {
     if (theme === 'dark') {
       btn.innerHTML = `
-        <svg class="w-5 h-5 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg class="w-5 h-5 text-amber-400 stroke-[2] transition-transform hover:rotate-45 duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>
         </svg>`;
     } else {
       btn.innerHTML = `
-        <svg class="w-5 h-5 text-slate-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg class="w-5 h-5 text-indigo-600 stroke-[2] transition-transform hover:-rotate-12 duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <path d="M12 3a6 6 0 0 0 9 9 9 0 1 1-9-9Z"/>
         </svg>`;
     }
@@ -243,7 +291,7 @@ function renderProducts(searchQuery = '') {
   if (filtered.length === 0) {
     grid.innerHTML = `
       <div class="col-span-full py-16 text-center text-slate-400">
-        <svg class="w-12 h-12 mx-auto mb-3 opacity-40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <svg class="w-12 h-12 mx-auto mb-3 opacity-40 stroke-[1.5]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
         <p class="text-base font-semibold">No encontramos prendas para esta búsqueda</p>
       </div>`;
     return;
@@ -253,17 +301,21 @@ function renderProducts(searchQuery = '') {
     <article class="product-card group relative flex flex-col justify-between">
       <div>
         <div class="img-container relative">
-          <span class="absolute top-3 left-3 z-10 text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#0A111E]/80 backdrop-blur-md text-[#00A896] border border-[#00A896]/30">
+          <span class="absolute top-3 left-3 z-10 text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#0A111E]/85 backdrop-blur-md text-[#00A896] border border-[#00A896]/40 shadow-sm flex items-center gap-1.5">
+            <svg class="w-3 h-3 text-[#00A896] stroke-[2.5]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             ${product.badge}
           </span>
           <img src="${product.image}" alt="${product.name}" loading="lazy" class="w-full h-full object-cover">
-          <button onclick="openQuickView('${product.id}')" class="absolute inset-0 bg-[#0A111E]/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center gap-2 text-white font-semibold text-xs tracking-wide">
-            <svg class="w-4 h-4 text-[#00A896]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-            Ver prenda
+          <button onclick="openQuickView('${product.id}')" class="absolute inset-0 bg-[#0A111E]/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center gap-2 text-white font-bold text-xs tracking-wide">
+            <svg class="w-5 h-5 text-[#00A896] stroke-[2.2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+            Ver detalle completo
           </button>
         </div>
         <div class="p-5">
-          <div class="text-[11px] font-bold text-[#00A896] uppercase tracking-wider mb-1">${product.categoryLabel}</div>
+          <div class="text-[11px] font-bold text-[#00A896] uppercase tracking-wider mb-1 flex items-center gap-1">
+            <svg class="w-3.5 h-3.5 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20.38 3.46 16 2a4 4 0 0 0-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23Z"/></svg>
+            ${product.categoryLabel}
+          </div>
           <h3 class="text-base font-bold text-slate-900 dark:text-white line-clamp-1 mb-2 group-hover:text-[#00A896] transition-colors">${product.name}</h3>
           <div class="flex items-baseline justify-between mt-3">
             <div class="text-lg font-extrabold text-slate-900 dark:text-white font-mono">$${product.price.toFixed(2)}</div>
@@ -274,7 +326,7 @@ function renderProducts(searchQuery = '') {
       <div class="px-5 pb-5 pt-0">
         <button onclick="openQuickView('${product.id}')" class="w-full py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-[#00A896] hover:text-white dark:hover:bg-[#00A896] text-slate-800 dark:text-slate-200 text-xs font-bold transition-all duration-300 flex items-center justify-center gap-2">
           <span>Ver Detalle / Comprar</span>
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          <svg class="w-4 h-4 stroke-[2.2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
         </button>
       </div>
     </article>
@@ -296,14 +348,15 @@ function openQuickView(productId) {
   dialog.innerHTML = `
     <div class="relative p-6 sm:p-8">
       <button onclick="closeQuickView()" class="absolute top-4 right-4 z-10 p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">
-        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        <svg class="w-5 h-5 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
       </button>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
         <div class="space-y-4">
           <div class="aspect-[4/5] rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-800 relative group">
             <img id="qv-main-img" src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-            <span class="absolute top-4 left-4 text-[10px] font-extrabold uppercase px-3 py-1 rounded-full bg-[#0A111E]/80 text-[#00A896] border border-[#00A896]/30 backdrop-blur-md">
+            <span class="absolute top-4 left-4 text-[10px] font-extrabold uppercase px-3 py-1 rounded-full bg-[#0A111E]/80 text-[#00A896] border border-[#00A896]/30 backdrop-blur-md flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5 stroke-[2.5]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               ${product.badge}
             </span>
           </div>
@@ -318,14 +371,17 @@ function openQuickView(productId) {
 
         <div class="space-y-6">
           <div>
-            <div class="text-xs font-bold text-[#00A896] uppercase tracking-wider mb-1">${product.categoryLabel}</div>
+            <div class="text-xs font-bold text-[#00A896] uppercase tracking-wider mb-1 flex items-center gap-1.5">
+              <svg class="w-4 h-4 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20.38 3.46 16 2a4 4 0 0 0-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23Z"/></svg>
+              ${product.categoryLabel}
+            </div>
             <h2 class="text-2xl font-extrabold text-slate-900 dark:text-white leading-tight mb-2">${product.name}</h2>
             <div class="text-2xl font-black text-slate-900 dark:text-white font-mono">$${product.price.toFixed(2)}</div>
           </div>
 
           <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 space-y-2">
             <div class="flex items-center gap-2 text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wide">
-              <svg class="w-4 h-4 text-[#00A896]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <svg class="w-4 h-4 text-[#00A896] stroke-[2.5]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               Telas Antifluido Nivel 4 (Hecho en El Salvador)
             </div>
             <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">${product.description}</p>
@@ -356,7 +412,7 @@ function openQuickView(productId) {
             </div>
 
             <button onclick="addQvToCart()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#00A896] to-teal-500 hover:from-[#009284] hover:to-teal-400 text-white font-bold text-sm shadow-lg shadow-[#00A896]/25 hover:shadow-[#00A896]/40 transition-all duration-300 flex items-center justify-center gap-3">
-              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 11-1 9"/><path d="m19 11-4-7"/><path d="M2 11h20"/><path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6l1.6-7.4"/><path d="m4.5 11 4-7"/><path d="m9 11 1 9"/></svg>
+              <svg class="w-5 h-5 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m15 11-1 9"/><path d="m19 11-4-7"/><path d="M2 11h20"/><path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6l1.6-7.4"/><path d="m4.5 11 4-7"/><path d="m9 11 1 9"/></svg>
               <span>Agregar al Carrito de Compras</span>
             </button>
           </div>
@@ -478,7 +534,7 @@ function updateCartUI() {
     if (cart.length === 0) {
       drawerList.innerHTML = `
         <div class="py-20 text-center text-slate-400 space-y-3">
-          <svg class="w-12 h-12 mx-auto text-slate-300 dark:text-slate-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+          <svg class="w-12 h-12 mx-auto text-slate-300 dark:text-slate-600 stroke-[1.5]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
           <p class="text-sm font-semibold">Tu carrito de compras está vacío</p>
           <button onclick="closeCartDrawer()" class="text-xs text-[#00A896] hover:underline font-bold">Ver catálogo de prendas</button>
         </div>`;
@@ -491,7 +547,7 @@ function updateCartUI() {
               <div class="flex justify-between items-start">
                 <h4 class="text-xs font-bold text-slate-900 dark:text-white line-clamp-1 pr-4">${item.name}</h4>
                 <button onclick="removeFromCart(${i})" class="text-slate-400 hover:text-rose-500 transition-colors p-0.5">
-                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+                  <svg class="w-4 h-4 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
                 </button>
               </div>
               <div class="text-[11px] font-semibold text-[#00A896]">Talla: ${item.size}</div>
@@ -598,7 +654,7 @@ function showOrderSuccessModal(order) {
   details.innerHTML = `
     <div class="text-center space-y-3">
       <div class="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-[#00A896] flex items-center justify-center mx-auto">
-        <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        <svg class="w-8 h-8 stroke-[2.5]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
       <h3 class="text-xl font-extrabold text-slate-900 dark:text-white">¡Pedido Registrado!</h3>
       <p class="text-xs text-slate-500">Orden <strong class="text-[#00A896] font-mono">#${order.id}</strong> realizada con éxito.</p>
@@ -678,11 +734,11 @@ function showToast(message, type = 'info') {
   toast.className = `toast ${type === 'error' ? 'border-left-rose-500' : ''}`;
   
   const icon = type === 'success' ? `
-    <svg class="w-5 h-5 text-[#00A896]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    <svg class="w-5 h-5 text-[#00A896] stroke-[2.5]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>
   ` : type === 'error' ? `
-    <svg class="w-5 h-5 text-rose-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+    <svg class="w-5 h-5 text-rose-500 stroke-[2.5]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
   ` : `
-    <svg class="w-5 h-5 text-sky-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+    <svg class="w-5 h-5 text-sky-400 stroke-[2.5]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
   `;
 
   toast.innerHTML = `
