@@ -3,15 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Panel de Administración | Martex</title>
+  <title>Panel de Administración | Martex Usulután</title>
   <meta name="description" content="Sistema Interno de Gestión de Pedidos y Medidas Anatómicas para Martex El Salvador.">
   
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -39,7 +37,7 @@
     <!-- 1. SIDEBAR NAVEGABLE PROFESIONAL -->
     <aside id="sidebar" class="sidebar-admin">
       <div class="p-6 border-b border-slate-800 flex items-center justify-between">
-        <a href="../frontend/index.html" class="flex items-center gap-2.5 group">
+        <a href="../index.html" class="flex items-center gap-2.5 group">
           <div class="w-8 h-8 rounded-lg bg-[#00A896] text-white flex items-center justify-center font-black text-sm">M</div>
           <span class="text-lg font-extrabold text-white tracking-tight">MAR<span class="text-[#00A896]">TEX</span> <span class="text-[10px] font-bold text-[#00A896] bg-[#00A896]/10 px-2 py-0.5 rounded border border-[#00A896]/30 uppercase ml-1">Admin</span></span>
         </a>
@@ -50,29 +48,29 @@
 
       <nav class="flex-1 p-4 space-y-2">
         <button onclick="switchTab('dashboard')" id="nav-dashboard" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition-all text-[#00A896] bg-[#00A896]/10 border-l-4 border-[#00A896]">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+          <svg class="w-4 h-4 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
           <span>Dashboard Métricas</span>
         </button>
 
         <button onclick="switchTab('medidas')" id="nav-medidas" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition-all text-slate-400 hover:text-white hover:bg-slate-800/60">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.4 2.4 0 0 1 0-3.4l2.6-2.6a2.4 2.4 0 0 1 3.4 0l12.6 12.6z"/></svg>
+          <svg class="w-4 h-4 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.4 2.4 0 0 1 0-3.4l2.6-2.6a2.4 2.4 0 0 1 3.4 0l12.6 12.6z"/></svg>
           <span>Medidas de Sastrería</span>
         </button>
 
         <button onclick="switchTab('pedidos')" id="nav-pedidos" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition-all text-slate-400 hover:text-white hover:bg-slate-800/60">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 11-1 9"/><path d="m19 11-4-7"/><path d="M2 11h20"/><path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6l1.6-7.4"/><path d="m4.5 11 4-7"/><path d="m9 11 1 9"/></svg>
+          <svg class="w-4 h-4 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m15 11-1 9"/><path d="m19 11-4-7"/><path d="M2 11h20"/><path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6l1.6-7.4"/><path d="m4.5 11 4-7"/><path d="m9 11 1 9"/></svg>
           <span>Registro de Ventas</span>
         </button>
 
         <button onclick="switchTab('productos')" id="nav-productos" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition-all text-slate-400 hover:text-white hover:bg-slate-800/60">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/></svg>
+          <svg class="w-4 h-4 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/></svg>
           <span>Gestión de Catálogo</span>
         </button>
       </nav>
 
       <div class="p-4 border-t border-slate-800 space-y-2">
-        <a href="../frontend/index.html" class="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-bold text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">
-          <svg class="w-4 h-4 text-[#00A896]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        <a href="../index.html" class="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-bold text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">
+          <svg class="w-4 h-4 text-[#00A896] stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           <span>Ir a la Tienda Pública</span>
         </a>
       </div>
@@ -84,18 +82,18 @@
       <div class="h-20 bg-white dark:bg-[#0F172A] border-b border-slate-200 dark:border-slate-800 px-6 sm:px-8 flex items-center justify-between sticky top-0 z-50">
         <div class="flex items-center gap-4">
           <button onclick="toggleMobileSidebar()" class="md:hidden p-2 text-slate-500 hover:text-white">
-            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            <svg class="w-6 h-6 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
           </button>
           <h1 id="view-title" class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">Dashboard Ejecutivo & Métricas</h1>
         </div>
 
         <div class="flex items-center gap-4">
           <button onclick="toggleAdminTheme()" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+            <svg class="w-5 h-5 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
           </button>
           <div class="text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center gap-2">
             <span class="w-2.5 h-2.5 rounded-full bg-[#00A896]"></span>
-            <span>Administración Martex</span>
+            <span>Administración Martex (Usulután)</span>
           </div>
         </div>
       </div>
@@ -108,11 +106,11 @@
           <div class="p-6 rounded-2xl bg-white dark:bg-[#162447] border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
             <div class="flex items-center justify-between text-slate-400">
               <span class="text-[11px] font-bold uppercase tracking-wider">Ingresos Acumulados</span>
-              <svg class="w-5 h-5 text-[#00A896]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              <svg class="w-5 h-5 text-[#00A896] stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
             </div>
             <div id="stat-total-ventas" class="text-3xl font-black font-mono text-slate-900 dark:text-white">$0.00</div>
             <div class="text-[11px] text-emerald-500 font-bold flex items-center gap-1">
-              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+              <svg class="w-3.5 h-3.5 stroke-[2.5]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
               <span>Ventas Confirmadas</span>
             </div>
           </div>
@@ -120,7 +118,7 @@
           <div class="p-6 rounded-2xl bg-white dark:bg-[#162447] border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
             <div class="flex items-center justify-between text-slate-400">
               <span class="text-[11px] font-bold uppercase tracking-wider">Total de Pedidos</span>
-              <svg class="w-5 h-5 text-[#00A896]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 11-1 9"/><path d="m19 11-4-7"/><path d="M2 11h20"/><path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6l1.6-7.4"/></svg>
+              <svg class="w-5 h-5 text-[#00A896] stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m15 11-1 9"/><path d="m19 11-4-7"/><path d="M2 11h20"/><path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6l1.6-7.4"/></svg>
             </div>
             <div id="stat-total-pedidos" class="text-3xl font-black font-mono text-slate-900 dark:text-white">0</div>
             <div class="text-[11px] text-slate-400 font-medium">Registrados en Tienda Web</div>
@@ -129,7 +127,7 @@
           <div class="p-6 rounded-2xl bg-white dark:bg-[#162447] border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
             <div class="flex items-center justify-between text-slate-400">
               <span class="text-[11px] font-bold uppercase tracking-wider">Pedidos Pendientes</span>
-              <svg class="w-5 h-5 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <svg class="w-5 h-5 text-amber-500 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             </div>
             <div id="stat-pedidos-pendientes" class="text-3xl font-black font-mono text-amber-500">0</div>
             <div class="text-[11px] text-amber-500 font-medium">Requieren Confección / Envío</div>
@@ -138,7 +136,7 @@
           <div class="p-6 rounded-2xl bg-white dark:bg-[#162447] border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
             <div class="flex items-center justify-between text-slate-400">
               <span class="text-[11px] font-bold uppercase tracking-wider">Fichas de Sastrería</span>
-              <svg class="w-5 h-5 text-[#00A896]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.4 2.4 0 0 1 0-3.4l2.6-2.6a2.4 2.4 0 0 1 3.4 0l12.6 12.6z"/></svg>
+              <svg class="w-5 h-5 text-[#00A896] stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.4 2.4 0 0 1 0-3.4l2.6-2.6a2.4 2.4 0 0 1 3.4 0l12.6 12.6z"/></svg>
             </div>
             <div id="stat-total-medidas" class="text-3xl font-black font-mono text-slate-900 dark:text-white">0</div>
             <div class="text-[11px] text-slate-400 font-medium">Medidas Corporales Guardadas</div>
@@ -147,7 +145,7 @@
         </div>
 
         <div class="p-8 rounded-3xl bg-white dark:bg-[#162447] border border-slate-200 dark:border-slate-800 space-y-4">
-          <h3 class="text-lg font-bold text-slate-900 dark:text-white">Resumen de Operación Martex (8 Años)</h3>
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white">Resumen de Operación Martex Usulután (8 Años)</h3>
           <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
             El sistema recopila en tiempo real las compras realizadas desde la tienda pública y mantiene sincronizadas las fichas de sastrería personalizadas para la producción de prendas médicas y para salones de belleza.
           </p>
@@ -183,7 +181,7 @@
               </div>
               <div>
                 <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Teléfono de Contacto *</label>
-                <input type="tel" name="medida_telefono" required placeholder="7000-0000" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-[#00A896]">
+                <input type="tel" name="medida_telefono" required placeholder="6049 7383" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-[#00A896]">
               </div>
               <div>
                 <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Observaciones / Preferencias</label>
@@ -194,7 +192,7 @@
             <!-- SECTION A: MEDIDAS DE FILIPINA (DINÁMICO) -->
             <div id="sec-medidas-filipina" class="measurement-section p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 space-y-4">
               <h3 class="text-sm font-extrabold text-[#00A896] uppercase tracking-wider flex items-center gap-2">
-                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.38 3.46 16 2a4 4 0 0 0-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23Z"/></svg>
+                <svg class="w-4 h-4 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20.38 3.46 16 2a4 4 0 0 0-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23Z"/></svg>
                 <span>Medidas Anatómicas — Filipina / Gabacha</span>
               </h3>
 
@@ -237,7 +235,7 @@
             <!-- SECTION B: MEDIDAS DE PANTALÓN (DINÁMICO) -->
             <div id="sec-medidas-pantalon" class="measurement-section p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 space-y-4">
               <h3 class="text-sm font-extrabold text-[#00A896] uppercase tracking-wider flex items-center gap-2">
-                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.4 2.4 0 0 1 0-3.4l2.6-2.6a2.4 2.4 0 0 1 3.4 0l12.6 12.6z"/></svg>
+                <svg class="w-4 h-4 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.4 2.4 0 0 1 0-3.4l2.6-2.6a2.4 2.4 0 0 1 3.4 0l12.6 12.6z"/></svg>
                 <span>Medidas Anatómicas — Pantalón</span>
               </h3>
 
@@ -370,7 +368,7 @@
                 <span class="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-[#00A896]/10 text-[#00A896]">Colección Médica</span>
                 <span class="font-bold font-mono text-sm text-slate-900 dark:text-white">$49.99</span>
               </div>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-white">Set Quirúrgico V-Neck Technical</h4>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-white">Conjunto Quirúrgico Azul Médico</h4>
               <p class="text-xs text-slate-500">4 bolsillos, elastano y tecnología antimicrobiana.</p>
               <div class="pt-2 flex justify-between items-center text-xs">
                 <span class="text-emerald-500 font-bold">Activo en Catálogo</span>
@@ -383,7 +381,7 @@
                 <span class="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-[#00A896]/10 text-[#00A896]">Colección Médica</span>
                 <span class="font-bold font-mono text-sm text-slate-900 dark:text-white">$28.50</span>
               </div>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-white">Filipina Quirúrgica Emerald Executive</h4>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-white">Filipina Verde Esmeralda</h4>
               <p class="text-xs text-slate-500">Verde Quirúrgico, corte slim y tecnología Silvadur.</p>
               <div class="pt-2 flex justify-between items-center text-xs">
                 <span class="text-emerald-500 font-bold">Activo en Catálogo</span>
@@ -396,7 +394,7 @@
                 <span class="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-[#00A896]/10 text-[#00A896]">Salón & Estética</span>
                 <span class="font-bold font-mono text-sm text-slate-900 dark:text-white">$45.00</span>
               </div>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-white">Set Estética Slate Grey Minimalist</h4>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-white">Uniforme Gris para Estética y Spa</h4>
               <p class="text-xs text-slate-500">Tela oleófoba resistente a tintes de cabello y químicos.</p>
               <div class="pt-2 flex justify-between items-center text-xs">
                 <span class="text-emerald-500 font-bold">Activo en Catálogo</span>
@@ -417,7 +415,7 @@
       <div class="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
         <h3 class="font-bold text-base text-slate-900 dark:text-white">Ficha Anatómica Completa</h3>
         <button onclick="closeMedidaModal()" class="text-slate-400 hover:text-white">
-          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          <svg class="w-5 h-5 stroke-[2]" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </button>
       </div>
 
